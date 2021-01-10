@@ -20,7 +20,7 @@ To view the `API Key` of your account, visit `Account Settings` and click on the
 ![Account API Key](docs/imgs/account_api_key.png)
 
 ### Create an app on Heroku
-On your Heroku account, click on `New` > `Create new app`, name it `heroku-gitlab-staging`.
+On your Heroku account, click on `New` > `Create new app`, name it `<YOUR_PROJECT_NAME>-staging`.
 
 ![Staging app](docs/imgs/create_app.png)
 
@@ -29,7 +29,7 @@ On your GitLab project repository, visit `settings` > `CI/CD`, and click on `Exp
 
 Add the below two variables and uncheck masked and protected flags:
 1. Key: `HEROKU_API_KEY`, Value: `API key` from Heroku `Account Settings`
-2. Key: `HEROKU_APP_STAGING`, Value: `heroku-gitlab-staging` name of the app that you have created on Heroku.
+2. Key: `HEROKU_APP_STAGING`, Value: `<YOUR_PROJECT_NAME>-staging` name of the app that you have created on Heroku.
 
 ![CD Variables](docs/imgs/cd-variables.png)
 
@@ -47,3 +47,8 @@ staging:
         - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY --run='python manage.py migrate'
 ```
 
+Create a new commit for the changes in the `.gitlab-ci.yml` and push the changes to the origin.
+
+On your GitLab project repository, visit CI/CD > Pipelines and check the progress of the `staging` stage in the pipeline.
+
+[Staging pipeline](docs/imgs/pipeline-staging.png)
