@@ -51,4 +51,4 @@ Create a new commit for the changes in the `.gitlab-ci.yml` and push the changes
 
 On your GitLab project repository, visit CI/CD > Pipelines and check the progress of the `staging` stage in the pipeline.
 
-[Staging pipeline](docs/imgs/pipeline-staging.png)
+![Staging pipeline](docs/imgs/pipeline-staging.png)
