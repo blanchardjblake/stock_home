@@ -46,8 +46,21 @@ staging:
     script:
         - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY --run='python manage.py migrate'
 ```
+### Edit Procfile
+The repository contains a `Procfile` that tells the Heroku to execute a list of processes to start the web application.
 
-Create a new commit for the changes in the `.gitlab-ci.yml` and push the changes to the origin.
+We are using `gunicorn` web application server to serve HTTP requests over the internet.
+
+The current content of the `Procfile` is as follows:
+
+```
+web: gunicorn django_project.wsgi --log-file -
+```
+
+Replace `django_project` in the `Procfile` with the name of your django project.
+
+### Push changes to GitLab
+Create a new commit for the changes in the `.gitlab-ci.yml` and `Procfile`, and push the changes to the origin.
 
 On your GitLab project repository, visit CI/CD > Pipelines and check the progress of the `staging` stage in the pipeline.
 
