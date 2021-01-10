@@ -1,0 +1,8 @@
+image: python:3.8
+test:
+    stage: test
+    before_script:
+        - pip install -r requirements.txt
+    script:
+        - python django_project/manage.py migrate
+        - python django_project/manage.py test
