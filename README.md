@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ## Apply Migrations
 
 ```bash
-python django_project/manage.py migrate
+python manage.py migrate
 ```
 
 ## Set the environment variables
@@ -59,10 +59,21 @@ These variables needs to be set everytime before you start running the developme
 The best practice would be to add these variables to your current user's environment
 variable set registery (on Windows) or `$HOME/.bashrc` file (for Linux and Mac).
 
-## Run the test webserver
+
+## Collect static files
+
 ```bash
-python django_project/manage.py runserver
+python manage.py collectstatic
 ```
+Type 'yes' if the prompt asks you a question.
+
+
+## Run the test webserver
+
+```bash
+python manage.py runserver
+```
+
 
 ## Set up GitLab CD
 

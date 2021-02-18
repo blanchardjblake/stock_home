@@ -20,7 +20,8 @@ To view the `API Key` of your account, visit `Account Settings` and click on the
 ![Account API Key](docs/imgs/account_api_key.png)
 
 ### Create an app on Heroku
-On your Heroku account, click on `New` > `Create new app`, name it `<YOUR_PROJECT_NAME>-staging`.
+On your Heroku account, click on `New` > `Create new app`, name it `<TEAM_NAME>-<YOUR_PROJECT_NAME>`.
+Replace `TEAM_NAME` with `team-x` where `X` can be [a, b, c, d,...].
 
 ![Staging app](docs/imgs/create_app.png)
 
@@ -29,43 +30,29 @@ On your GitLab project repository, visit `settings` > `CI/CD`, and click on `Exp
 
 Add the below two variables and uncheck masked and protected flags:
 1. Key: `HEROKU_API_KEY`, Value: `API key` from Heroku `Account Settings`
-2. Key: `HEROKU_APP_STAGING`, Value: `<YOUR_PROJECT_NAME>-staging` name of the app that you have created on Heroku.
+2. Key: `HEROKU_APP_STAGING`, Value: `<TEAM_NAME>-<YOUR_PROJECT_NAME>` name of the app that you have created on Heroku.
 
 ![CD Variables](docs/imgs/cd-variables.png)
 
-### Activate delivery when the the GitLab pipeline is triggered
-Append the below lines to the `.gitlab-ci.yml` at the end of the file:
-
-```yaml
-staging:
-    stage: deploy
-    before_script:
-        - apt-get update -qy
-        - apt-get install -y ruby-dev
-        - gem install dpl
-    script:
-        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY --run='python manage.py migrate'
-```
-
 ### Edit django project settings
 
-In the file, `django_project\django_project\settings.py`, you will see the list `ALLOWED_HOSTS`:
+In the file, `django_project\settings.py`, you will see the list `ALLOWED_HOSTS`:
 
 ```
 ALLOWED_HOSTS = [
     '127.0.0.1', 'localhost',
-    # Change the below line to '<your app URL without the https:// prefix>.herokuapp.com'
-    # 'myapp.herokuapp.com'
+    # Change the below line to '<TEAM_NAME>-<YOUR_PROJECT_NAME>.herokuapp.com'
+    'cmps-453-project-template.herokuapp.com'  # comment this line
 ]
 ```
 
 Include a list element to the `ALLOWED_HOSTS` that matches the name of the staging app
-that you have created on Heroku like this: `<YOUR_PROJECT_NAME>-staging.herokuapp.com`.
+that you have created on Heroku like this: `<TEAM_NAME>-<YOUR_PROJECT_NAME>.herokuapp.com`.
 
 All the web apps registered on Heroku are registered under the domain `.herokuapp.com`.
 
 ### Push changes to GitLab
-Create a new commit for the changes in the `.gitlab-ci.yml` and `django_project\django_project\settings.py`,
+Create a new commit for the changes in the `.gitlab-ci.yml` and `django_project\settings.py`,
 and push the changes to the origin.
 
 On your GitLab project repository, visit CI/CD > Pipelines and check the progress of the `staging` stage in the pipeline.
