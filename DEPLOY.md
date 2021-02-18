@@ -34,23 +34,9 @@ Add the below two variables and uncheck masked and protected flags:
 
 ![CD Variables](docs/imgs/cd-variables.png)
 
-### Activate delivery when the the GitLab pipeline is triggered
-Append the below lines to the `.gitlab-ci.yml` at the end of the file:
-
-```yaml
-staging:
-    stage: deploy
-    before_script:
-        - apt-get update -qy
-        - apt-get install -y ruby-dev
-        - gem install dpl
-    script:
-        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY --run='python django_project/manage.py migrate'
-```
-
 ### Edit django project settings
 
-In the file, `django_project\django_project\settings.py`, you will see the list `ALLOWED_HOSTS`:
+In the file, `django_project\settings.py`, you will see the list `ALLOWED_HOSTS`:
 
 ```
 ALLOWED_HOSTS = [
@@ -66,7 +52,7 @@ that you have created on Heroku like this: `<TEAM_NAME>-<YOUR_PROJECT_NAME>.hero
 All the web apps registered on Heroku are registered under the domain `.herokuapp.com`.
 
 ### Push changes to GitLab
-Create a new commit for the changes in the `.gitlab-ci.yml` and `django_project\django_project\settings.py`,
+Create a new commit for the changes in the `.gitlab-ci.yml` and `django_project\settings.py`,
 and push the changes to the origin.
 
 On your GitLab project repository, visit CI/CD > Pipelines and check the progress of the `staging` stage in the pipeline.
