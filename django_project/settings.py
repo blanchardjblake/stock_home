@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Add newly defined Django apps here
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
