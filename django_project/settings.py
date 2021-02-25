@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add newly defined Django apps here
     'bootstrap4',
-    'accounts',
+    'bootstrap_datepicker_plus',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,5 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTH_USER_MODEL = 'users.CustomUser'
