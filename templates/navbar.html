@@ -16,7 +16,7 @@
         <ul class="navbar-nav my-2 my-lg-0">
         {% if user.is_authenticated %}
             <li class="nav-item">
-                <span class="navbar-text">{{ user.username }}</span>
+                <span class="navbar-text">{{ user.email }}</span>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'password_change' %}">Change password</a>
@@ -29,7 +29,7 @@
                 <a class="nav-link" href="{% url 'login' %}">Sign in</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
+                <a class="nav-link" href="{% url 'users:signup' %}">Sign up</a>
             </li>
         {% endif %}
         </ul>
