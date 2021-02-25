@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add newly defined Django apps here
     'bootstrap4',
+    'accounts',
 ]
 
 MIDDLEWARE = [

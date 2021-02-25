@@ -47,9 +47,8 @@
 <body>
     {% include "navbar.html" %}
     <div class="container">
+        <h1>{% block title %}{% endblock %}</h1>
         <div class="row">
-            <h1>{% block title %}{% endblock %}</h1>
-            <br>
             {% block content %}{% endblock %}
         </div>
     </div>
