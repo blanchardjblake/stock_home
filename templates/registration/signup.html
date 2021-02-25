@@ -4,9 +4,16 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Sign Up</button>
-</form>
+<div class="col-md-3"></div>
+<div class="col-md-6">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+        <div class="row justify-content-md-center">
+            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        </div>
+    </form>
+</div>
+<div class="col-md-3"></div>
 {% endblock %}
