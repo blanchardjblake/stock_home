@@ -1,17 +1,67 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
-{% block title %} Contact {% endblock %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block title %} Meet our team {% endblock %}
 
 {% block content %}
-
-<div class="container">
-    <p>Feel free to change the style and beautify the page using Bootstrap 4</p>
-    <ul class="list-group">
-        <li class="list-group-item">Tech Lead: </li>
-        <li class="list-group-item">Team Lead: </li>
-        <li class="list-group-item">Developer: </li>
-        <li class="list-group-item">Developer: </li>
-    </ul>
+<div class="container mt-40">
+    <div class="row mt-30">
+        <div class="col-md-3 col-sm-6">
+            <div class="box15">
+                <img src="http://bestjquery.com/tutorial/hover-effect/demo119/images/img-1.jpg" alt="">
+                <div class="box-content">
+                    <h3 class="title">Harvey</h3>
+                    <ul class="icon">
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-gitlab"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <span class="post">Project Lead</span>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="box15">
+                <img src="http://bestjquery.com/tutorial/hover-effect/demo119/images/img-3.jpg" alt="">
+                <div class="box-content">
+                    <h3 class="title">Katrina</h3>
+                    <ul class="icon">
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-gitlab"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <span class="post">Tech Lead</span>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="box15">
+                <img src="http://bestjquery.com/tutorial/hover-effect/demo119/images/img-2.jpg" alt="">
+                <div class="box-content">
+                    <h3 class="title">Maria</h3>
+                    <ul class="icon">
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-gitlab"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <span class="post">Product Lead</span>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="box15">
+                <img src="http://bestjquery.com/tutorial/hover-effect/demo119/images/img-4.jpg" alt="">
+                <div class="box-content">
+                    <h3 class="title">Andrew</h3>
+                    <ul class="icon">
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-gitlab"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <span class="post">Quality Assurance</span>
+        </div>
+    </div>
 </div>
-
 {% endblock %}
