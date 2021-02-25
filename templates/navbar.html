@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="{% url 'home' %}">Project Name</a>
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <i class="fab fa-python"></i> Product Name
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,29 +9,43 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav  mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
+                <a class="nav-link" href="{% url 'about' %}">
+                    <i class="fas fa-sitemap"></i> About
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                <a class="nav-link" href="{% url 'team' %}">
+                    <i class="fas fa-address-card"></i> Team
+                </a>
             </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
         {% if user.is_authenticated %}
             <li class="nav-item">
-                <span class="navbar-text">{{ user.email }}</span>
+                <span class="navbar-text">
+                    <i class="fas fa-user-shield"></i> {{ user.email }}
+                </span>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'password_change' %}">Change password</a>
+                <a class="nav-link" href="{% url 'password_change' %}">
+                    <i class="fas fa-user-cog"></i> Change password
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+                <a class="nav-link" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                </a>
             </li>
         {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+                <a class="nav-link" href="{% url 'login' %}">
+                    <i class="fas fa-sign-in"></i> Sign in
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:signup' %}">Sign up</a>
+                <a class="nav-link" href="{% url 'users:signup' %}">
+                    <i class="fas fa-user-edit"></i> Sign up
+                </a>
             </li>
         {% endif %}
         </ul>
