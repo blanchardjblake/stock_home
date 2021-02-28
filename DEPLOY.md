@@ -4,7 +4,7 @@ We will use GitLab CI/CD for continuous deployment on Heroku which is a platform
 that enables developers to build, run, and operate application entirely on cloud.
 
 ### Create an account on Heroku
-
+(skip this if you already have an account on Heroku)
 To start using Heroku you will first need to create an account:
 
 1. Go to https://www.heroku.com and click the `SIGN UP FOR FREE` button.
@@ -20,8 +20,7 @@ To view the `API Key` of your account, visit `Account Settings` and click on the
 ![Account API Key](docs/imgs/account_api_key.png)
 
 ### Create an app on Heroku
-On your Heroku account, click on `New` > `Create new app`, name it `<TEAM_NAME>-<YOUR_PROJECT_NAME>`.
-Replace `TEAM_NAME` with `team-x` where `X` can be [a, b, c, d,...].
+On your Heroku account, click on `New` > `Create new app`, name it `453-spring-2021-team-<X>` where `<X>` can be [a, b, c, d,...].
 
 ![Staging app](docs/imgs/create_app.png)
 
@@ -30,7 +29,7 @@ On your GitLab project repository, visit `settings` > `CI/CD`, and click on `Exp
 
 Add the below two variables and uncheck masked and protected flags:
 1. Key: `HEROKU_API_KEY`, Value: `API key` from Heroku `Account Settings`
-2. Key: `HEROKU_APP_STAGING`, Value: `<TEAM_NAME>-<YOUR_PROJECT_NAME>` name of the app that you have created on Heroku.
+2. Key: `HEROKU_APP_STAGING`, Value: `453-spring-2021-team-<X>` name of the app that you have created on Heroku.
 
 ![CD Variables](docs/imgs/cd-variables.png)
 
@@ -41,13 +40,13 @@ In the file, `django_project\settings.py`, you will see the list `ALLOWED_HOSTS`
 ```
 ALLOWED_HOSTS = [
     '127.0.0.1', 'localhost',
-    # Change the below line to '<TEAM_NAME>-<YOUR_PROJECT_NAME>.herokuapp.com'
+    # Change the below line to '453-spring-2021-team-<X>.herokuapp.com'
     'cmps-453-project-template.herokuapp.com'  # comment this line
 ]
 ```
 
 Include a list element to the `ALLOWED_HOSTS` that matches the name of the staging app
-that you have created on Heroku like this: `<TEAM_NAME>-<YOUR_PROJECT_NAME>.herokuapp.com`.
+that you have created on Heroku like this: `453-spring-2021-team-<X>.herokuapp.com`.
 
 All the web apps registered on Heroku are registered under the domain `.herokuapp.com`.
 
