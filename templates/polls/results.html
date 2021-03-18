@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{{ question.question_text }}{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<br/>
+<div class="row">
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
+{% endif %}
+
+{% endblock %}
