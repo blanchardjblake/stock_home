@@ -3,17 +3,38 @@
 {% block title %}Available Polls{% endblock %}
 
 {% block content %}
-{% if latest_question_list %}
-<ol>
-{% for question in latest_question_list %}
+
+<div class="container">
+    {% if latest_question_list %}
+    <ol>
+    {% for question in latest_question_list %}
         <li>
-<a href="{% url 'polls:detail' question.id %}">
-{{ question.question_text }}
-</a>
-</li>
-{% endfor %}
-</ol>
-{% else %}
-<p>No polls are available.</p>
-{% endif %}
+            <a href="{% url 'polls:detail' question.id %}">
+                {{ question.question_text }}
+            </a>
+        </li>
+    {% endfor %}
+    </ol>
+    {% else %}
+    <p>No polls are available.</p>
+    {% endif %}
+</div>
+<!--row-->
+
+<div class="container">
+    <div class="center">
+        {% if user.is_authenticated and user.is_teacher %}
+        <a class="btn btn-warning" href="{% url 'polls:create-question' %}">
+            <i class="fas fa-plus"></i> Create Question
+        </a>
+        {% else %}
+        <a class="btn btn-warning disabled" href="{% url 'polls:create-question' %}" role="button" aria-disabled="true">
+            <i class="fas fa-plus"></i> Create Question
+        </a>
+        {% endif %}
+    </div>
+</div>
+<br/>
+
+
 {% endblock %}
