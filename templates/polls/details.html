@@ -35,7 +35,8 @@
         <a class="btn btn-warning" href="{% url 'polls:results' question.id %}">
             <i class="fas fa-poll"></i> View Polling Result
         </a>
-        {% else %}
+        {% endif %}
+        {% if user.is_authenticated and user.is_student %}
         <a class="btn btn-warning disabled" href="{% url 'polls:create-choice' question.id %}" role="button" aria-disabled="true">
             <i class="fas fa-plus"></i> Add choice
         </a>

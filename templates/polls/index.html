@@ -27,7 +27,8 @@
         <a class="btn btn-warning" href="{% url 'polls:create-question' %}">
             <i class="fas fa-plus"></i> Create Question
         </a>
-        {% else %}
+        {% endif %}
+        {% if user.is_authenticated and user.is_student %}
         <a class="btn btn-warning disabled" href="{% url 'polls:create-question' %}" role="button" aria-disabled="true">
             <i class="fas fa-plus"></i> Create Question
         </a>
