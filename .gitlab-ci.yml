@@ -15,6 +15,6 @@ staging:
     image: ruby:latest
     before_script:
         - gem install dpl
-        - gem install -v faraday -v 1.8.0
+        - gem install faraday -v 1.8.0
     script:
         - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY --run='python manage.py migrate'
