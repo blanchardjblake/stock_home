@@ -7,7 +7,7 @@ test:
     stage: test
     script:
         - .gitlab/test_install.sh
-        - echo $GITLAB_USER_ID
+        - echo $GITLAB_USER_LOGIN
         - coverage run --source='.' manage.py test
         - coverage report
 
@@ -18,7 +18,7 @@ staging-a:
     stage: deploy
     image: ruby:latest
     rules:
-        - if: $GITLAB_USER_ID == $GITLAB_USER_ID_A
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-a --api-key=$HEROKU_API_KEY_A
@@ -28,7 +28,7 @@ staging-b:
     stage: deploy
     image: ruby:latest
     rules:
-        - if: $GITLAB_USER_ID == $GITLAB_USER_ID_B
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-b --api-key=$HEROKU_API_KEY_B
@@ -38,7 +38,7 @@ staging-c:
     stage: deploy
     image: ruby:latest
     rules:
-        - if: $GITLAB_USER_ID == $GITLAB_USER_ID_C
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-c --api-key=$HEROKU_API_KEY_C
@@ -48,7 +48,7 @@ staging-d:
     stage: deploy
     image: ruby:latest
     rules:
-        - if: $GITLAB_USER_ID == $GITLAB_USER_ID_D
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-d --api-key=$HEROKU_API_KEY_D
