@@ -17,7 +17,7 @@ staging-a:
     stage: deploy
     image: ruby:latest
     rules:
-        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-a --api-key=$HEROKU_API_KEY_A
@@ -27,17 +27,16 @@ staging-b:
     stage: deploy
     image: ruby:latest
     rules:
-        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-b --api-key=$HEROKU_API_KEY_B
-
 
 staging-c:
     stage: deploy
     image: ruby:latest
     rules:
-        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-c --api-key=$HEROKU_API_KEY_C
@@ -47,11 +46,10 @@ staging-d:
     stage: deploy
     image: ruby:latest
     rules:
-        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-d --api-key=$HEROKU_API_KEY_D
-
 
 production:
     stage: deploy
@@ -59,9 +57,6 @@ production:
     before_script:
         - .gitlab/dpl_before_script.sh
     script:
-        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY_A
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING} --api-key=$HEROKU_API_KEY_A
     only:
-        - merge_requests
-    except:
-        variables:
-            - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "main"
+        - master
