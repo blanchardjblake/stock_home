@@ -35,12 +35,14 @@ python manage.py runserver
 ```
 
 ## Team Members
-| Role | Name | Heroku App |
-| ---- | ---- | -----------|
-| Tech Lead | Name | [Heroku app](/insert/link/here) |
-| Team Lead | Name | [Heroku app](/insert/link/here) |
-| Quality Assurance | Name | [Heroku app](/insert/link/here) |
-| Developer | Name | [Heroku app](/insert/link/here) |
+**Update the last name, first name, Heroku app name, and URLs in the table below **
+
+| Role | Last Name | First Name | Heroku App |
+| ---- | --------- |  --------- | -----------|
+| Member A | Last Name | First Name  | [heroku_app-a.herokuapp.com](update URL here) |
+| Member B | Last Name | First Name  | [heroku_app-b.herokuapp.com](update URL here) |
+| Member C | Last Name | First Name  | [heroku_app-c.herokuapp.com](update URL here) |
+| Member D | Last Name | First Name  | [heroku_app-d.herokuapp.com](update URL here) |
 
 ## Set up GitLab CD
 See the [DEPLOY.md](DEPLOY.md)
