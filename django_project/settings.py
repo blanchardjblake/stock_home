@@ -26,13 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'This_is_a_test_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') != 'False'
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    '127.0.0.1', 'localhost',
-    # Change the below line to '<YOUR_HEROKU_APP>.herokuapp.com'
-    'cmps-453-project-template.herokuapp.com'  # comment this line
-]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com']
 
 
 # Application definition
@@ -46,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add newly defined Django apps here
     'bootstrap4',
-    'bootstrap_datepicker_plus',
     'users',
 ]
 
@@ -121,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Chicago'
 
 USE_I18N = True
 
@@ -146,4 +141,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

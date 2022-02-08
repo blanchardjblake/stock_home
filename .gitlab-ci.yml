@@ -1,21 +1,67 @@
-image: python:3.8.12
+stages:
+    - test
+    - deploy
+
 test:
+    image: python:3.8.12
     stage: test
-    before_script:
-        - pip install -r requirements.txt
     script:
-        - python manage.py migrate
-        - python manage.py collectstatic --no-input
+        - .gitlab/test_install.sh
         - coverage run --source='.' manage.py test
         - coverage report
 
     coverage: '/TOTAL.*\s+(\d+%)$/'
 
-staging:
+
+staging-a:
+    stage: deploy
+    image: ruby:latest
+    rules:
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A
+    script:
+        - .gitlab/dpl_before_script.sh
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-a --api-key=$HEROKU_API_KEY_A
+
+
+staging-b:
+    stage: deploy
+    image: ruby:latest
+    rules:
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B
+    script:
+        - .gitlab/dpl_before_script.sh
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-b --api-key=$HEROKU_API_KEY_B
+
+
+staging-c:
+    stage: deploy
+    image: ruby:latest
+    rules:
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C
+    script:
+        - .gitlab/dpl_before_script.sh
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-c --api-key=$HEROKU_API_KEY_C
+
+
+staging-d:
+    stage: deploy
+    image: ruby:latest
+    rules:
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D
+    script:
+        - .gitlab/dpl_before_script.sh
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-d --api-key=$HEROKU_API_KEY_D
+
+
+production:
     stage: deploy
     image: ruby:latest
     before_script:
-        - gem install dpl
-        - gem install faraday -v 1.8.0
+        - .gitlab/dpl_before_script.sh
     script:
-        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY --run='python manage.py migrate'
+        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY_A
+    only:
+        - merge_requests
+    except:
+        variables:
+            - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "main"
