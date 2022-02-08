@@ -10,11 +10,10 @@ class CustomUser(AbstractUser):
     """Custom User class."""
 
     username = None
-    date_of_birth = models.DateField()
     email = models.EmailField(_('email address'), unique=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['date_of_birth']
+    REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 
