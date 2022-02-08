@@ -21,7 +21,7 @@ staging-a:
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A
     script:
         - .gitlab/dpl_before_script.sh
-        - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-a --api-key=$HEROKU_API_KEY_A
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-a --api-key=$HEROKU_API_KEY_A
 
 
 staging-b:
@@ -31,7 +31,7 @@ staging-b:
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B
     script:
         - .gitlab/dpl_before_script.sh
-        - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-b --api-key=$HEROKU_API_KEY_B
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-b --api-key=$HEROKU_API_KEY_B
 
 
 staging-c:
@@ -41,7 +41,7 @@ staging-c:
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C
     script:
         - .gitlab/dpl_before_script.sh
-        - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-c --api-key=$HEROKU_API_KEY_C
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-c --api-key=$HEROKU_API_KEY_C
 
 
 staging-d:
@@ -51,7 +51,7 @@ staging-d:
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D
     script:
         - .gitlab/dpl_before_script.sh
-        - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-d --api-key=$HEROKU_API_KEY_D
+        - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-d --api-key=$HEROKU_API_KEY_D
 
 
 production:
@@ -60,7 +60,7 @@ production:
     before_script:
         - .gitlab/dpl_before_script.sh
     script:
-        - dpl --provider=heroku --app=$HEROKU_APP_DEPLOY --api-key=$HEROKU_API_KEY_A
+        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY_A
     only:
         - merge_requests
     except:
