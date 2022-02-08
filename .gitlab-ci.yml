@@ -5,8 +5,6 @@ stages:
 test:
     image: python:3.8.12
     stage: test
-    tags:
-        - python
     script:
         - .gitlab/test_install.sh
         - coverage run --source='.' manage.py test
@@ -18,8 +16,6 @@ test:
 staging-a:
     stage: deploy
     image: ruby:latest
-    tags:
-        - ruby
     rules:
         - if: $GILAB_USER_ID == $GITLAB_USER_ID_A
     script:
@@ -30,8 +26,6 @@ staging-a:
 staging-b:
     stage: deploy
     image: ruby:latest
-    tags:
-        - ruby
     rules:
         - if: $GILAB_USER_ID == $GITLAB_USER_ID_B
     script:
@@ -42,8 +36,6 @@ staging-b:
 staging-c:
     stage: deploy
     image: ruby:latest
-    tags:
-        - ruby
     rules:
         - if: $GILAB_USER_ID == $GITLAB_USER_ID_C
     script:
@@ -54,8 +46,6 @@ staging-c:
 staging-d:
     stage: deploy
     image: ruby:latest
-    tags:
-        - ruby
     rules:
         - if: $GILAB_USER_ID == $GITLAB_USER_ID_D
     script:
@@ -66,8 +56,6 @@ staging-d:
 production:
     stage: deploy
     image: ruby:latest
-    tags:
-        - ruby
     before_script:
         - .gitlab/dpl_before.sh
     script:
