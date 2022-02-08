@@ -7,11 +7,8 @@ test:
     stage: test
     tags:
         - python
-    before_script:
-        - pip install -r requirements.txt
     script:
-        - python manage.py migrate
-        - python manage.py collectstatic --no-input
+        - .gitlab/test_install.sh
         - coverage run --source='.' manage.py test
         - coverage report
 
