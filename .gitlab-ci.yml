@@ -7,7 +7,6 @@ test:
     stage: test
     script:
         - .gitlab/test_install.sh
-        - echo $GITLAB_USER_LOGIN
         - coverage run --source='.' manage.py test
         - coverage report
 
