@@ -1,6 +1,12 @@
-image: python:3.8.12
+stages:
+    - test
+    - deploy
+
 test:
+    image: python:3.8.12
     stage: test
+    tags:
+        - python
     before_script:
         - pip install -r requirements.txt
     script:
@@ -11,11 +17,66 @@ test:
 
     coverage: '/TOTAL.*\s+(\d+%)$/'
 
-staging:
+
+staging-a:
     stage: deploy
     image: ruby:latest
-    before_script:
-        - gem install dpl
-        - gem install faraday -v 1.8.0
+    tags:
+        - ruby
+    rules:
+        - if: $GILAB_USER_ID == $GITLAB_USER_ID_A
     script:
-        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY --run='python manage.py migrate'
+        - .gitlab/dpl_before.sh
+        - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-a --api-key=$HEROKU_API_KEY_A
+
+
+staging-b:
+    stage: deploy
+    image: ruby:latest
+    tags:
+        - ruby
+    rules:
+        - if: $GILAB_USER_ID == $GITLAB_USER_ID_B
+    script:
+        - .gitlab/dpl_before.sh
+        - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-b --api-key=$HEROKU_API_KEY_B
+
+
+staging-c:
+    stage: deploy
+    image: ruby:latest
+    tags:
+        - ruby
+    rules:
+        - if: $GILAB_USER_ID == $GITLAB_USER_ID_C
+    script:
+        - .gitlab/dpl_before.sh
+        - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-c --api-key=$HEROKU_API_KEY_C
+
+
+staging-d:
+    stage: deploy
+    image: ruby:latest
+    tags:
+        - ruby
+    rules:
+        - if: $GILAB_USER_ID == $GITLAB_USER_ID_D
+    script:
+        - .gitlab/dpl_before.sh
+        - dpl --provider=heroku --app=$(HEROKU_APP_STAGING)-d --api-key=$HEROKU_API_KEY_D
+
+
+production:
+    stage: deploy
+    image: ruby:latest
+    tags:
+        - ruby
+    before_script:
+        - .gitlab/dpl_before.sh
+    script:
+        - dpl --provider=heroku --app=$HEROKU_APP_DEPLOY --api-key=$HEROKU_API_KEY_A
+    only:
+        - merge_requests
+    except:
+        variables:
+            - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "main"
