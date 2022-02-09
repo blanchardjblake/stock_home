@@ -65,9 +65,10 @@ staging-d:
 # This job is triggered when there is a (merge request) commit in the Main/Master branch
 production:
     stage: deploy
+    only:
+        # Limit this job to the main/master branch
+        - master
+        - main
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING} --api-key=$HEROKU_API_KEY_A
-    only:
-        # Only for commits or pushes to the main/master branch
-        - $CI_DEFAULT_BRANCH
