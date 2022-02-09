@@ -8,7 +8,12 @@ The template project is deployed on Heroku: [https://cmps-453-project-template.h
 
 To develop this Django application, clone this repository and follow the instructions:
 
-## Install Python requirements
+## What's Already Included in the Django Template?
+* User Authentication System:
+    * Login: [https://cmps-453-project-template.herokuapp.com/accounts/login/](https://cmps-453-project-template.herokuapp.com/accounts/login/)
+    * User Registration: [https://cmps-453-project-template.herokuapp.com/accounts/signup/](https://cmps-453-project-template.herokuapp.com/accounts/signup/)
+
+## Install Python Requirements
 
 ```bash
 pip install -r requirements.txt
@@ -20,15 +25,13 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-## Collect static files
+## Collect Static Files
 
 ```bash
-python manage.py collectstatic
+python manage.py collectstatic --no-input
 ```
-Type 'yes' if the prompt asks you a question.
 
-
-## Run the test webserver
+## Run the Django Web Server
 
 ```bash
 python manage.py runserver

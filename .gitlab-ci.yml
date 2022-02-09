@@ -1,8 +1,13 @@
+default:
+    image: ruby:latest
+
+
+# This job is triggered for all pushes from any branches
 stages:
     - test
     - deploy
 
-test:
+test_job:
     image: python:3.8.12
     stage: test
     script:
@@ -13,50 +18,56 @@ test:
     coverage: '/TOTAL.*\s+(\d+%)$/'
 
 
+# Only Team Member A (GITLAB_USER_LOGIN_A) can trigger this job
 staging-a:
     stage: deploy
-    image: ruby:latest
     rules:
+        # Only run this job if Team Member A is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-a --api-key=$HEROKU_API_KEY_A
 
 
+# Only Team Member B (GITLAB_USER_LOGIN_B) can trigger this job
 staging-b:
     stage: deploy
-    image: ruby:latest
     rules:
+        # Only run this job if Team Member B is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-b --api-key=$HEROKU_API_KEY_B
 
+
+# Only Team Member C (GITLAB_USER_LOGIN_C) can trigger this job
 staging-c:
     stage: deploy
-    image: ruby:latest
     rules:
+        # Only run this job if Team Member C is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-c --api-key=$HEROKU_API_KEY_C
 
 
+# Only Team Member D (GITLAB_USER_LOGIN_D) can trigger this job
 staging-d:
     stage: deploy
-    image: ruby:latest
     rules:
+        # Only run this job if Team Member D is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-d --api-key=$HEROKU_API_KEY_D
 
+
+# This job is triggered when there is a (merge request) commit in the Main/Master branch
 production:
     stage: deploy
-    image: ruby:latest
-    before_script:
-        - .gitlab/dpl_before_script.sh
     script:
+        - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING} --api-key=$HEROKU_API_KEY_A
     only:
-        - master
+        # Only for commits or pushes to the main/master branch
+        - $CI_DEFAULT_BRANCH
