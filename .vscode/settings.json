@@ -1,7 +1,9 @@
 {
     "editor.fontSize": 15,
-    "editor.rulers": [80],
-    "editor.wordWrapColumn": 80,
+    "editor.rulers": [
+        100
+    ],
+    "editor.wordWrapColumn": 100,
     "files.trimTrailingWhitespace": true,
     "editor.fontFamily": "Menlo, Consolas, DejaVu Sans Mono, monospace",
     "files.exclude": {
@@ -29,28 +31,30 @@
         ".vscode test": true
     },
     "editor.formatOnSave": true,
-    "[python]": {
-        "editor.formatOnSave": true
+    "files.associations": {
+        "*.html": "django-html",
     },
     "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.defaultFormatter": "monosans.djlint",
+    },
+    "[django-html]": {
+        "editor.defaultFormatter": "monosans.djlint",
     },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "[JSON]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "[YAML]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "python.linting.enabled": true,
     "python.linting.pycodestyleEnabled": true,
@@ -61,10 +65,10 @@
     "python.testing.promptToConfigure": true,
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": [
-        "--line-length=75"
+        "--line-length=100"
     ],
     "javascript.preferences.quoteStyle": "single",
-    "prettier.printWidth": 80,
+    "prettier.printWidth": 100,
     "prettier.singleQuote": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
@@ -74,16 +78,13 @@
     "python.linting.flake8Enabled": false,
     "python.linting.flake8Args": [
         // Match what black does.
-        "--max-line-length=80"
+        "--max-line-length=100"
     ],
     "typescript.preferences.importModuleSpecifier": "relative",
     "python.linting.pylamaEnabled": true,
     "python.linting.pylamaArgs": [
         // Match what black does.
-        "--max-line-length=80"
-    ],
-    "python.analysis.extraPaths": [
-        "./backend/backend"
+        "--max-line-length=100"
     ],
     "autoDocstring.docstringFormat": "numpy",
     "autoDocstring.customTemplatePath": ".vscode/numpy.mustache",

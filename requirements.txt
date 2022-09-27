@@ -3,7 +3,8 @@ beautifulsoup4
 coverage
 dj-database-url
 Django
-django-bootstrap4
+django-bootstrap5
+fontawesomefree
 parameterized
 gunicorn
 psycopg2-binary
@@ -12,3 +13,4 @@ sqlparse
 whitenoise
 pylama
 black
+djlint

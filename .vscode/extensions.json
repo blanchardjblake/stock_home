@@ -3,6 +3,7 @@
         "esbenp.prettier-vscode",
         "njpwerner.autodocstring",
         "ms-python.vscode-pylance",
-        "ms-python.python"
+        "ms-python.python",
+        "monosans.djlint"
     ]
 }

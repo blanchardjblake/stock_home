@@ -1,29 +1,20 @@
-{% extends "base_generic.html" %} {% block content %}
-<main role="main">
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+{% extends "base_generic.html" %}
+{% block content %}
+    <main role="main">
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Insert Project Title Here</h1>
+                <p>Insert a short description of your project here.</p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
+                </p>
+            </div>
+        </div>
         <div class="container">
-            <h1 class="display-3">Insert Project Title Here</h1>
-            <p>Insert a short description of your project here.</p>
-            <p>
-                <a
-                    class="btn btn-primary btn-lg"
-                    href="{% url 'about' %}"
-                    role="button"
-                >
-                    Learn more &raquo;</a
-                >
-            </p>
+            <!-- Example row of columns -->
+            <div class="row">Use this space to add any additional information about the project.</div>
+            <hr />
         </div>
-    </div>
-
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            Use this space to add any additional information about the project.
-        </div>
-        <hr />
-    </div>
-    <!-- /container -->
-</main>
-{% endblock %}
+    </main>
+{% endblock content %}
