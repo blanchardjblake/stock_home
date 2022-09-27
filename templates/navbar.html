@@ -2,12 +2,20 @@
     <a class="navbar-brand" href="{% url 'home' %}">
         <i class="fab fa-python"></i> Product Name
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse">
-        <ul class="navbar-nav  mr-auto">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'about' %}">
                     <i class="fas fa-sitemap"></i> About
@@ -20,7 +28,7 @@
             </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
-        {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
             <li class="nav-item">
                 <span class="navbar-text">
                     <i class="fas fa-user-shield"></i> {{ user.email }}
@@ -36,7 +44,7 @@
                     <i class="fas fa-sign-out-alt"></i> Log out
                 </a>
             </li>
-        {% else %}
+            {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}">
                     <i class="fas fa-sign-in"></i> Sign in
@@ -47,7 +55,7 @@
                     <i class="fas fa-user-edit"></i> Sign up
                 </a>
             </li>
-        {% endif %}
+            {% endif %}
         </ul>
     </div>
 </nav>
