@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark justify-content-between">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">
             <i class="fa-brands fa-python"></i> Product Name
@@ -12,8 +12,8 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="#navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">
                         <i class="fa-solid fa-sitemap"></i> About
@@ -25,23 +25,37 @@
                     </a>
                 </li>
             </ul>
-            <ul class="navbar-nav d-flex">
+        </div>
+        <div class="navbar-collapse collapse" id="#navbarsExampleDefault">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <span class="navbar-text">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle"
+                           id="navbarDropdown"
+                           style="color: white; text-decoration: auto"
+                           role="button"
+                           data-toggle="dropdown"
+                           data-bs-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false">
                             <i class="fa-solid fa-user-shield"></i> {{ user.email }}
-                        </span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'password_change' %}">
-                            <i class="fa-solid fa-user-cog"></i> Change password
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">
-                            <i class="fa-solid fa-sign-out-alt"></i> Log out
-                        </a>
-                    </li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'password_change' %}">
+                                    <i class="fa-solid fa-user-cog"></i> Change password
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="fa-solid fa-sign-out-alt"></i> Log out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">
