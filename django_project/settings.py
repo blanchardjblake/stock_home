@@ -135,8 +135,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Redirect to home URL after login (Default redirects to /accounts/profile/)
+# Redirect to home URL after login and logout (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
