@@ -1,7 +1,7 @@
 """Forms for accounts app."""
 from django import forms
 from .models import CustomUser
-from django.contrib.auth.forms import (UserCreationForm, UserChangeForm)
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -11,13 +11,19 @@ class CustomUserCreationForm(UserCreationForm):
         """Meta class."""
 
         model = CustomUser
-        fields = ("first_name", "last_name", "email", "password1", "password2")
+        fields = (
+            "first_name",
+            "last_name",
+            "email",
+            "password1",
+            "password2",
+        )
         widgets = {
-            'first_name': forms.TextInput(attrs={"class": "form-control"}),
-            'last_name': forms.TextInput(attrs={"class": "form-control"}),
-            'email': forms.TextInput(attrs={"class": "form-control"}),
-            'password1': forms.TextInput(attrs={"class": "form-control"}),
-            'password2': forms.TextInput(attrs={"class": "form-control"}),
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.TextInput(attrs={"class": "form-control"}),
+            "password1": forms.TextInput(attrs={"class": "form-control"}),
+            "password2": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 
@@ -28,4 +34,4 @@ class CustomUserChangeForm(UserChangeForm):
         """Meta class."""
 
         model = CustomUser
-        fields = ('email',)
+        fields = ("email",)

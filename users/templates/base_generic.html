@@ -1,0 +1,42 @@
+{# Load the tag library #}
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="us-en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Django Project Template" />
+        <meta name="keywords" content="HTML, CSS, JavaScript" />
+        <meta name="author" content="John Doe" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon"
+              type="image/png"
+              href="{% static 'img/favicon.ico' %}"/>
+        <title>Django Project Template</title>
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+        <link href="{% static 'fontawesomefree/css/all.min.css' %}"
+              rel="stylesheet"
+              type="text/css"/>
+        {% block style %}
+        {% endblock style %}
+    </head>
+    <body>
+        {% include "navbar.html" %}
+        <div class="container">
+            <h1 align="center">
+                {% block title %}
+                {% endblock title %}
+            </h1>
+            <div class="row">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+        {% include "footer.html" %}
+    </body>
+</html>

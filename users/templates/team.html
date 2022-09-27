@@ -1,0 +1,96 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'css/contact.css' %}"/>
+{% endblock style %}
+{% block title %}
+    Meet our team
+{% endblock title %}
+{% block content %}
+    <div class="container mt-40">
+        <div class="row mt-30">
+            <div class="col-md-3 col-sm-6">
+                <div class="box15">
+                    <img src="{% static 'img/user_icon_a.png' %}"
+                         height="100%"
+                         width="100%"
+                         alt="user"/>
+                    <div class="box-content">
+                        <h3 class="title">Harvey</h3>
+                        <ul class="icon">
+                            <li>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-gitlab"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <span class="post">Project Lead</span>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="box15">
+                    <img src="{% static 'img/user_icon_a.png' %}"
+                         height="100%"
+                         width="100%"
+                         alt="user"/>
+                    <div class="box-content">
+                        <h3 class="title">Katrina</h3>
+                        <ul class="icon">
+                            <li>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-gitlab"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <span class="post">Tech Lead</span>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="box15">
+                    <img src="{% static 'img/user_icon_a.png' %}"
+                         height="100%"
+                         width="100%"
+                         alt="user"/>
+                    <div class="box-content">
+                        <h3 class="title">Maria</h3>
+                        <ul class="icon">
+                            <li>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-gitlab"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <span class="post">Product Lead</span>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="box15">
+                    <img src="{% static 'img/user_icon_a.png' %}"
+                         height="100%"
+                         width="100%"
+                         alt="user"/>
+                    <div class="box-content">
+                        <h3 class="title">Andrew</h3>
+                        <ul class="icon">
+                            <li>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-gitlab"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <span class="post">Quality Assurance</span>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

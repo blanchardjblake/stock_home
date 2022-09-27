@@ -1,14 +1,13 @@
 default:
     image: ruby:latest
 
-
 # This job is triggered for all pushes from any branches
 stages:
     - test
     - deploy
 
 test_job:
-    image: python:3.8.12
+    image: python:3.9-slim-buster
     stage: test
     script:
         - .gitlab/test_install.sh
@@ -16,7 +15,6 @@ test_job:
         - coverage report
 
     coverage: '/TOTAL.*\s+(\d+%)$/'
-
 
 # Only Team Member A (GITLAB_USER_LOGIN_A) can trigger this job
 staging-a:
@@ -28,7 +26,6 @@ staging-a:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-a --api-key=$HEROKU_API_KEY_A
 
-
 # Only Team Member B (GITLAB_USER_LOGIN_B) can trigger this job
 staging-b:
     stage: deploy
@@ -38,7 +35,6 @@ staging-b:
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-b --api-key=$HEROKU_API_KEY_B
-
 
 # Only Team Member C (GITLAB_USER_LOGIN_C) can trigger this job
 staging-c:
@@ -50,7 +46,6 @@ staging-c:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-c --api-key=$HEROKU_API_KEY_C
 
-
 # Only Team Member D (GITLAB_USER_LOGIN_D) can trigger this job
 staging-d:
     stage: deploy
@@ -60,7 +55,6 @@ staging-d:
     script:
         - .gitlab/dpl_before_script.sh
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-d --api-key=$HEROKU_API_KEY_D
-
 
 # This job is triggered when there is a (merge request) commit in the Main/Master branch
 production:

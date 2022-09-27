@@ -1,0 +1,20 @@
+<!-- templates/registration/signup.html -->
+{% extends "base_generic.html" %}
+{% load django_bootstrap5 %}
+{% block title %}
+    Sign Up
+{% endblock title %}
+{% block content %}
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {{ form.media }}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+{% endblock content %}
