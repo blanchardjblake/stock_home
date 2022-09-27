@@ -1,0 +1,90 @@
+{
+    "editor.fontSize": 15,
+    "editor.rulers": [80],
+    "editor.wordWrapColumn": 80,
+    "files.trimTrailingWhitespace": true,
+    "editor.fontFamily": "Menlo, Consolas, DejaVu Sans Mono, monospace",
+    "files.exclude": {
+        "out": true, // set this to true to hide the "out" folder with the compiled JS files
+        "**/*.pyc": true,
+        ".nyc_output": true,
+        "obj": true,
+        "bin": true,
+        "**/__pycache__": true,
+        ".vscode-test": false,
+        ".vscode test": false,
+        "**/.mypy_cache/**": true,
+        "**/.pytest_cache/**": true,
+        "**/.venv/**": true,
+        ".coverage": true,
+        "db.sqlite3": true,
+    },
+    "search.exclude": {
+        "out": true, // set this to false to include "out" folder in search results
+        "dist": true,
+        "**/node_modules": true,
+        "coverage": true,
+        "languageServer*/**": true,
+        ".vscode-test": true,
+        ".vscode test": true
+    },
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.formatOnSave": true
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[JSON]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[YAML]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "python.linting.enabled": true,
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pydocstyleEnabled": true,
+    "python.linting.pycodestyleArgs": [
+        "--ignore=E501"
+    ],
+    "python.testing.promptToConfigure": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=75"
+    ],
+    "javascript.preferences.quoteStyle": "single",
+    "prettier.printWidth": 80,
+    "prettier.singleQuote": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "python.languageServer": "Pylance",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false,
+    "python.linting.flake8Args": [
+        // Match what black does.
+        "--max-line-length=80"
+    ],
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "python.linting.pylamaEnabled": true,
+    "python.linting.pylamaArgs": [
+        // Match what black does.
+        "--max-line-length=80"
+    ],
+    "python.analysis.extraPaths": [
+        "./backend/backend"
+    ],
+    "autoDocstring.docstringFormat": "numpy",
+    "autoDocstring.customTemplatePath": ".vscode/numpy.mustache",
+}
