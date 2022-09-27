@@ -7,7 +7,7 @@ stages:
     - deploy
 
 test_job:
-    image: python:3.8.12
+    image: python:3.9-slim-buster
     stage: test
     script:
         - .gitlab/test_install.sh
