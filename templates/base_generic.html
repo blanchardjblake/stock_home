@@ -1,3 +1,4 @@
+{# Load the tag library #}
 {% load django_bootstrap5 %}
 {% load static %}
 <!DOCTYPE html>
@@ -12,7 +13,10 @@
               type="image/png"
               href="{% static 'img/favicon.ico' %}"/>
         <title>Django Project Template</title>
-        {% bootstrap_css %} {% bootstrap_javascript %}
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
         <link rel="stylesheet" href="{% static 'css/base.css' %}" />
         <link href="{% static 'fontawesomefree/css/all.min.css' %}"
@@ -34,6 +38,5 @@
             </div>
         </div>
         {% include "footer.html" %}
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </body>
 </html>
