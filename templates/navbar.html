@@ -30,17 +30,14 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
                     <div class="dropdown">
-                        <a class="dropdown-toggle"
-                           id="navbarDropdown"
-                           style="color: white; text-decoration: auto"
+                        <a class="nav-link dropdown-toggle"
                            role="button"
                            data-toggle="dropdown"
                            data-bs-toggle="dropdown"
-                           aria-haspopup="true"
                            aria-expanded="false">
                             <i class="fa-solid fa-user-shield"></i> {{ user.email }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu">
                             <li>
                                 <a class="dropdown-item" href="{% url 'password_change' %}">
                                     <i class="fa-solid fa-user-cog"></i> Change password
