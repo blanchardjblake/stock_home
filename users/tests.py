@@ -112,6 +112,7 @@ class LoginTestCase(TestCase):
         """Set up test data for the class."""
         CustomUser.objects.create_user(email="jdoe@gmail.com", password="p@$$W0RDL@rG3")
         self.login_url = reverse("login")
+        self.logout_url = reverse("logout")
         self.login_params = {"username": "jdoe@gmail.com", "password": "p@$$W0RDL@rG3"}
 
     def test_signinview(self):
@@ -141,4 +142,19 @@ class LoginTestCase(TestCase):
             "Please enter a correct email address and password"
             in str(response.context.get("errors"))
         )
+        self.assertEqual(str(response.context.get("user")), "AnonymousUser")
+
+    def test_login_and_logout(self):
+        """Test logout by login in first and then logout."""
+        response = self.client.post(self.login_url, data=self.login_params)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
+        response = self.client.get(reverse("home"))
+        self.assertEqual(str(response.context.get("user")), "jdoe@gmail.com")
+
+        response = self.client.get(self.logout_url)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
+        response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(str(response.context.get("user")), "AnonymousUser")
