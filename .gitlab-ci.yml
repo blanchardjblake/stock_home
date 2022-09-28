@@ -51,7 +51,9 @@ staging-a:
     stage: deploy
     rules:
         # Only run this job if Team Member A is pushing to a non-master/main branch
-        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A &&
+              $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH &&
+              $CI_PIPELINE_SOURCE != 'merge_request_event'
     before_script:
         - .gitlab/dpl_before_script.sh
     script:
@@ -63,7 +65,9 @@ staging-b:
     stage: deploy
     rules:
         # Only run this job if Team Member B is pushing to a non-master/main branch
-        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B &&
+              $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH &&
+              $CI_PIPELINE_SOURCE != 'merge_request_event'
     before_script:
         - .gitlab/dpl_before_script.sh
     script:
@@ -75,7 +79,9 @@ staging-c:
     stage: deploy
     rules:
         # Only run this job if Team Member C is pushing to a non-master/main branch
-        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C &&
+              $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH &&
+              $CI_PIPELINE_SOURCE != 'merge_request_event'
     before_script:
         - .gitlab/dpl_before_script.sh
     script:
@@ -87,7 +93,9 @@ staging-d:
     stage: deploy
     rules:
         # Only run this job if Team Member D is pushing to a non-master/main branch
-        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+        - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D &&
+              $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH &&
+              $CI_PIPELINE_SOURCE != 'merge_request_event'
     before_script:
         - .gitlab/dpl_before_script.sh
     script:
