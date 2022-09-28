@@ -9,22 +9,17 @@ pylint:
     image: python:alpine
     stage: lint
     before_script:
-        - apk add --update --no-cache --virtual .build-deps build-base
-          alpine-sdk musl-dev libffi-dev python3-dev gcc libc-dev
-        - pip3 install --no-cache-dir -r requirements.txt
+        - .gitlab/test_install.sh
     script:
         - pylama .
 
 # Defines the job in build
+# Checks if migrations files are missing
 migrations:
     image: python:alpine
     stage: build
     before_script:
-        - apk add --update --no-cache --virtual .build-deps build-base
-          alpine-sdk musl-dev libffi-dev python3-dev gcc libc-dev
-        - pip3 install --no-cache-dir -r requirements.txt
-        - python3 manage.py collectstatic --no-input
-        - python3 manage.py migrate
+        - .gitlab/test_install.sh
     script:
         - python3 manage.py makemigrations --check
         - python3 manage.py migrate --check
@@ -32,15 +27,23 @@ migrations:
         - python3 manage.py check --database default
         - python3 manage.py check --deploy
 
+# Defines the job in test
 test_job:
     image: python:alpine
     stage: test
-    script:
+    before_script:
         - .gitlab/test_install.sh
-        - coverage run --source='.' manage.py test
+    script:
+        - coverage run --source="." manage.py test
+        - coverage xml
         - coverage report
 
     coverage: '/TOTAL.*\s+(\d+%)$/'
+    artifacts:
+        reports:
+            coverage_report:
+                coverage_format: cobertura
+                path: coverage.xml
 
 # Only Team Member A (GITLAB_USER_LOGIN_A) can trigger this job
 staging-a:
@@ -49,8 +52,9 @@ staging-a:
     rules:
         # Only run this job if Team Member A is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
-    script:
+    before_script:
         - .gitlab/dpl_before_script.sh
+    script:
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-a --api-key=$HEROKU_API_KEY_A
 
 # Only Team Member B (GITLAB_USER_LOGIN_B) can trigger this job
@@ -60,8 +64,9 @@ staging-b:
     rules:
         # Only run this job if Team Member B is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
-    script:
+    before_script:
         - .gitlab/dpl_before_script.sh
+    script:
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-b --api-key=$HEROKU_API_KEY_B
 
 # Only Team Member C (GITLAB_USER_LOGIN_C) can trigger this job
@@ -71,8 +76,9 @@ staging-c:
     rules:
         # Only run this job if Team Member C is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
-    script:
+    before_script:
         - .gitlab/dpl_before_script.sh
+    script:
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-c --api-key=$HEROKU_API_KEY_C
 
 # Only Team Member D (GITLAB_USER_LOGIN_D) can trigger this job
@@ -82,8 +88,9 @@ staging-d:
     rules:
         # Only run this job if Team Member D is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
-    script:
+    before_script:
         - .gitlab/dpl_before_script.sh
+    script:
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-d --api-key=$HEROKU_API_KEY_D
 
 # This job is triggered when there is a (merge request) commit in the Main/Master branch
@@ -94,6 +101,7 @@ production:
         # Limit this job to the main/master branch
         - master
         - main
-    script:
+    before_script:
         - .gitlab/dpl_before_script.sh
+    script:
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING} --api-key=$HEROKU_API_KEY_A
