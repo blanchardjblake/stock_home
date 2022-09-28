@@ -4,7 +4,7 @@
     Login
 {% endblock title %}
 {% block content %}
-    <div class="row">
+    <div class="d-flex justify-content-center">
         {% if next %}
             {% if user.is_authenticated %}
                 <div class="alert alert-warning" role="alert">
@@ -15,7 +15,6 @@
                 <div class="alert alert-warning" role="alert">Please login to see this page.</div>
             {% endif %}
         {% endif %}
-        <div class="col-md-4"></div>
         <div class="col-md-4">
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
@@ -29,6 +28,5 @@
                 <input type="hidden" name="next" value="{{ next }}" class="form-control" />
             </form>
         </div>
-        <div class="col-md-4"></div>
     </div>
 {% endblock content %}
