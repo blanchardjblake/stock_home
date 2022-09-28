@@ -9,7 +9,7 @@ pylint:
     image: python:alpine
     stage: lint
     before_script:
-        - apk add --update --no-cache --virtual .build-deps build-base \
+        - apk add --update --no-cache --virtual .build-deps build-base
           alpine-sdk musl-dev libffi-dev python3-dev gcc libc-dev
         - pip3 install --no-cache-dir -r requirements.txt
     script:
@@ -20,7 +20,7 @@ migrations:
     image: python:alpine
     stage: build
     before_script:
-        - apk add --update --no-cache --virtual .build-deps build-base \
+        - apk add --update --no-cache --virtual .build-deps build-base
           alpine-sdk musl-dev libffi-dev python3-dev gcc libc-dev
         - pip3 install --no-cache-dir -r requirements.txt
     script:
