@@ -28,14 +28,12 @@
     <body>
         {% include "navbar.html" %}
         <div class="container">
-            <h1 align="center">
+            <h1 class="text-center fw-bold mb-5">
                 {% block title %}
                 {% endblock title %}
             </h1>
-            <div class="row">
-                {% block content %}
-                {% endblock content %}
-            </div>
+            {% block content %}
+            {% endblock content %}
         </div>
         {% include "footer.html" %}
     </body>
