@@ -4,29 +4,31 @@
     Login
 {% endblock title %}
 {% block content %}
-    {% if next %}
-        {% if user.is_authenticated %}
-            <div class="alert alert-warning" role="alert">
-                Your account doesn't have access to this page. To proceed, please login with
-                an account that has access.
-            </div>
-        {% else %}
-            <div class="alert alert-warning" role="alert">Please login to see this page.</div>
+    <div class="row">
+        {% if next %}
+            {% if user.is_authenticated %}
+                <div class="alert alert-warning" role="alert">
+                    Your account doesn't have access to this page. To proceed, please login with
+                    an account that has access.
+                </div>
+            {% else %}
+                <div class="alert alert-warning" role="alert">Please login to see this page.</div>
+            {% endif %}
         {% endif %}
-    {% endif %}
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <p>
-                <a href="{% url 'password_reset' %}">Lost password?</a>
-            </p>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary justify-center">Login</button>
-            </div>
-            <input type="hidden" name="next" value="{{ next }}" class="form-control" />
-        </form>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <p>
+                    <a href="{% url 'password_reset' %}">Lost password?</a>
+                </p>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary justify-center">Login</button>
+                </div>
+                <input type="hidden" name="next" value="{{ next }}" class="form-control" />
+            </form>
+        </div>
+        <div class="col-md-4"></div>
     </div>
-    <div class="col-md-4"></div>
 {% endblock content %}
