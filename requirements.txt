@@ -14,3 +14,4 @@ whitenoise
 pylama
 black
 djlint
+pytest-django

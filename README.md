@@ -38,6 +38,47 @@ python manage.py collectstatic --no-input
 python manage.py runserver
 ```
 
+## Developer's Guide
+
+Before performing a `git push`, run these commands to ensure that the new code changes will pass
+the pipeline stages:
+
+### Python linting
+
+**Pipeline Stage**: _lint_
+
+To ensure code changes meet the python coding and documentation standards, run the following
+commands:
+
+```bash
+pylama .
+```
+
+If the above command raises errors, fix the lines specified in the error messages.
+
+### Django migrations
+
+**Pipeline Stage**: _build_
+
+To ensure Django migration files are created, applied, and added to git, run the following commands:
+
+```bash
+python manage.py makemigrations --check
+python manage.py migrate --check
+```
+
+If the any of the above commands raises an error, create migration files and add to the commit.
+
+### Django Tests
+
+**Pipeline Stage**: _test_
+
+To ensure code changes passes all unit tests, run the following commands:
+
+```bash
+python manage.py test
+```
+
 ## Team Members
 
 **Update the last name, first name, Heroku app name, and URLs in the table below **
