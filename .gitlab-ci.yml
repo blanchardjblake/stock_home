@@ -23,9 +23,9 @@ migrations:
         - apk add --update --no-cache --virtual .build-deps build-base
           alpine-sdk musl-dev libffi-dev python3-dev gcc libc-dev
         - pip3 install --no-cache-dir -r requirements.txt
+        - python3 manage.py makemigrations
+        - python3 manage.py migrate
     script:
-        - python3 manage.py makemigrations --check
-        - python3 manage.py migrate --check
         - python3 manage.py check
         - python3 manage.py check --database default
         - python3 manage.py check --deploy
