@@ -34,7 +34,7 @@ test_job:
     before_script:
         - .gitlab/test_install.sh
     script:
-        - coverage run --source="." manage.py test
+        - coverage run manage.py test
         - coverage xml
         - coverage report
 

@@ -93,3 +93,25 @@ python manage.py test
 ## Set up GitLab CD
 
 See the [DEPLOY.md](DEPLOY.md)
+
+## (Optional) Run the project from Docker
+
+Install [docker engine](https://docs.docker.com/engine/install/).
+
+### Build the docker image
+
+```bash
+docker build -t django_project --file Dockerfile .
+```
+
+This command will build a docker image titled `django_project:latest`.
+
+### Run the docker image
+
+```bash
+docker run -d -p 8080:8080 django_project:latest
+```
+
+The above command runs the docker image in a detached mode.
+
+Open the browser and visit [http://127.0.0.1:8080/](http://127.0.0.1:8080/).
