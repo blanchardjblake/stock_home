@@ -2,7 +2,6 @@ stages:
     - lint
     - build
     - test
-    - release
     - deploy
 
 variables:
@@ -36,24 +35,6 @@ migrations:
         - python3 manage.py check --database default
         - python3 manage.py check --deploy
 
-# Defines the job in docker build
-docker-build:
-    image: docker:20.10.14
-    stage: build
-    tags:
-        - dind
-        - docker
-    needs: ['pylint', 'migrations']
-    services:
-        - name: docker:20.10.14-dind
-    before_script:
-        - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    script:
-        - docker pull $CI_REGISTRY_IMAGE:latest || true
-        - docker build --cache-from $CI_REGISTRY_IMAGE:latest
-          --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-          --tag $CI_REGISTRY_IMAGE:latest .
-
 # Defines the job in test
 test:
     image: python:alpine
@@ -74,25 +55,6 @@ test:
             coverage_report:
                 coverage_format: cobertura
                 path: coverage.xml
-
-# Defines the job in docker release
-docker-release:
-    image: docker:20.10.14
-    stage: release
-    tags:
-        - dind
-        - docker
-    needs: ['test', 'migrations']
-    services:
-        - name: docker:20.10.14-dind
-    before_script:
-        - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    script:
-        - docker pull $CI_REGISTRY_IMAGE:latest || true
-        - docker build --cache-from $CI_REGISTRY_IMAGE:latest
-          --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-          --tag $CI_REGISTRY_IMAGE:latest .
-        - docker push $CI_REGISTRY_IMAGE:latest
 
 # Only Team Member A (GITLAB_USER_LOGIN_A) can trigger this job
 staging-a:
