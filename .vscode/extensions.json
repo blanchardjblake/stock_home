@@ -1,9 +1,11 @@
 {
     "recommendations": [
         "esbenp.prettier-vscode",
-        "njpwerner.autodocstring",
+        "foxundermoon.shell-format",
+        "monosans.djlint",
+        "ms-azuretools.vscode-docker",
         "ms-python.vscode-pylance",
         "ms-python.python",
-        "monosans.djlint"
+        "njpwerner.autodocstring",
     ]
 }

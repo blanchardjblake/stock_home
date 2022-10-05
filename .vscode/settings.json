@@ -36,11 +36,17 @@
     "files.associations": {
         "*.html": "django-html",
     },
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+            "source.fixAll": true,
+        },
+    },
     "[html]": {
-        "editor.defaultFormatter": "monosans.djlint",
+        "editor.defaultFormatter": "monosans.djlint"
     },
     "[django-html]": {
-        "editor.defaultFormatter": "monosans.djlint",
+        "editor.defaultFormatter": "monosans.djlint"
     },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -48,20 +54,37 @@
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+            "source.fixAll": true,
+        }
     },
-    "[JSON]": {
+    "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
     },
-    "[YAML]": {
+    "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
+    },
+    "[ignore]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker",
+        "editor.quickSuggestions": {
+            "strings": true
+        }
     },
     "python.linting.enabled": true,
     "python.linting.pycodestyleEnabled": true,
     "python.linting.pydocstyleEnabled": true,
+    "python.linting.pydocstyleArgs": [
+        "--line-length=100",
+        "--ignore=D213,D203,D104"
+    ],
     "python.linting.pycodestyleArgs": [
+        "--line-length=100",
         "--ignore=E501"
     ],
     "python.testing.promptToConfigure": true,
@@ -76,18 +99,21 @@
         "source.fixAll.eslint": true
     },
     "python.languageServer": "Pylance",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": false,
-    "python.linting.flake8Args": [
-        // Match what black does.
-        "--max-line-length=100"
-    ],
     "typescript.preferences.importModuleSpecifier": "relative",
     "python.linting.pylamaEnabled": true,
     "python.linting.pylamaArgs": [
-        // Match what black does.
+        "--options=pylama.ini",
         "--max-line-length=100"
     ],
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django",
+        "--rcfile=.pylintrc",
+        "--django-settings-module=django_project.settings",
+    ],
+    "python.analysis.completeFunctionParens": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoSearchPaths": true,
     "autoDocstring.docstringFormat": "numpy",
     "autoDocstring.customTemplatePath": ".vscode/numpy.mustache",
 }
