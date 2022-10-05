@@ -13,6 +13,8 @@ variables:
 pylint:
     image: python:alpine
     stage: lint
+    tags:
+        - python
     before_script:
         - .gitlab/test_install.sh
     script:
@@ -23,6 +25,8 @@ pylint:
 migrations:
     image: python:alpine
     stage: build
+    tags:
+        - python
     needs: ['pylint']
     before_script:
         - .gitlab/test_install.sh
@@ -33,10 +37,30 @@ migrations:
         - python3 manage.py check --database default
         - python3 manage.py check --deploy
 
+# Defines the job in docker build
+docker-build:
+    image: docker:20.10.14
+    stage: build
+    tags:
+        - dind
+        - docker
+    needs: ['pylint', 'migrations']
+    services:
+        - name: docker:20.10.14-dind
+    before_script:
+        - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    script:
+        - docker pull $CI_REGISTRY_IMAGE:latest || true
+        - docker build --cache-from $CI_REGISTRY_IMAGE:latest
+          --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+          --tag $CI_REGISTRY_IMAGE:latest .
+
 # Defines the job in test
 test:
     image: python:alpine
     stage: test
+    tags:
+        - python
     needs: ['migrations', 'pylint']
     before_script:
         - .gitlab/test_install.sh
@@ -52,28 +76,31 @@ test:
                 coverage_format: cobertura
                 path: coverage.xml
 
-# Defines the job in staging release
-stage-release:
+# Defines the job in docker release
+docker-release:
     image: docker:20.10.14
     stage: release
     tags:
         - dind
+        - docker
     needs: ['test', 'migrations']
     services:
         - name: docker:20.10.14-dind
     before_script:
-        - .gitlab/test_install.sh
         - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     script:
         - docker pull $CI_REGISTRY_IMAGE:latest || true
         - docker build --cache-from $CI_REGISTRY_IMAGE:latest
           --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
           --tag $CI_REGISTRY_IMAGE:latest .
+        - docker push $CI_REGISTRY_IMAGE:latest
 
 # Only Team Member A (GITLAB_USER_LOGIN_A) can trigger this job
 staging-a:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
     needs: ['test', 'migrations']
     rules:
         # Only run this job if Team Member A is pushing to a non-master/main branch
@@ -89,6 +116,8 @@ staging-a:
 staging-b:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
     needs: ['test', 'migrations']
     rules:
         # Only run this job if Team Member B is pushing to a non-master/main branch
@@ -104,6 +133,8 @@ staging-b:
 staging-c:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
     needs: ['test', 'migrations']
     rules:
         # Only run this job if Team Member C is pushing to a non-master/main branch
@@ -119,6 +150,8 @@ staging-c:
 staging-d:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
     needs: ['test', 'migrations']
     rules:
         # Only run this job if Team Member D is pushing to a non-master/main branch
@@ -134,6 +167,8 @@ staging-d:
 production:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
     needs: ['test', 'migrations']
     only:
         # Limit this job to the main/master branch
