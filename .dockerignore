@@ -1,4 +1,3 @@
-
 *.pyc
 *.pyo
 *.mo
@@ -12,6 +11,9 @@
 .pydevproject
 .idea/workspace.xml
 .venv/
+.vscode/
+.gitlab/
+docs/
 htmlcov
 staticfiles/
 .vscode
@@ -26,3 +28,4 @@ env
 logs
 stats
 Dockerfile
+db.sqlite3

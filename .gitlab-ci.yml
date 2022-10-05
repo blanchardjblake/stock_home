@@ -4,10 +4,15 @@ stages:
     - test
     - deploy
 
+variables:
+    DOCKER_TLS_CERTDIR: '/certs'
+
 # Defines the job in Static Analysis
 pylint:
     image: python:alpine
     stage: lint
+    tags:
+        - python
     before_script:
         - .gitlab/test_install.sh
     script:
@@ -18,6 +23,9 @@ pylint:
 migrations:
     image: python:alpine
     stage: build
+    tags:
+        - python
+    needs: ['pylint']
     before_script:
         - .gitlab/test_install.sh
     script:
@@ -28,9 +36,12 @@ migrations:
         - python3 manage.py check --deploy
 
 # Defines the job in test
-test_job:
+test:
     image: python:alpine
     stage: test
+    tags:
+        - python
+    needs: ['migrations', 'pylint']
     before_script:
         - .gitlab/test_install.sh
     script:
@@ -49,6 +60,9 @@ test_job:
 staging-a:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
+    needs: ['test', 'migrations']
     rules:
         # Only run this job if Team Member A is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A &&
@@ -63,6 +77,9 @@ staging-a:
 staging-b:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
+    needs: ['test', 'migrations']
     rules:
         # Only run this job if Team Member B is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B &&
@@ -77,6 +94,9 @@ staging-b:
 staging-c:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
+    needs: ['test', 'migrations']
     rules:
         # Only run this job if Team Member C is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C &&
@@ -91,6 +111,9 @@ staging-c:
 staging-d:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
+    needs: ['test', 'migrations']
     rules:
         # Only run this job if Team Member D is pushing to a non-master/main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D &&
@@ -105,6 +128,9 @@ staging-d:
 production:
     image: ruby:latest
     stage: deploy
+    tags:
+        - ruby
+    needs: ['test', 'migrations']
     only:
         # Limit this job to the main/master branch
         - master

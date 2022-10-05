@@ -14,5 +14,7 @@ whitenoise
 pylama
 black
 djlint
+pylint
+pylint-django
 pytest-django
 pytest-cov
