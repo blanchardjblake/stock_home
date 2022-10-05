@@ -94,16 +94,15 @@ python manage.py test
 
 See the [DEPLOY.md](DEPLOY.md)
 
-## (Optional) Develop the project from Docker
+## (Optional) Develop the project using Docker
 
 Install [docker engine](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/).
 
-The `Dockerfile` is configured to mount the current working directory (root of the repository) inside the docker.
+The `docker-compose.dev.yml` is configured to mount the current working directory (the repository's root) inside the docker container.
 
-This enables editing changes on your machine using VSCode and the Django running inside the docker container
-reloads the changes automatically.
+It enables editing changes on your machine using VSCode, and the Django running inside the docker container reloads the changes automatically.
 
-### Build the docker image
+### Build
 
 From the root of this repository, run the following command:
 
@@ -111,9 +110,9 @@ From the root of this repository, run the following command:
 docker-compose -f docker-compose.dev.yml build
 ```
 
-The above command builds two docker images. One with django project and other with `PostgresSQL` DB.
+The above command builds two docker images—one with the Django project and the other with the `PostgresSQL` DB.
 
-### Run the docker image
+### Run
 
 ```bash
 docker-compose -f docker-compose.dev.yml up
@@ -122,3 +121,11 @@ docker-compose -f docker-compose.dev.yml up
 The above command brings the docker container to a running stage.
 
 Open the browser and visit [http://127.0.0.1:8080/](http://127.0.0.1:8080/).
+
+### Stop
+
+To shutdown down all the dockers safely, run the following command:
+
+```bash
+docker-compose -f docker-compose.dev.yml down --remove-orphans
+```
