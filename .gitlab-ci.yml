@@ -6,7 +6,6 @@ stages:
     - deploy
 
 variables:
-    POSTGRES_HOST_AUTH_METHOD: trust
     DOCKER_TLS_CERTDIR: '/certs'
 
 # Defines the job in Static Analysis
