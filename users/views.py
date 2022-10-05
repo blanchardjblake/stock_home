@@ -1,7 +1,8 @@
 """Accounts view."""
-from .forms import CustomUserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
+
+from users.forms import CustomUserCreationForm
 
 
 class SignUpView(generic.CreateView):
