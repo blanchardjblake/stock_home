@@ -94,24 +94,31 @@ python manage.py test
 
 See the [DEPLOY.md](DEPLOY.md)
 
-## (Optional) Run the project from Docker
+## (Optional) Develop the project from Docker
 
-Install [docker engine](https://docs.docker.com/engine/install/).
+Install [docker engine](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+
+The `Dockerfile` is configured to mount the current working directory (root of the repository) inside the docker.
+
+This enables editing changes on your machine using VSCode and the Django running inside the docker container
+reloads the changes automatically.
 
 ### Build the docker image
 
+From the root of this repository, run the following command:
+
 ```bash
-docker build -t django_project --file Dockerfile .
+docker-compose -f docker-compose.dev.yml build
 ```
 
-This command will build a docker image titled `django_project:latest`.
+The above command builds two docker images. One with django project and other with `PostgresSQL` DB.
 
 ### Run the docker image
 
 ```bash
-docker run -d -p 8080:8080 django_project:latest
+docker-compose -f docker-compose.dev.yml up
 ```
 
-The above command runs the docker image in a detached mode.
+The above command brings the docker container to a running stage.
 
 Open the browser and visit [http://127.0.0.1:8080/](http://127.0.0.1:8080/).

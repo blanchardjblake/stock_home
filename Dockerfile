@@ -19,11 +19,12 @@ RUN addgroup -S django_user && adduser -S django_user -G django_user
 WORKDIR /usr/src/django_project
 
 # install dependencies
-RUN apk --update --no-cache add python3-dev libffi-dev gcc musl-dev \
-    make libevent-dev build-base > /dev/null
+RUN apk add --virtual build-deps gcc python3-dev musl-dev >/dev/null
 RUN pip install --upgrade -q pip
 COPY --chown=django_user:django_user ./requirements.txt .
 RUN pip install --no-cache-dir -qr requirements.txt
+
+RUN apk del build-deps >/dev/null
 
 WORKDIR /usr/src/django_project
 
@@ -39,8 +40,6 @@ USER django_user
 
 # Add execution permission for the start script
 RUN chmod +x ./gunicorn.sh
-
-EXPOSE 8080
 
 # run gunicorn
 CMD [ "/usr/src/django_project/gunicorn.sh"]

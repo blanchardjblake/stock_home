@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - '8080:8080'
+    env_file:
+      - .env.dev-sample
+    volumes:
+      - ./:/usr/src/django_project
+
+  db:
+    image: postgres:13.3-alpine
+    ports:
+      - '5678:5432'
+    env_file:
+      - .env.dev-sample
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
