@@ -56,6 +56,8 @@ docker-build:
     tags:
         - dind
     needs: ['django-migrations']
+    services:
+        - docker:20.10.14-dind
     before_script:
         - .gitlab/docker_build.sh
     script:
