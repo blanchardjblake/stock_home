@@ -2,6 +2,7 @@ stages:
     - lint
     - build
     - test
+    - release
     - deploy
 
 variables:
@@ -19,27 +20,27 @@ cache:
         - venv/
 
 # Defines the job in Static Analysis
-pylint:
+django-lint:
     image: python:alpine
     stage: lint
     tags:
         - python
     before_script:
-        - .gitlab/pip_install.sh
+        - .gitlab/django_before_install.sh
         - source venv/bin/activate
     script:
         - pylama .
 
 # Defines the job in build
 # Checks if migrations files are missing
-migrations:
+django-migrations:
     image: python:alpine
     stage: build
     tags:
         - python
-    needs: ['pylint']
+    needs: ['django-lint']
     before_script:
-        - .gitlab/pip_install.sh
+        - .gitlab/django_before_install.sh
         - source venv/bin/activate
     script:
         - python3 manage.py makemigrations --check
@@ -48,15 +49,29 @@ migrations:
         - python3 manage.py check --database default
         - python3 manage.py check --deploy
 
+# Defines the job in docker build
+docker-build:
+    image: docker:20.10.14
+    stage: build
+    tags:
+        - dind
+    needs: ['django-migrations']
+    services:
+        - docker:20.10.14-dind
+    before_script:
+        - .gitlab/docker-build.sh
+    script:
+        - docker-compose -f docker-compose.dev.yml build --pull
+
 # Defines the job in test
-test:
+django-tests:
     image: python:alpine
     stage: test
     tags:
         - python
-    needs: ['migrations', 'pylint']
+    needs: ['django-migrations', 'django-lint']
     before_script:
-        - .gitlab/pip_install.sh
+        - .gitlab/django_before_install.sh
         - source venv/bin/activate
     script:
         - coverage run manage.py test
@@ -70,13 +85,28 @@ test:
                 coverage_format: cobertura
                 path: coverage.xml
 
+# Defines the job in release
+docker-release:
+    image: docker:20.10.14
+    stage: release
+    tags:
+        - dind
+    needs: ['django-tests', 'docker-build']
+    services:
+        - name: docker:20.10.14-dind
+    before_script:
+        - .gitlab/docker-build.sh
+    script:
+        - docker-compose -f docker-compose.dev.yml build --pull
+        - docker-compose -f docker-compose.dev.yml push
+
 # Only Team Member A (GITLAB_USER_LOGIN_A) can trigger this job
 staging-a:
     image: ruby:latest
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests', 'django-migrations']
     rules:
         # Only run this job if Team Member A is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A &&
@@ -93,7 +123,7 @@ staging-b:
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests', 'django-migrations']
     rules:
         # Only run this job if Team Member B is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B &&
@@ -110,7 +140,7 @@ staging-c:
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests', 'django-migrations']
     rules:
         # Only run this job if Team Member C is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C &&
@@ -127,7 +157,7 @@ staging-d:
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests', 'django-migrations']
     rules:
         # Only run this job if Team Member D is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D &&
@@ -144,7 +174,7 @@ production:
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests', 'django-migrations', 'docker-release']
     only:
         # Limit this job to the main branch
         - main
