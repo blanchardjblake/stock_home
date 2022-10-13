@@ -8,6 +8,16 @@ variables:
     DOCKER_TLS_CERTDIR: '/certs'
     PIP_CACHE_DIR: '$CI_PROJECT_DIR/.cache/pip'
 
+# Pip's cache doesn't store the python packages
+# https://pip.pypa.io/en/stable/reference/pip_install/#caching
+#
+# If you want to also cache the installed packages, you have to install
+# them in a virtualenv and cache it as well.
+cache:
+    paths:
+        - .cache/pip/
+        - venv/
+
 # Defines the job in Static Analysis
 pylint:
     image: python:alpine
@@ -16,15 +26,9 @@ pylint:
         - python
     before_script:
         - .gitlab/pip_install.sh
-        - .gitlab/django_before.sh
-    script:
         - source venv/bin/activate
+    script:
         - pylama .
-    # These folders are cached for the remaining jobs
-    cache:
-        paths:
-            - .cache/pip/
-            - venv/
 
 # Defines the job in build
 # Checks if migrations files are missing
@@ -35,9 +39,9 @@ migrations:
         - python
     needs: ['pylint']
     before_script:
-        - .gitlab/django_before.sh
-    script:
+        - .gitlab/pip_install.sh
         - source venv/bin/activate
+    script:
         - python3 manage.py makemigrations --check
         - python3 manage.py migrate --check
         - python3 manage.py check
@@ -52,9 +56,9 @@ test:
         - python
     needs: ['migrations', 'pylint']
     before_script:
-        - .gitlab/django_before.sh
-    script:
+        - .gitlab/pip_install.sh
         - source venv/bin/activate
+    script:
         - coverage run manage.py test
         - coverage xml
         - coverage report
