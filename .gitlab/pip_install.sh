@@ -1,4 +1,4 @@
-pip3 install --root-user-action=ignore -r virtualenv
+pip3 install virtualenv
 virtualenv venv
 source venv/bin/activate
 pip3 install --upgrade -q pip
