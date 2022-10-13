@@ -6,28 +6,42 @@ stages:
 
 variables:
     DOCKER_TLS_CERTDIR: '/certs'
+    PIP_CACHE_DIR: '$CI_PROJECT_DIR/.cache/pip'
+
+# Pip's cache doesn't store the python packages
+# https://pip.pypa.io/en/stable/reference/pip_install/#caching
+#
+# If you want to also cache the installed packages, you have to install
+# them in a virtualenv and cache it as well.
+cache:
+    paths:
+        - .cache/pip/
+        - venv/
+        - staticfiles/
 
 # Defines the job in Static Analysis
-pylint:
+django-lint:
     image: python:alpine
     stage: lint
     tags:
         - python
     before_script:
-        - .gitlab/test_install.sh
+        - .gitlab/django_before_install.sh
+        - source venv/bin/activate
     script:
         - pylama .
 
 # Defines the job in build
 # Checks if migrations files are missing
-migrations:
+django-migrations:
     image: python:alpine
     stage: build
     tags:
         - python
-    needs: ['pylint']
+    needs: ['django-lint']
     before_script:
-        - .gitlab/test_install.sh
+        - .gitlab/django_before_install.sh
+        - source venv/bin/activate
     script:
         - python3 manage.py makemigrations --check
         - python3 manage.py migrate --check
@@ -35,15 +49,30 @@ migrations:
         - python3 manage.py check --database default
         - python3 manage.py check --deploy
 
+# Defines the job in docker build
+docker-build:
+    image: docker:20.10.14
+    stage: build
+    tags:
+        - dind
+    needs: ['django-migrations']
+    services:
+        - docker:20.10.14-dind
+    before_script:
+        - .gitlab/docker_build.sh
+    script:
+        - docker-compose -f docker-compose.dev.yml build
+
 # Defines the job in test
-test:
+django-tests:
     image: python:alpine
     stage: test
     tags:
         - python
-    needs: ['migrations', 'pylint']
+    needs: ['django-migrations', 'django-lint']
     before_script:
-        - .gitlab/test_install.sh
+        - .gitlab/django_before_install.sh
+        - source venv/bin/activate
     script:
         - coverage run manage.py test
         - coverage xml
@@ -62,9 +91,9 @@ staging-a:
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests']
     rules:
-        # Only run this job if Team Member A is pushing to a non-master/main branch
+        # Only run this job if Team Member A is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A &&
               $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH &&
               $CI_PIPELINE_SOURCE != 'merge_request_event'
@@ -79,9 +108,9 @@ staging-b:
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests']
     rules:
-        # Only run this job if Team Member B is pushing to a non-master/main branch
+        # Only run this job if Team Member B is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B &&
               $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH &&
               $CI_PIPELINE_SOURCE != 'merge_request_event'
@@ -96,9 +125,9 @@ staging-c:
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests']
     rules:
-        # Only run this job if Team Member C is pushing to a non-master/main branch
+        # Only run this job if Team Member C is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C &&
               $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH &&
               $CI_PIPELINE_SOURCE != 'merge_request_event'
@@ -113,9 +142,9 @@ staging-d:
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests']
     rules:
-        # Only run this job if Team Member D is pushing to a non-master/main branch
+        # Only run this job if Team Member D is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D &&
               $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH &&
               $CI_PIPELINE_SOURCE != 'merge_request_event'
@@ -124,16 +153,15 @@ staging-d:
     script:
         - dpl --provider=heroku --app=${HEROKU_APP_STAGING}-d --api-key=$HEROKU_API_KEY_D
 
-# This job is triggered when there is a (merge request) commit in the Main/Master branch
+# This job is triggered when there is a (merge request) commit in the main branch
 production:
     image: ruby:latest
     stage: deploy
     tags:
         - ruby
-    needs: ['test', 'migrations']
+    needs: ['django-tests', 'docker-build']
     only:
-        # Limit this job to the main/master branch
-        - master
+        # Limit this job to the main branch
         - main
     before_script:
         - .gitlab/dpl_before_script.sh

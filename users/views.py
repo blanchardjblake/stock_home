@@ -6,7 +6,14 @@ from users.forms import CustomUserCreationForm
 
 
 class SignUpView(generic.CreateView):
-    """Registration view."""
+    """User registration view.
+
+    Arguments:
+    ---------
+    generic : object
+        Django generic `CreateView`.
+
+    """
 
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("login")

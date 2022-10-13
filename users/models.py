@@ -7,7 +7,19 @@ from users.managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
-    """Custom User class."""
+    """A custom User model.
+
+    Arguments:
+    ---------
+    AbstractUser : class
+        Django's `AbstractUser` class.
+
+    Returns:
+    -------
+    object:
+        `CustomUser` model.
+
+    """
 
     username = None
     email = models.EmailField(_("email address"), unique=True)
@@ -17,6 +29,13 @@ class CustomUser(AbstractUser):
 
     objects = CustomUserManager()
 
-    def __str__(self):
-        """Return email as the object's string representation."""
+    def __str__(self) -> str:
+        """Get the string representation of the object.
+
+        Returns:
+        -------
+        str
+            The unique identifer of the model, `email`.
+
+        """
         return self.email

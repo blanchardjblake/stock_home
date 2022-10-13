@@ -1,7 +1,7 @@
 """Accounts app URL Configuration."""
 from django.urls import path
 
-from .views import SignUpView
+from users.views import SignUpView
 
 app_name = "users"
 
