@@ -22,7 +22,6 @@ pylint:
     cache:
         paths:
             - ~/.cache/pip/
-            - ~/.venv/
 
 # Defines the job in build
 # Checks if migrations files are missing
