@@ -6,6 +6,7 @@ stages:
 
 variables:
     DOCKER_TLS_CERTDIR: '/certs'
+    PIP_CACHE_DIR: '$CI_PROJECT_DIR/.cache/pip'
 
 # Defines the job in Static Analysis
 pylint:
@@ -21,7 +22,7 @@ pylint:
     # These folders are cached for the remaining jobs
     cache:
         paths:
-            - ~/.cache/pip/
+            - .cache/pip/
 
 # Defines the job in build
 # Checks if migrations files are missing
