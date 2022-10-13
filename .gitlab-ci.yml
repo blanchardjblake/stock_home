@@ -60,7 +60,7 @@ docker-build:
     services:
         - docker:20.10.14-dind
     before_script:
-        - .gitlab/docker-build.sh
+        - .gitlab/docker_build.sh
     script:
         - docker-compose -f docker-compose.dev.yml build --pull
 
@@ -96,7 +96,7 @@ docker-release:
     services:
         - name: docker:20.10.14-dind
     before_script:
-        - .gitlab/docker-build.sh
+        - .gitlab/docker_build.sh
     script:
         - docker-compose -f docker-compose.dev.yml build --pull
         - docker-compose -f docker-compose.dev.yml push
@@ -107,7 +107,7 @@ staging-a:
     stage: deploy
     tags:
         - ruby
-    needs: ['django-tests', 'django-migrations']
+    needs: ['django-tests']
     rules:
         # Only run this job if Team Member A is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_A &&
@@ -124,7 +124,7 @@ staging-b:
     stage: deploy
     tags:
         - ruby
-    needs: ['django-tests', 'django-migrations']
+    needs: ['django-tests']
     rules:
         # Only run this job if Team Member B is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_B &&
@@ -141,7 +141,7 @@ staging-c:
     stage: deploy
     tags:
         - ruby
-    needs: ['django-tests', 'django-migrations']
+    needs: ['django-tests']
     rules:
         # Only run this job if Team Member C is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_C &&
@@ -158,7 +158,7 @@ staging-d:
     stage: deploy
     tags:
         - ruby
-    needs: ['django-tests', 'django-migrations']
+    needs: ['django-tests']
     rules:
         # Only run this job if Team Member D is pushing to a non main branch
         - if: $GITLAB_USER_LOGIN == $GITLAB_USER_LOGIN_D &&
@@ -175,7 +175,7 @@ production:
     stage: deploy
     tags:
         - ruby
-    needs: ['django-tests', 'django-migrations', 'docker-release']
+    needs: ['django-tests', 'docker-release']
     only:
         # Limit this job to the main branch
         - main
