@@ -1,11 +1,13 @@
 {
     "editor.fontSize": 15,
+    "editor.lineHeight": 22,
     "editor.rulers": [
         100
     ],
     "editor.wordWrapColumn": 100,
     "files.trimTrailingWhitespace": true,
-    "editor.fontFamily": "Menlo, Consolas, DejaVu Sans Mono, monospace",
+    "workbench.preferredDarkColorTheme": "One Dark Pro Darker",
+    "editor.fontFamily": "Fira Code, JetBrains Mono, Menlo, Consolas, DejaVu Sans Mono, monospace",
     "files.exclude": {
         "out": true, // set this to true to hide the "out" folder with the compiled JS files
         "**/*.pyc": true,
@@ -39,7 +41,6 @@
     "[python]": {
         "editor.codeActionsOnSave": {
             "source.organizeImports": true,
-            "source.fixAll": true,
         },
     },
     "[html]": {
@@ -81,7 +82,7 @@
     "python.linting.pydocstyleEnabled": true,
     "python.linting.pydocstyleArgs": [
         "--line-length=100",
-        "--ignore=D213,D203,D104"
+        "--ignore=D213,D203,D104,D406"
     ],
     "python.linting.pycodestyleArgs": [
         "--line-length=100",
