@@ -6,14 +6,31 @@ from django.utils.translation import gettext_lazy as _
 class CustomUserManager(BaseUserManager):
     """Custom User Manager.
 
-    Custom user model manager where email is the unique identifiers
-    for authentication instead of usernames.
+    Custom user model manager where `email` is the unique identifier
+    for authentication instead of the Django's default -- `username`.
+
     """
 
-    def create_user(self, email, password, **extra_fields):
-        """Create user.
+    def create_user(self, email: str, password: str, **extra_fields) -> object:
+        """Create a new user.
 
-        Create and save a User with the given email and password.
+        Arguments:
+        ---------
+        email : str
+            Email address.
+        password : str
+            Password.
+
+        Returns:
+        -------
+        object
+            `CustomUser` object of the new user.
+
+        Raises:
+        ------
+        ValueError
+            When the no `email` is provided.
+
         """
         if not email:
             raise ValueError(_("Users must have an email address"))
@@ -26,10 +43,28 @@ class CustomUserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email, password, **extra_fields):
-        """Create Super user.
+    def create_superuser(self, email: str, password: str, **extra_fields) -> object:
+        """Create a super user.
 
-        Create and save a SuperUser with the given email and password.
+        Arguments:
+        ---------
+        email : str
+            Email address.
+        password : str
+            Password.
+
+        Returns:
+        -------
+        object
+            `CustomUser` object of the super user.
+
+        Raises:
+        ------
+        ValueError
+            When the `is_staff` is not set.
+        ValueError
+            When the `is_superuser` is not set.
+
         """
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
