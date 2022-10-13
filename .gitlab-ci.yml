@@ -18,6 +18,7 @@ cache:
     paths:
         - .cache/pip/
         - venv/
+        - staticfiles/
 
 # Defines the job in Static Analysis
 django-lint:

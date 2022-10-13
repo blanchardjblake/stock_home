@@ -1,5 +1,5 @@
 pip3 install --root-user-action=ignore -q virtualenv
-virtualenv venv
+virtualenv venv >/dev/null
 source venv/bin/activate
 pip3 install --upgrade -q pip
 pip3 install --no-cache-dir -qr requirements.txt
