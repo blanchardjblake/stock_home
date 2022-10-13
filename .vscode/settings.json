@@ -34,6 +34,7 @@
         ".vscode-test": true,
         ".vscode test": true
     },
+    "git.allowForcePush": true,
     "editor.formatOnSave": true,
     "files.associations": {
         "*.html": "django-html",
