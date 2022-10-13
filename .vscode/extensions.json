@@ -7,6 +7,7 @@
         "ms-python.vscode-pylance",
         "ms-python.python",
         "njpwerner.autodocstring",
-        "zhuangtongfa.material-theme"
+        "zhuangtongfa.material-theme",
+        "GitLab.gitlab-workflow"
     ]
 }
