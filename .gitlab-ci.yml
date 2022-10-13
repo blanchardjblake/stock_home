@@ -157,7 +157,7 @@ production:
     stage: deploy
     tags:
         - ruby
-    needs: ['django-tests', 'docker-release']
+    needs: ['django-tests']
     only:
         # Limit this job to the main branch
         - main
