@@ -18,11 +18,13 @@ pylint:
         - .gitlab/pip_install.sh
         - .gitlab/django_before.sh
     script:
+        - source venv/bin/activate
         - pylama .
     # These folders are cached for the remaining jobs
     cache:
         paths:
             - .cache/pip/
+            - venv/
 
 # Defines the job in build
 # Checks if migrations files are missing
@@ -35,6 +37,7 @@ migrations:
     before_script:
         - .gitlab/django_before.sh
     script:
+        - source venv/bin/activate
         - python3 manage.py makemigrations --check
         - python3 manage.py migrate --check
         - python3 manage.py check
@@ -51,6 +54,7 @@ test:
     before_script:
         - .gitlab/django_before.sh
     script:
+        - source venv/bin/activate
         - coverage run manage.py test
         - coverage xml
         - coverage report
