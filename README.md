@@ -63,11 +63,14 @@ Upon opening the project folder onto the VSCode, install all extensions
 -   [ms-python.python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 -   [njpwerner.autodocstring](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring)
 -   [zhuangtongfa.material-theme](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)
--   [Gitlab.gitlab-workflow][https://marketplace.visualstudio.com/items?itemname=gitlab.gitlab-workflow]
+-   [Gitlab.gitlab-workflow](https://marketplace.visualstudio.com/items?itemname=gitlab.gitlab-workflow)
 
-These extensions require specific pip packages to be installed. The [requirements.txt](requirements.txt)
-file includes the pip packages required for the VSCode extensions. That's why VSCode needs to know the
-python virtual environment of the Django project for the normal functioning of the recommended extensions.
+These extensions require specific pip packages to be installed.
+
+The [requirements.txt](requirements.txt) file includes the pip packages required for the VSCode extensions.
+
+That's why VSCode needs to know the python virtual environment of the Django project for the normal
+functioning of the recommended extensions.
 
 ### GitLab CI/CD pipelines
 
