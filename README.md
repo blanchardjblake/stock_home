@@ -40,10 +40,41 @@ python manage.py runserver
 
 ## Developer's Guide
 
-Before performing a `git push`, run these commands to ensure that the new code changes will pass
+### Visual Studio Code
+
+It's highly recommended to use [VSCode](https://code.visualstudio.com/) to develop the Django project.
+
+The project repository comes with VSCode-specific settings that make the development much more effortless.
+
+While importing the project into the VSCode, open the root folder of the project such that VSCode can
+read the [.vscode/settings.json](.vscode/settings.json) file.
+
+If you're using a python virtual env for this project and the `.venv` or `venv` folder is in the root
+folder of the repository, then VSCode automatically identifies the virtual env. Otherwise, press
+`CTRL + SHIFT + P` and search for `python: select interpreter` and specify the path to the installation
+path of the python virtual env on your machine.
+
+Upon opening the project folder onto the VSCode, install all extensions
+([.vscode/extensions.json](.vscode/extensions.json)) recommended by the project's settings.
+
+-   [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+-   [monosans.djlint](https://marketplace.visualstudio.com/items?itemName=monosans.djlint)
+-   [ms-python.vscode-pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)
+-   [ms-python.python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+-   [njpwerner.autodocstring](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring)
+-   [zhuangtongfa.material-theme](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)
+-   [Gitlab.gitlab-workflow][https://marketplace.visualstudio.com/items?itemname=gitlab.gitlab-workflow]
+
+These extensions require specific pip packages to be installed. The [requirements.txt](requirements.txt)
+file includes the pip packages required for the VSCode extensions. That's why VSCode needs to know the
+python virtual environment of the Django project for the normal functioning of the recommended extensions.
+
+### GitLab CI/CD pipelines
+
+Before performing a `git push`, run these commands to ensure that the new code changes passes
 the pipeline stages:
 
-### Python linting
+#### Python linting
 
 **Pipeline Stage**: _lint_
 
@@ -56,7 +87,7 @@ pylama .
 
 If the above command raises errors, fix the lines specified in the error messages.
 
-### Django migrations
+#### Django migrations
 
 **Pipeline Stage**: _build_
 
@@ -69,7 +100,7 @@ python manage.py migrate --check
 
 If the any of the above commands raises an error, create migration files and add to the commit.
 
-### Django Tests
+#### Django Tests
 
 **Pipeline Stage**: _test_
 
@@ -96,11 +127,14 @@ See the [DEPLOY.md](DEPLOY.md)
 
 ## (Optional) Develop the project using Docker
 
-Install [docker engine](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+Install [docker engine](https://docs.docker.com/engine/install/) and
+[docker-compose](https://docs.docker.com/compose/install/).
 
-The `docker-compose.dev.yml` is configured to mount the current working directory (the repository's root) inside the docker container.
+The [docker-compose.dev.yml](docker-compose.dev.yml) is configured to mount the current working
+directory (the repository's root) inside the docker container.
 
-It enables editing changes on your machine using VSCode, and the Django running inside the docker container reloads the changes automatically.
+It enables editing changes on your machine using VSCode, and the Django running inside the docker
+container reloads the changes automatically.
 
 ### Build
 
@@ -110,7 +144,7 @@ From the root of this repository, run the following command:
 docker-compose -f docker-compose.dev.yml build
 ```
 
-The above command builds two docker images—one with the Django project and the other with the `PostgresSQL` DB.
+The above command builds two docker images—one with the Django project and the other with the `PostgreSQL` DB.
 
 ### Run
 
