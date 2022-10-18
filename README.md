@@ -89,7 +89,7 @@ of the VScode extensions. That's why VSCode needs to be opened from the bash or 
 line with an active python virtual environment in which all the project-specific python packages
 are installed.
 
-Some fonts to reduce eye strain and to provide better coding experience:
+Some fonts to reduce eye strain and provide better coding experience:
 
 -   [FiraCode](https://github.com/tonsky/FiraCode)
 -   [Jet Brains Mono](https://github.com/JetBrains/JetBrainsMono)
