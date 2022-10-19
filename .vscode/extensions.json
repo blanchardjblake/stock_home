@@ -8,6 +8,7 @@
         "ms-python.python",
         "njpwerner.autodocstring",
         "zhuangtongfa.material-theme",
-        "GitLab.gitlab-workflow"
+        "gitlab.gitlab-workflow",
+        "yzhang.markdown-all-in-one",
     ]
 }
