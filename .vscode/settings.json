@@ -51,9 +51,12 @@
         "editor.defaultFormatter": "monosans.djlint"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
         "editor.formatOnSave": true,
     },
+    "markdown.extension.preview.autoShowPreviewToSide": true,
+    "markdown.extension.print.theme": "dark",
+    "markdown.extension.toc.slugifyMode": "gitlab",
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.codeActionsOnSave": {
