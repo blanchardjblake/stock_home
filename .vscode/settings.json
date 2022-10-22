@@ -121,4 +121,9 @@
     "python.analysis.autoSearchPaths": true,
     "autoDocstring.docstringFormat": "numpy",
     "autoDocstring.customTemplatePath": ".vscode/numpy.mustache",
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
 }
