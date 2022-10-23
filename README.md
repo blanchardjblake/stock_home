@@ -1,18 +1,18 @@
-# Project Title
+# Stock Home
 
-**Insert project description here**
-
-**Change the URLs of the deployed app on Heroku**
+**The Stock Home provides users free, easy access to real time stock data. Uses can view graphical representation of stock price history for the past day, week, month, six months, year, or five years. Additionally, users can view tabular data containing stock attributes such as yearly dividend yield, current day opening price, current day min/max price, & previous year min/max price.
+Without an account, users can only view stock data, but creating an account gives users purchase options. Upon creating an account, users are instructed to view basic trading documentation included on the site. Until completing the review, users will be denied access to trading even with an account.
+Our site provides an easily accessible, commission-free trading platform to enable users of all financial backgrounds to participate in the market & attempt to grow their wealth. Additionally, the provided stock trading knowledge base will help prevent reckless trading among newcomers & increase the number of educated traders in the market.**
 
 The project is deployed on Heroku:
-[https://cmps-453-project-template.herokuapp.com/](https://cmps-453-project-template.herokuapp.com/)
+[https://fa22-team-d.herokuapp.com/](https://fa22-team-d.herokuapp.com/)
 
 To develop the Django application, clone this repository and follow the instructions:
 
 ## What's Already Included in the Django Template?
 
 -   User Authentication System:
-    -   [Login](https://cmps-453-project-template.herokuapp.com/accounts/login/)
+    -   [Login](https://fa22-team-d.herokuapp.com/accounts/login/)
     -   [User Registration](https://cmps-453-project-template.herokuapp.com/accounts/signup/)
 
 ## Create Python Virtual Environment
@@ -142,10 +142,10 @@ python manage.py test
 
 | Role     | Last Name | First Name | Heroku App                                    |
 | -------- | --------- | ---------- | --------------------------------------------- |
-| Member A | Last Name | First Name | [heroku_app-a.herokuapp.com](update URL here) |
-| Member B | Last Name | First Name | [heroku_app-b.herokuapp.com](update URL here) |
-| Member C | Last Name | First Name | [heroku_app-c.herokuapp.com](update URL here) |
-| Member D | Last Name | First Name | [heroku_app-d.herokuapp.com](update URL here) |
+| Member A | Blanchard | Blake      | https://fa22-team-d-a.herokuapp.com/          |
+| Member B | Ho        | Nicholas   | https://fa22-team-d-b.herokuapp.com/          |
+| Member C | Russell   | Nicholas   | https://fa22-team-d-c.herokuapp.com/          |
+| Member D | Trahan    | Gabriel    | https://fa22-team-d-d.herokuapp.com/          |
 
 ## (Optional) Use Docker Containers for Development
 
