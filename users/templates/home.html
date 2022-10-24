@@ -1,27 +1,41 @@
-{% extends "base_generic.html" %}
-{% block content %}
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="py-5">
-            <h1 class="display-3 fw-bold">Insert Project Title Here</h1>
-            <p>Insert a short description of your project here.</p>
-            <p class="col-md-8 fs-4">
-                <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
-            </p>
-        </div>
+{% extends "base_generic.html" %} {% block content %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="p-5 mb-4 bg-light rounded-3">
+  <div class="py-5">
+    <h1 class="display-3 fw-bold">Stock Home</h1>
+    <p>
+      Stock Home is a web-based stock trading solution that provides access to historical and
+      real-time stock data, commission-free trading, and extensive documentation to ensure that
+      users can be educated on all aspects of trading, such as risks, strategies, and terminology.
+      Stock Home is intended for investors of any experience level to take control of their finances
+      and invest in their future.
+    </p>
+    <p class="col-md-8 fs-4">
+      <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
+    </p>
+  </div>
+</div>
+<div class="py-5">
+  <div class="row align-items-md-stretch">
+    <div class="col-md-6">
+      <div class="h-100 p-5 bg-light rounded-3">
+        <p>
+          Unlike other popular brokerage applications, such as Robinhood and Webull, Stock Home
+          offers public discussion forums to allow users to share their analyses or collect
+          information on stock sentiment, in addition to traditional forecasts and market analysis
+          tools.
+        </p>
+      </div>
     </div>
-    <div class="py-5">
-        <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-                <div class="h-100 p-5 bg-light rounded-3">
-                    <p>Use this space to add any additional information about the project</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="h-100 p-5 bg-light rounded-3">
-                    <p>Use this space to add any additional information about the project.</p>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-6">
+      <div class="h-100 p-5 bg-light rounded-3">
+        <p>
+          Stock Home also provides users with lessons to familiarize themselves with investing in
+          the stock market. Users can search for lessons in a specific topic, view recommended
+          lessons, or view all lessons available, while Stock Home saves user progress.
+        </p>
+      </div>
     </div>
+  </div>
+</div>
 {% endblock content %}
