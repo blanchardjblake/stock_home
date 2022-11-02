@@ -1,7 +1,6 @@
 """Project apps."""
 from django.apps import AppConfig
 
-"""Main app."""
-class StockHomeConfig(AppConfig):
+class StockHomeConfig(AppConfig): """Main app."""
     default_auto_field = "django.db.models.BigAutoField"
     name = "stock_home"
