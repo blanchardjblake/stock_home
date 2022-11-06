@@ -5,7 +5,7 @@ from users.models import CustomUser
 
 
 class Company(models.Model):
-    """A Company model.
+    """Return a Company model.
 
     Arguments:
     ---------
@@ -49,7 +49,7 @@ class Company(models.Model):
 
 
 class Position(models.Model):
-    """A Position model.
+    """Return a Position model.
 
     Arguments:
     ---------
@@ -84,7 +84,7 @@ class Position(models.Model):
 
 
 class Transaction(models.Model):
-    """A Transaction model.
+    """Return a Transaction model.
 
     Arguments:
     ---------

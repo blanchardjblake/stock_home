@@ -9,7 +9,7 @@ from users.managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
-    """A custom User model.
+    """Return a custom User model.
 
     Arguments:
     ---------
