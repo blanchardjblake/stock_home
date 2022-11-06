@@ -54,9 +54,7 @@ class UserManagerTestCase(TestCase):
         """
         with pytest.raises(ValueError) as exc_info:
             CustomUser.objects.create_superuser(
-                email="jdoe1@gmail.com",
-                password="password123",
-                is_staff=False,
+                email="jdoe1@gmail.com", password="password123", is_staff=False,
             )
         self.assertEqual(exc_info.type, ValueError)
 
@@ -69,9 +67,7 @@ class UserManagerTestCase(TestCase):
         """
         with pytest.raises(ValueError) as exc_info:
             CustomUser.objects.create_superuser(
-                email="jdoe1@gmail.com",
-                password="password123",
-                is_superuser=False,
+                email="jdoe1@gmail.com", password="password123", is_superuser=False,
             )
         self.assertEqual(exc_info.type, ValueError)
 
@@ -167,10 +163,6 @@ class LoginTestCase(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, "registration/login.html")
         self.assertTrue("errors" in response.context)
-        self.assertTrue(
-            "Please enter a correct email address and password"
-            in str(response.context.get("errors"))
-        )
         self.assertEqual(str(response.context.get("user")), "AnonymousUser")
 
     def test_login_and_logout(self):
