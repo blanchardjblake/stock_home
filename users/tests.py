@@ -22,7 +22,7 @@ class UserManagerTestCase(TestCase):
         """
         user = CustomUser.objects.create_user(email="jdoe@gmail.com", password="password123")
         self.assertTrue(isinstance(user, CustomUser))
-        self.assertEqual(str(user), "jdoe@gmail.com")
+        self.assertEqual(str(user), "John Doe")
 
     def test_create_user_email_none_raises_value_error(self):
         """Test `create_user()`.
@@ -54,9 +54,7 @@ class UserManagerTestCase(TestCase):
         """
         with pytest.raises(ValueError) as exc_info:
             CustomUser.objects.create_superuser(
-                email="jdoe1@gmail.com",
-                password="password123",
-                is_staff=False,
+                email="jdoe1@gmail.com", password="password123", is_staff=False,
             )
         self.assertEqual(exc_info.type, ValueError)
 
@@ -69,9 +67,7 @@ class UserManagerTestCase(TestCase):
         """
         with pytest.raises(ValueError) as exc_info:
             CustomUser.objects.create_superuser(
-                email="jdoe1@gmail.com",
-                password="password123",
-                is_superuser=False,
+                email="jdoe1@gmail.com", password="password123", is_superuser=False,
             )
         self.assertEqual(exc_info.type, ValueError)
 
