@@ -21,6 +21,7 @@ class Company(models.Model):
 
     id = models.BigAutoField(primary_key=True)
     name = models.CharField("Company's name", max_length=30, unique=True)
+    symbol = models.CharField("Ticker symbol", max_length=5, unique=True, default="")
     value = models.FloatField()
     share_price = models.FloatField()
     curr_day_open = models.FloatField()
@@ -29,11 +30,11 @@ class Company(models.Model):
     corr_day_low = models.FloatField()
     year_high = models.FloatField()
     year_low = models.FloatField()
-    div_yield = models.DecimalField(decimal_places=4, max_digits=4)
-    volume = models.PositiveIntegerField()
-    avg_volume = models.PositiveIntegerField()
+    div_yield = models.FloatField()
+    volume = models.FloatField()
+    avg_volume = models.FloatField()
 
-    REQUIRED_FIELDS = [name, share_price]
+    REQUIRED_FIELDS = [name, share_price, symbol]
 
     def __str__(self) -> str:
         """Returns string representation of the object.
