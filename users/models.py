@@ -46,7 +46,7 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self) -> str:
-        """Returns string representation of the object.
+        """Return string representation of the object.
 
         Returns:
         -------
