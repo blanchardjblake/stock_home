@@ -54,4 +54,4 @@ class CustomUser(AbstractUser):
             The unique identifer of the model, `name`.
 
         """
-        return self.name
+        return self.email

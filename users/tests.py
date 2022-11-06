@@ -22,7 +22,7 @@ class UserManagerTestCase(TestCase):
         """
         user = CustomUser.objects.create_user(email="jdoe@gmail.com", password="password123")
         self.assertTrue(isinstance(user, CustomUser))
-        self.assertEqual(str(user), "John Doe")
+        self.assertEqual(str(user), "jdoe@gmail.com")
 
     def test_create_user_email_none_raises_value_error(self):
         """Test `create_user()`.
