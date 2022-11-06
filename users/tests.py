@@ -163,10 +163,6 @@ class LoginTestCase(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, "registration/login.html")
         self.assertTrue("errors" in response.context)
-        self.assertTrue(
-            "Please enter a correct email address and password"
-            in str(response.context.get("errors"))
-        )
         self.assertEqual(str(response.context.get("user")), "AnonymousUser")
 
     def test_login_and_logout(self):
