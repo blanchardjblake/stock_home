@@ -37,7 +37,7 @@ class Company(models.Model):
     REQUIRED_FIELDS = [name, share_price, symbol]
 
     def __str__(self) -> str:
-        """Returns string representation of the object.
+        """Return string representation of the object.
 
         Returns:
         -------
@@ -72,7 +72,7 @@ class Position(models.Model):
     REQUIRED_FIELDS = [user, company, quantity, avg_cost]
 
     def __str__(self) -> str:
-        """Returns string representation of the object.
+        """Return string representation of the object.
 
         Returns:
         -------
@@ -108,7 +108,7 @@ class Transaction(models.Model):
     REQUIRED_FIELDS = [user, company, quantity, type, price, date]
 
     def __str__(self) -> str:
-        """Returns string representation of the object.
+        """Return string representation of the object.
 
         Returns:
         -------
