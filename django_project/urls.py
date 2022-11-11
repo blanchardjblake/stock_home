@@ -34,16 +34,8 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
-    path(
-        "team",
-        TemplateView.as_view(template_name="team.html"),
-        name="team",
-    ),
-    path(
-        "about",
-        TemplateView.as_view(template_name="about.html"),
-        name="about",
-    ),
+    path("team", TemplateView.as_view(template_name="team.html"), name="team",),
+    path("about", TemplateView.as_view(template_name="about.html"), name="about",),
     path("accounts/", include("users.urls")),
 ]
 
@@ -91,3 +83,7 @@ urlpatterns += [
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+
+urlpatterns += [
+    path("stock_home/", include("stock_home.urls")),
+]
