@@ -80,7 +80,7 @@ class Position(models.Model):
             The quantity and company of the position.
 
         """
-        return self.quantity + " " + self.company
+        return str(self.quantity) + " " + str(self.company) + " @ " + str(self.avg_cost)
 
 
 class Transaction(models.Model):
@@ -100,7 +100,7 @@ class Transaction(models.Model):
 
     user = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
-    quantity = models.PositiveIntegerField()
+    quantity = models.FloatField()
     type = [("Buy", "Buy"), ("Sell", "Sell")]
     price = models.FloatField()
     date = models.DateTimeField
@@ -116,4 +116,4 @@ class Transaction(models.Model):
             The quantity and company of the position.
 
         """
-        return self.quantity + " " + self.company
+        return str(self.quantity) + " " + str(self.company) + " @ " + str(self.price)
