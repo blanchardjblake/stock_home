@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<ul>
+        <li>User: {{ object.user}}</li>
+        <li>Company: {{ object.company }}</li>
+        <li>Quantity: {{ object.quantity }}</li>
+        <li>Type: {{ object.type }}</li>
+        <li>Price: ${{ object.price }}</li>
+        <li>Date: ${{ object.date }}</li>
+</ul>
+{% endblock content %}
