@@ -23,22 +23,22 @@ class CustomUser(AbstractUser):
 
     """
 
-    I = "Inidvidual"
-    F = "Foreign Citizen"
+    IA = "Inidvidual"
+    FA = "Foreign Citizen"
     UT = "US Trust"
     FT = "Foreign Trust"
     UC = "US Corporation"
     FC = "Foreign Corporation"
-    P = "Partnership/Limited Liability Company"
+    PC = "Partnership/Limited Liability Company"
     MF = "Managed Futures"
     account_types = [
-        (I, "Individual"),
-        (F, "Foreign Citizen"),
+        (IA, "Individual"),
+        (FA, "Foreign Citizen"),
         (UT, "US Trust"),
         (FT, "Foreign Trust"),
         (UC, "US Corporation"),
         (FC, "Foreign Corpoartion"),
-        (P, "Partnership/Limited Liability Company"),
+        (PC, "Partnership/Limited Liability Company"),
         (MF, "Managed Futures"),
     ]
 
@@ -48,7 +48,7 @@ class CustomUser(AbstractUser):
     password = models.CharField("User's password", max_length=88)
     buying_power = models.FloatField(default=0)
     account_value = models.FloatField(default=0)
-    account_type = models.CharField(max_length=37, choices=account_types, default=I)
+    account_type = models.CharField(max_length=37, choices=account_types, default=IA)
     username = None
 
     USERNAME_FIELD = "email"
