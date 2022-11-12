@@ -98,12 +98,16 @@ class Transaction(models.Model):
 
     """
 
+    BUY = "Buy"
+    SELL = "Sell"
+    transaction_types = [(BUY, "Buy"), (SELL, "Sell")]
+
     user = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     quantity = models.FloatField()
-    type = [("Buy", "Buy"), ("Sell", "Sell")]
+    type = models.CharField(max_length=4, choices=transaction_types, default=BUY)
     price = models.FloatField()
-    date = models.DateTimeField
+    date = models.DateTimeField()
 
     REQUIRED_FIELDS = [user, company, quantity, type, price, date]
 
