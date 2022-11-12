@@ -23,22 +23,33 @@ class CustomUser(AbstractUser):
 
     """
 
+    IA = "Inidvidual"
+    FA = "Foreign Citizen"
+    UT = "US Trust"
+    FT = "Foreign Trust"
+    UC = "US Corporation"
+    FC = "Foreign Corporation"
+    PC = "Partnership/Limited Liability Company"
+    MF = "Managed Futures"
+    account_types = [
+        (IA, "Individual"),
+        (FA, "Foreign Citizen"),
+        (UT, "US Trust"),
+        (FT, "Foreign Trust"),
+        (UC, "US Corporation"),
+        (FC, "Foreign Corpoartion"),
+        (PC, "Partnership/Limited Liability Company"),
+        (MF, "Managed Futures"),
+    ]
+
     id = models.BigAutoField(primary_key=True)
-    name = models.CharField("User's name", max_length=30, default="John Doe")
+    name = models.CharField(max_length=30, default="John Doe")
     email = models.EmailField(unique=True)
-    password = models.CharField("User's password", max_length=20)
+    password = models.CharField("User's password", max_length=88)
     buying_power = models.FloatField(default=0)
     account_value = models.FloatField(default=0)
-    account_type = [
-        ("I", "Individual"),
-        ("F", "Foreign Citizen"),
-        ("UT", "US Trust"),
-        ("FT", "Foreign Trust"),
-        ("UC", "US Corporation"),
-        ("FC", "Foreign Corpoartion"),
-        ("P", "Partnership/Limited Liability Company"),
-        ("MF", "Managed Futures"),
-    ]
+    account_type = models.CharField(max_length=37, choices=account_types, default=IA)
+    username = None
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -51,7 +62,7 @@ class CustomUser(AbstractUser):
         Returns:
         -------
         str
-            The unique identifer of the model, `name`.
+            The unique identifer of the model, `email`.
 
         """
         return self.email
