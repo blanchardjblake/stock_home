@@ -13,6 +13,7 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
     list_display = (
+        "name",
         "email",
         "is_staff",
         "is_active",
@@ -23,7 +24,19 @@ class CustomUserAdmin(UserAdmin):
         "is_active",
     )
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (
+            None,
+            {
+                "fields": (
+                    "name",
+                    "email",
+                    "password",
+                    "buying_power",
+                    "account_value",
+                    "account_type",
+                )
+            },
+        ),
         ("Permissions", {"fields": ("is_staff", "is_active")}),
     )
     add_fieldsets = (
@@ -32,9 +45,13 @@ class CustomUserAdmin(UserAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
+                    "name",
                     "email",
                     "password1",
                     "password2",
+                    "buying_power",
+                    "account_value",
+                    "account_type",
                     "is_staff",
                     "is_active",
                 ),
@@ -42,7 +59,7 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
     search_fields = ("email",)
-    ordering = ("email",)
+    ordering = ("id",)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
