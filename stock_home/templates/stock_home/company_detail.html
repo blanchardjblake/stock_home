@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<ul>
+        <li>ID: {{ object.id}}</li>
+        <li>Name: {{ object.name }}</li>
+        <li>Symbol: {{ object.symbol }}</li>
+        <li>Value: {{ object.value }}</li>
+        <li>Share Price: ${{ object.share_price }}</li>
+        <li>Current Day Open: ${{ object.curr_day_open }}</li>
+        <li>Previous Day Open: ${{ object.prev_day_open }}</li>
+        <li>Current Day High: ${{ object.curr_day_high }}</li>
+        <li>Current Day Low: ${{ object.curr_day_low }}</li>
+        <li>Year High: ${{ object.year_high }}</li>
+        <li>Year Low: ${{ object.year_low }}</li>
+        <li>Dividend Yield: {{ object.div_yeild }}%</li>
+        <li>Volume: {{ object.volume }}</li>
+        <li>Average Volume: {{ object.avg_volume}}</li>
+</ul>
+{% endblock content %}
