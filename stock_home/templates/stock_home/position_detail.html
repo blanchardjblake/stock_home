@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<ul>
+        <li>User: {{ object.user}}</li>
+        <li>Company: {{ object.company }}</li>
+        <li>Quantity: {{ object.quantity }}</li>
+        <li>Average Cost: ${{ object.avg_cost }}</li>
+        <li>Profit/Loss: ${{ object.p_l }}</li>
+</ul>
+{% endblock content %}
