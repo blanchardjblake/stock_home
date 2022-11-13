@@ -1,3 +1,4 @@
+{% load static %}
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark justify-content-between">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">
@@ -7,7 +8,7 @@
                 height: 2.5em;
                 border-radius: 50%;
                 "
-                src="../static/img/stock_home_logo.png"
+                src="{% static 'img/stock_home_logo.png' %}"
             > Stock Home
         </a>
         <button class="navbar-toggler"
