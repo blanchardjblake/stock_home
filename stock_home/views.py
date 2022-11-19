@@ -2,7 +2,14 @@
 from django.urls import reverse_lazy
 from django.views import generic
 
-from stock_home.forms import CompanyCreateForm, CompanyUpdateForm, UserCreateForm, UserUpdateForm
+from stock_home.forms import (
+    CompanyCreateForm,
+    CompanyUpdateForm,
+    PositionCreateForm,
+    PositionUpdateForm,
+    UserCreateForm,
+    UserUpdateForm,
+)
 from stock_home.models import Company, Position, Transaction
 from users.models import CustomUser
 
@@ -104,6 +111,31 @@ class PositionDetailView(generic.DetailView):
 
     model = Position
     template_name = "stock_home/positions/position_detail.html"
+
+
+class PositionCreateView(generic.CreateView):
+    """Position create view."""
+
+    form_class = PositionCreateForm
+    template_name = "stock_home/position/position_create.html"
+    success_url = reverse_lazy("stock_home:position_list")
+
+
+class PositionUpdateView(generic.UpdateView):
+    """Position update view."""
+
+    model = Position
+    form_class = PositionUpdateForm
+    template_name = "stock_home/position/position_update.html"
+    success_url = reverse_lazy("stock_home:position_list")
+
+
+class PositionDeleteView(generic.DeleteView):
+    """Position delete view."""
+
+    model = Position
+    template_name = "stock_home/position/position_confirm_delete.html"
+    success_url = reverse_lazy("stock_home:position_list")
 
 
 # -------------------------------------------------- TRANSACTIONS
