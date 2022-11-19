@@ -24,15 +24,15 @@ class Company(models.Model):
     symbol = models.CharField("Ticker symbol", max_length=5, unique=True, default="")
     value = models.FloatField()
     share_price = models.FloatField()
-    curr_day_open = models.FloatField()
-    prev_day_open = models.FloatField()
-    curr_day_high = models.FloatField()
-    curr_day_low = models.FloatField()
-    year_high = models.FloatField()
-    year_low = models.FloatField()
+    curr_day_open = models.FloatField(null=True)
+    prev_day_open = models.FloatField(null=True)
+    curr_day_high = models.FloatField(null=True)
+    curr_day_low = models.FloatField(null=True)
+    year_high = models.FloatField(null=True)
+    year_low = models.FloatField(null=True)
     div_yield = models.FloatField()
-    volume = models.FloatField()
-    avg_volume = models.FloatField()
+    volume = models.FloatField(null=True)
+    avg_volume = models.FloatField(null=True)
 
     REQUIRED_FIELDS = [name, share_price, symbol]
 
