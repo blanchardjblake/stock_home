@@ -1,5 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
+<a href="{% url 'stock_home:company_create'%}">Add a Company</a>
+<br>
 {% if object_list %}
 <ul>
 {% for object in object_list %}

@@ -1,5 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
+<a href="{% url 'stock_home:company_update' object.id %}">Update {{object.name}}</a>
+<a href="{% url 'stock_home:company_delete' object.id %}">Delete {{object.name}}</a>
 <ul>
         <li>ID: {{ object.id}}</li>
         <li>Name: {{ object.name }}</li>
