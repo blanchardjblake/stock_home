@@ -10,7 +10,7 @@ urlpatterns = [
     path("users", views.UserListView.as_view(), name="custom_user_list"),
     path("users/<int:pk>/", views.UserDetailView.as_view(), name="custom_user_detail"),
     path("users/create/", views.UserCreateView.as_view(), name="custom_user_create"),
-    path("users/<int:pk>/update/", views.UserUpdateView.as_view(), name="custom_user_update"),
+    path("users/update/<int:pk>/", views.UserUpdateView.as_view(), name="custom_user_update"),
     path(
         "users/<int:pk>/delete/", views.UserDeleteView.as_view(), name="custom_user_confirm_delete"
     ),
