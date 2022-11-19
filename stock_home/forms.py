@@ -4,6 +4,7 @@ from users.models import CustomUser
 
 from stock_home.models import Company
 
+
 # -------------------------------------------------- COMPANIES
 class CompanyCreateForm(ModelForm):
     """Company creation form."""
