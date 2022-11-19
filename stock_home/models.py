@@ -1,4 +1,6 @@
 """Stock Home Models (Entities)."""
+from datetime import datetime
+
 from django.db import models
 from users.managers import CustomUserManager
 from users.models import CustomUser
@@ -22,17 +24,17 @@ class Company(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField("Company's name", max_length=30, unique=True)
     symbol = models.CharField("Ticker symbol", max_length=5, unique=True, default="")
-    value = models.FloatField()
-    share_price = models.FloatField()
-    curr_day_open = models.FloatField()
-    prev_day_open = models.FloatField()
-    curr_day_high = models.FloatField()
-    curr_day_low = models.FloatField()
-    year_high = models.FloatField()
-    year_low = models.FloatField()
-    div_yield = models.FloatField()
-    volume = models.FloatField()
-    avg_volume = models.FloatField()
+    value = models.FloatField(default=0.00, null=True)
+    share_price = models.FloatField(default=0.00, null=True)
+    curr_day_open = models.FloatField(default=0.00, null=True)
+    prev_day_open = models.FloatField(default=0.00, null=True)
+    curr_day_high = models.FloatField(default=0.00, null=True)
+    curr_day_low = models.FloatField(default=0.00, null=True)
+    year_high = models.FloatField(default=0.00, null=True)
+    year_low = models.FloatField(default=0.00, null=True)
+    div_yield = models.FloatField(default=0.00, null=True)
+    volume = models.FloatField(default=0.00, null=True)
+    avg_volume = models.FloatField(default=0.00, null=True)
 
     REQUIRED_FIELDS = [name, share_price, symbol]
 
@@ -65,11 +67,11 @@ class Position(models.Model):
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    quantity = models.FloatField()
-    avg_cost = models.FloatField()
-    p_l = models.FloatField()
+    quantity = models.FloatField(default=0)
+    avg_cost = models.FloatField(default=0.00, null=True)
+    p_l = models.FloatField(default=0.00, null=True)
 
-    REQUIRED_FIELDS = [user, company, quantity, avg_cost]
+    REQUIRED_FIELDS = [user, company, quantity]
 
     def __str__(self) -> str:
         """Return string representation of the object.
@@ -104,12 +106,12 @@ class Transaction(models.Model):
 
     user = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
-    quantity = models.FloatField()
+    quantity = models.FloatField(default=0.00, null=True)
     type = models.CharField(max_length=4, choices=transaction_types, default=BUY)
-    price = models.FloatField()
-    date = models.DateTimeField()
+    price = models.FloatField(default=0.00, null=True)
+    date = models.DateTimeField(default=datetime.now())
 
-    REQUIRED_FIELDS = [user, company, quantity, type, price, date]
+    REQUIRED_FIELDS = [user, company, quantity]
 
     def __str__(self) -> str:
         """Return string representation of the object.
