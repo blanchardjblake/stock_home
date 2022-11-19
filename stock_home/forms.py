@@ -4,7 +4,7 @@ from users.models import CustomUser
 
 from stock_home.models import Company
 
-
+# -------------------------------------------------- COMPANIES
 class CompanyCreateForm(ModelForm):
     """Company creation form."""
 
@@ -17,15 +17,7 @@ class CompanyCreateForm(ModelForm):
             "symbol",
             "value",
             "share_price",
-            "curr_day_open",
-            "prev_day_open",
-            "curr_day_high",
-            "curr_day_low",
-            "year_high",
-            "year_low",
             "div_yield",
-            "volume",
-            "avg_volume",
         )
 
 
@@ -41,15 +33,7 @@ class CompanyUpdateForm(ModelForm):
             "symbol",
             "value",
             "share_price",
-            "curr_day_open",
-            "prev_day_open",
-            "curr_day_high",
-            "curr_day_low",
-            "year_high",
-            "year_low",
             "div_yield",
-            "volume",
-            "avg_volume",
         )
 
 
@@ -74,10 +58,6 @@ class UserUpdateForm(ModelForm):
         model = CustomUser
         # list of fields to be used in the form.
         fields = ("name", "email", "password", "account_type")
-
-
-# -------------------------------------------------- COMPANIES
-# For fields, include: name, symbol, value, share_price, div_yeild
 
 
 # -------------------------------------------------- POSITIONS
