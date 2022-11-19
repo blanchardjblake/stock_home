@@ -1,15 +1,10 @@
 """Define views (URLS)."""
 from django.urls import reverse_lazy
 from django.views import generic
-from django.urls import reverse_lazy
 from users.models import CustomUser
 
-from stock_home.forms import (  # CompanyCreateForm,; CompanyUpdateForm,; PositionCreateForm,; PositionUpdateForm,; TransactionCreateForm,; TransactionUpdateForm,
-    UserCreateForm,
-    UserUpdateForm,
-)
+from stock_home.forms import CompanyCreateForm, CompanyUpdateForm, UserCreateForm, UserUpdateForm
 from stock_home.models import Company, Position, Transaction
-from stock_home.forms import CompanyCreateForm, CompanyUpdateForm
 
 
 # -------------------------------------------------- USERS
@@ -40,6 +35,7 @@ class UserCreateView(generic.CreateView):
 class UserUpdateView(generic.UpdateView):
     """User update view."""
 
+    model = CustomUser
     form_class = UserUpdateForm
     template_name = "users/custom_user_update.html"
     # which page to show upon success
