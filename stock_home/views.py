@@ -103,21 +103,21 @@ class PositionListView(generic.ListView):
     """Position List class."""
 
     model = Position
-    tempate_name = "stock_home/positions/position_list.html"
+    tempate_name = "stock_home/position_list.html"
 
 
 class PositionDetailView(generic.DetailView):
     """Position Detail class."""
 
     model = Position
-    template_name = "stock_home/positions/position_detail.html"
+    template_name = "stock_home/position_detail.html"
 
 
 class PositionCreateView(generic.CreateView):
     """Position create view."""
 
     form_class = PositionCreateForm
-    template_name = "stock_home/position/position_create.html"
+    template_name = "stock_home/position_create.html"
     success_url = reverse_lazy("stock_home:position_list")
 
 
@@ -126,7 +126,7 @@ class PositionUpdateView(generic.UpdateView):
 
     model = Position
     form_class = PositionUpdateForm
-    template_name = "stock_home/position/position_update.html"
+    template_name = "stock_home/position_update.html"
     success_url = reverse_lazy("stock_home:position_list")
 
 
@@ -134,7 +134,7 @@ class PositionDeleteView(generic.DeleteView):
     """Position delete view."""
 
     model = Position
-    template_name = "stock_home/position/position_confirm_delete.html"
+    template_name = "stock_home/position_confirm_delete.html"
     success_url = reverse_lazy("stock_home:position_list")
 
 
