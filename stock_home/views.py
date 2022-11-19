@@ -3,12 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from users.models import CustomUser
 
-from stock_home.forms import (  # CompanyCreateForm,; CompanyUpdateForm,; PositionCreateForm,; PositionUpdateForm,; TransactionCreateForm,; TransactionUpdateForm,
-    CompanyCreateForm,
-    CompanyUpdateForm,
-    UserCreateForm,
-    UserUpdateForm,
-)
+from stock_home.forms import CompanyCreateForm, CompanyUpdateForm, UserCreateForm, UserUpdateForm
 from stock_home.models import Company, Position, Transaction
 
 
