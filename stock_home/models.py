@@ -27,7 +27,7 @@ class Company(models.Model):
     curr_day_open = models.FloatField()
     prev_day_open = models.FloatField()
     curr_day_high = models.FloatField()
-    corr_day_low = models.FloatField()
+    curr_day_low = models.FloatField()
     year_high = models.FloatField()
     year_low = models.FloatField()
     div_yield = models.FloatField()
