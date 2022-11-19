@@ -17,5 +17,7 @@ urlpatterns = [
     path("positions", views.PositionListView.as_view(), name="position_list"),
     path("positions/<int:pk>/", views.PositionDetailView.as_view(), name="position_detail"),
     path("transactions", views.TransactionListView.as_view(), name="transaction_list"),
-    path("transactions/<int:pk>/", views.TransactionDetailView.as_view(), name="transaction_detail"),
+    path(
+        "transactions/<int:pk>/", views.TransactionDetailView.as_view(), name="transaction_detail"
+    ),
 ]

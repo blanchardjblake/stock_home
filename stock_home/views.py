@@ -25,30 +25,38 @@ class UserDetailView(generic.DetailView):
 # -------------------------------------------------- COMPANIES
 class CompanyListView(generic.ListView):
     """Company List class."""
+
     model = Company
     template_name = "stock_home/company/company_list.html"
 
 
 class CompanyDetailView(generic.DetailView):
     """Company Detail class."""
+
     model = Company
     template_name = "stock_home/company/company_detail.html"
 
+
 class CompanyCreateView(generic.CreateView):
     """Company create view."""
+
     form_class = CompanyCreateForm
     template_name = "stock_home/company/company_create.html"
     success_url = reverse_lazy("stock_home:company_list")
 
+
 class CompanyUpdateView(generic.UpdateView):
     """Company update view."""
+
     model = Company
     form_class = CompanyUpdateForm
     template_name = "stock_home/company/company_update.html"
     success_url = reverse_lazy("stock_home:company_list")
 
+
 class CompanyDeleteView(generic.DeleteView):
     """Company delete view."""
+
     model = Company
     template_name = "stock_home/company/company_delete.html"
     success_url = reverse_lazy("stock_home:company_list")
