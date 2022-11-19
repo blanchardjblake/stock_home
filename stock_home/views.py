@@ -1,10 +1,10 @@
 """Define views (URLS)."""
 from django.urls import reverse_lazy
 from django.views import generic
-from users.models import CustomUser
 
 from stock_home.forms import CompanyCreateForm, CompanyUpdateForm, UserCreateForm, UserUpdateForm
 from stock_home.models import Company, Position, Transaction
+from users.models import CustomUser
 
 
 # -------------------------------------------------- USERS
@@ -96,14 +96,14 @@ class PositionListView(generic.ListView):
     """Position List class."""
 
     model = Position
-    tempate_name = "stock_home/position_list.html"
+    tempate_name = "stock_home/positions/position_list.html"
 
 
 class PositionDetailView(generic.DetailView):
     """Position Detail class."""
 
     model = Position
-    template_name = "stock_home/position_detail.html"
+    template_name = "stock_home/positions/position_detail.html"
 
 
 # -------------------------------------------------- TRANSACTIONS
