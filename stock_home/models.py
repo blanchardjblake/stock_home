@@ -109,7 +109,7 @@ class Transaction(models.Model):
     quantity = models.FloatField(default=0.00, null=True)
     type = models.CharField(max_length=4, choices=transaction_types, default=BUY)
     price = models.FloatField(default=0.00, null=True)
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(default=datetime(2022, 11, 1))
 
     REQUIRED_FIELDS = [user, company, quantity]
 
