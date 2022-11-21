@@ -32,6 +32,17 @@ urlpatterns = [
     path(
         "transactions/<int:pk>/", views.TransactionDetailView.as_view(), name="transaction_detail"
     ),
+    path("transactions/create/", views.TransactionCreateView.as_view(), name="transaction_create"),
+    path(
+        "transactions/update/<int:pk>/",
+        views.TransactionUpdateView.as_view(),
+        name="transaction_update",
+    ),
+    path(
+        "transactions/delete/<int:pk>/",
+        views.TransactionDeleteView.as_view(),
+        name="transaction_confirm_delete",
+    ),
     path("users/create/", views.UserCreateView.as_view(), name="custom_user_create"),
     path("users/<int:pk>/update/", views.UserUpdateView.as_view(), name="custom_user_update"),
     path(
