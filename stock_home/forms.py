@@ -1,7 +1,7 @@
 """Forms for Stock Home app."""
 from django.forms import ModelForm
 
-from stock_home.models import Company, Position
+from stock_home.models import Company, Position, Transaction
 from users.models import CustomUser
 
 
@@ -87,3 +87,23 @@ class PositionUpdateForm(ModelForm):
 
 # -------------------------------------------------- TRANSACTIONS
 # For fields, include: user, company, quantity, type, price, date
+class TransactionCreateForm(ModelForm):
+    """Transaction creation form."""
+
+    class Meta:
+        """Meta class."""
+
+        model = Transaction
+        # list of fields to be used in the form.
+        fields = ("user", "company", "quantity", "type", "price", "date")
+
+
+class TransactionUpdateForm(ModelForm):
+    """Transaction update form."""
+
+    class Meta:
+        """Meta class."""
+
+        model = Transaction
+        # list of fields to be used in the form.
+        fields = ("user", "company", "quantity", "type", "price", "date")
