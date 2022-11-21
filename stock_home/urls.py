@@ -10,7 +10,7 @@ urlpatterns = [
     path("users", views.UserListView.as_view(), name="custom_user_list"),
     path("users/<int:pk>/", views.UserDetailView.as_view(), name="custom_user_detail"),
     path("users/create/", views.UserCreateView.as_view(), name="custom_user_create"),
-    path("users/update/<int:pk>/", views.UserUpdateView.as_view(), name="custom_user_update"),
+    path("users/<int:pk>/update/", views.UserUpdateView.as_view(), name="custom_user_update"),
     path(
         "users/<int:pk>/delete/", views.UserDeleteView.as_view(), name="custom_user_confirm_delete"
     ),
@@ -21,8 +21,20 @@ urlpatterns = [
     path("company/delete/<int:pk>/", views.CompanyDeleteView.as_view(), name="company_delete"),
     path("positions", views.PositionListView.as_view(), name="position_list"),
     path("positions/<int:pk>/", views.PositionDetailView.as_view(), name="position_detail"),
+    path("positions/create/", views.PositionCreateView.as_view(), name="position_create"),
+    path("positions/<int:pk>/update/", views.PositionUpdateView.as_view(), name="position_update"),
+    path(
+        "positions/<int:pk>/delete/",
+        views.PositionDeleteView.as_view(),
+        name="position_confirm_delete",
+    ),
     path("transactions", views.TransactionListView.as_view(), name="transaction_list"),
     path(
         "transactions/<int:pk>/", views.TransactionDetailView.as_view(), name="transaction_detail"
+    ),
+    path("users/create/", views.UserCreateView.as_view(), name="custom_user_create"),
+    path("users/<int:pk>/update/", views.UserUpdateView.as_view(), name="custom_user_update"),
+    path(
+        "users/<int:pk>/delete/", views.UserDeleteView.as_view(), name="custom_user_confirm_delete"
     ),
 ]
