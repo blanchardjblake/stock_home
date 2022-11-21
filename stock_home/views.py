@@ -7,6 +7,8 @@ from stock_home.forms import (
     CompanyUpdateForm,
     PositionCreateForm,
     PositionUpdateForm,
+    TransactionCreateForm,
+    TransactionUpdateForm,
     UserCreateForm,
     UserUpdateForm,
 )
@@ -151,3 +153,28 @@ class TransactionDetailView(generic.DetailView):
 
     model = Transaction
     template_name = "stock_home/transaction_detail.html"
+
+
+class TransactionCreateView(generic.CreateView):
+    """Transaction create view."""
+
+    form_class = TransactionCreateForm
+    template_name = "stock_home/transaction_create.html"
+    success_url = reverse_lazy("stock_home:transaction_list")
+
+
+class TransactionUpdateView(generic.UpdateView):
+    """Transaction update view."""
+
+    model = Transaction
+    form_class = TransactionUpdateForm
+    template_name = "stock_home/transaction_update.html"
+    success_url = reverse_lazy("stock_home:transaction_list")
+
+
+class TransactionDeleteView(generic.DeleteView):
+    """Transaction delete view."""
+
+    model = Transaction
+    template_name = "stock_home/transaction_confirm_delete.html"
+    success_url = reverse_lazy("stock_home:transaction_list")
