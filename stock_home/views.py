@@ -1,6 +1,8 @@
 """Define views (URLS)."""
 from django.urls import reverse_lazy
 from django.views import generic
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from stock_home.forms import (
     CompanyCreateForm,
@@ -35,6 +37,11 @@ class CompanyCreateView(generic.CreateView):
     template_name = "stock_home/company/company_create.html"
     success_url = reverse_lazy("stock_home:company_list")
 
+    def form_valid(self, form: object) -> object:
+        """When the form submitted is valid, add current user to the form data."""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class CompanyUpdateView(generic.UpdateView):
     """Company update view."""
@@ -43,11 +50,6 @@ class CompanyUpdateView(generic.UpdateView):
     form_class = CompanyUpdateForm
     template_name = "stock_home/company/company_update.html"
     success_url = reverse_lazy("stock_home:company_list")
-
-    def form_valid(self, form: object) -> object:
-        """When the form submitted is valid, add current user to the form data."""
-        form.instance.user = self.request.user
-        return super().form_valid(form)
 
 
 class CompanyDeleteView(generic.DeleteView):
@@ -59,7 +61,7 @@ class CompanyDeleteView(generic.DeleteView):
 
 
 # -------------------------------------------------- POSITIONS
-class PositionListView(generic.ListView):
+class PositionListView(LoginRequiredMixin, generic.ListView):
     """Position List class."""
 
     model = Position
@@ -67,15 +69,20 @@ class PositionListView(generic.ListView):
 
     def get_queryset(self) -> list:
         """Return a list with objects created by current user."""
-        return Position.objects.filter(owner=self.request.user)
+        return Position.objects.filter(user=self.request.user)
 
 
-
-class PositionDetailView(generic.DetailView):
+class PositionDetailView(LoginRequiredMixin, generic.DetailView):
     """Position Detail class."""
 
     model = Position
     template_name = "stock_home/position_detail.html"
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not the owner of the object, redirect."""
+        if self.get_object().user != self.request.user:
+            return redirect("stock_home:transaction_list")
+        return super().get(request, *args, **kwargs)
 
 
 class PositionCreateView(generic.CreateView):
@@ -109,18 +116,28 @@ class PositionDeleteView(generic.DeleteView):
 
 
 # -------------------------------------------------- TRANSACTIONS
-class TransactionListView(generic.ListView):
+class TransactionListView(LoginRequiredMixin, generic.ListView):
     """Transaction List class."""
 
     model = Transaction
     template_name = "stock_home/transaction_list.html"
 
+    def get_queryset(self) -> list:
+        """Return a list with objects created by current user."""
+        return Transaction.objects.filter(user=self.request.user)
 
-class TransactionDetailView(generic.DetailView):
+
+class TransactionDetailView(LoginRequiredMixin, generic.DetailView):
     """Transaction Detail class."""
 
     model = Transaction
     template_name = "stock_home/transaction_detail.html"
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not the owner of the object, redirect."""
+        if self.get_object().user != self.request.user:
+            return redirect("stock_home:transaction_list")
+        return super().get(request, *args, **kwargs)
 
 
 class TransactionCreateView(generic.CreateView):
