@@ -37,30 +37,6 @@ class CompanyUpdateForm(ModelForm):
             "div_yield",
         )
 
-
-# -------------------------------------------------- USERS
-class UserCreateForm(ModelForm):
-    """User creation form."""
-
-    class Meta:
-        """Meta class."""
-
-        model = CustomUser
-        # list of fields to be used in the form.
-        fields = ("name", "email", "password", "account_type")
-
-
-class UserUpdateForm(ModelForm):
-    """User update form."""
-
-    class Meta:
-        """Meta class."""
-
-        model = CustomUser
-        # list of fields to be used in the form.
-        fields = ("name", "email", "password", "account_type")
-
-
 # -------------------------------------------------- POSITIONS
 # For fields, include: user, company, quantity
 class PositionCreateForm(ModelForm):

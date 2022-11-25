@@ -9,55 +9,8 @@ from stock_home.forms import (
     PositionUpdateForm,
     TransactionCreateForm,
     TransactionUpdateForm,
-    UserCreateForm,
-    UserUpdateForm,
 )
 from stock_home.models import Company, Position, Transaction
-from users.models import CustomUser
-
-
-# -------------------------------------------------- USERS
-class UserListView(generic.ListView):
-    """User List class."""
-
-    model = CustomUser
-    template_name = "users/custom_user_list.html"
-
-
-class UserDetailView(generic.DetailView):
-    """User Detail class."""
-
-    model = CustomUser
-    template_name = "users/custom_user_detail.html"
-
-
-class UserCreateView(generic.CreateView):
-    """User create view."""
-
-    form_class = UserCreateForm
-    template_name = "users/custom_user_create.html"
-    # which page to show upon success
-    # replace "home" with one of the names in urls_patterns of urls.py
-    success_url = reverse_lazy("stock_home:custom_user_list")
-
-
-class UserUpdateView(generic.UpdateView):
-    """User update view."""
-
-    model = CustomUser
-    form_class = UserUpdateForm
-    template_name = "users/custom_user_update.html"
-    # which page to show upon success
-    success_url = reverse_lazy("stock_home:custom_user_list")
-
-
-class UserDeleteView(generic.DeleteView):
-    """<SomeModel> delete view."""
-
-    model = CustomUser
-    template_name = "users/custom_user_confirm_delete.html"
-    # which page to show upon success
-    success_url = reverse_lazy("stock_home:custom_user_list")
 
 
 # -------------------------------------------------- COMPANIES
@@ -91,6 +44,11 @@ class CompanyUpdateView(generic.UpdateView):
     template_name = "stock_home/company/company_update.html"
     success_url = reverse_lazy("stock_home:company_list")
 
+    def form_valid(self, form: object) -> object:
+        """When the form submitted is valid, add current user to the form data."""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class CompanyDeleteView(generic.DeleteView):
     """Company delete view."""
@@ -107,6 +65,11 @@ class PositionListView(generic.ListView):
     model = Position
     tempate_name = "stock_home/position_list.html"
 
+    def get_queryset(self) -> list:
+        """Return a list with objects created by current user."""
+        return Position.objects.filter(owner=self.request.user)
+
+
 
 class PositionDetailView(generic.DetailView):
     """Position Detail class."""
@@ -121,6 +84,11 @@ class PositionCreateView(generic.CreateView):
     form_class = PositionCreateForm
     template_name = "stock_home/position_create.html"
     success_url = reverse_lazy("stock_home:position_list")
+
+    def form_valid(self, form: object) -> object:
+        """When the form submitted is valid, add current user to the form data."""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class PositionUpdateView(generic.UpdateView):
@@ -161,6 +129,11 @@ class TransactionCreateView(generic.CreateView):
     form_class = TransactionCreateForm
     template_name = "stock_home/transaction_create.html"
     success_url = reverse_lazy("stock_home:transaction_list")
+
+    def form_valid(self, form: object) -> object:
+        """When the form submitted is valid, add current user to the form data."""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class TransactionUpdateView(generic.UpdateView):
