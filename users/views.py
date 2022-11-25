@@ -55,4 +55,3 @@ class UserDeleteView(generic.DeleteView):
     template_name = "custom_user_confirm_delete.html"
     # which page to show upon success
     success_url = reverse_lazy("users:custom_user_list")
-    

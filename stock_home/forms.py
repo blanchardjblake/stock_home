@@ -37,6 +37,7 @@ class CompanyUpdateForm(ModelForm):
             "div_yield",
         )
 
+
 # -------------------------------------------------- POSITIONS
 # For fields, include: user, company, quantity
 class PositionCreateForm(ModelForm):
