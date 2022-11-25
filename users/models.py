@@ -43,7 +43,8 @@ class CustomUser(AbstractUser):
     ]
 
     id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=30, default="John Doe")
+    first_name = models.CharField(max_length=30, default="")
+    last_name = models.CharField(max_length=30, default="")
     email = models.EmailField(unique=True)
     password = models.CharField("User's password", max_length=88)
     buying_power = models.FloatField(default=0)
