@@ -18,6 +18,7 @@ class CustomUserCreationForm(UserCreationForm):
             "email",
             "password1",
             "password2",
+            "account_type"
         )
         widgets = {
             "first_name": forms.TextInput(attrs={"class": "form-control"}),
@@ -25,14 +26,20 @@ class CustomUserCreationForm(UserCreationForm):
             "email": forms.TextInput(attrs={"class": "form-control"}),
             "password1": forms.TextInput(attrs={"class": "form-control"}),
             "password2": forms.TextInput(attrs={"class": "form-control"}),
+            "account_type": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(forms.ModelForm):
     """User profile change view."""
 
     class Meta:
         """Meta class."""
 
         model = CustomUser
-        fields = ("email",)
+        fields = (
+            "first_name",
+            "last_name",
+            "email",
+            "account_type"
+        )

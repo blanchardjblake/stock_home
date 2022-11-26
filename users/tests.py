@@ -103,7 +103,7 @@ class SignUpViewTestCase(TestCase):
                     "password1": "p@$$W0RDL@rG3",
                     "password2": "p@$$W0RDL@rG3",
                 },
-                HTTPStatus.FOUND,
+                HTTPStatus.OK,
             ),
             (
                 {

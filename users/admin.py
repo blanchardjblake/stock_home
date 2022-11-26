@@ -13,7 +13,8 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
     list_display = (
-        "name",
+        "first_name",
+        "last_name",
         "email",
         "is_staff",
         "is_active",
@@ -28,7 +29,8 @@ class CustomUserAdmin(UserAdmin):
             None,
             {
                 "fields": (
-                    "name",
+                    "first_name",
+                    "last_name",
                     "email",
                     "password",
                     "buying_power",
@@ -45,7 +47,8 @@ class CustomUserAdmin(UserAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
-                    "name",
+                    "first_name",
+                    "last_name",
                     "email",
                     "password1",
                     "password2",

@@ -1,6 +1,8 @@
 """Define views (URLS)."""
 from django.urls import reverse_lazy
 from django.views import generic
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from stock_home.forms import (
     CompanyCreateForm,
@@ -9,55 +11,8 @@ from stock_home.forms import (
     PositionUpdateForm,
     TransactionCreateForm,
     TransactionUpdateForm,
-    UserCreateForm,
-    UserUpdateForm,
 )
 from stock_home.models import Company, Position, Transaction
-from users.models import CustomUser
-
-
-# -------------------------------------------------- USERS
-class UserListView(generic.ListView):
-    """User List class."""
-
-    model = CustomUser
-    template_name = "users/custom_user_list.html"
-
-
-class UserDetailView(generic.DetailView):
-    """User Detail class."""
-
-    model = CustomUser
-    template_name = "users/custom_user_detail.html"
-
-
-class UserCreateView(generic.CreateView):
-    """User create view."""
-
-    form_class = UserCreateForm
-    template_name = "users/custom_user_create.html"
-    # which page to show upon success
-    # replace "home" with one of the names in urls_patterns of urls.py
-    success_url = reverse_lazy("stock_home:custom_user_list")
-
-
-class UserUpdateView(generic.UpdateView):
-    """User update view."""
-
-    model = CustomUser
-    form_class = UserUpdateForm
-    template_name = "users/custom_user_update.html"
-    # which page to show upon success
-    success_url = reverse_lazy("stock_home:custom_user_list")
-
-
-class UserDeleteView(generic.DeleteView):
-    """<SomeModel> delete view."""
-
-    model = CustomUser
-    template_name = "users/custom_user_confirm_delete.html"
-    # which page to show upon success
-    success_url = reverse_lazy("stock_home:custom_user_list")
 
 
 # -------------------------------------------------- COMPANIES
@@ -65,21 +20,21 @@ class CompanyListView(generic.ListView):
     """Company List class."""
 
     model = Company
-    template_name = "stock_home/company/company_list.html"
+    template_name = "company/company_list.html"
 
 
 class CompanyDetailView(generic.DetailView):
     """Company Detail class."""
 
     model = Company
-    template_name = "stock_home/company/company_detail.html"
+    template_name = "company/company_detail.html"
 
 
 class CompanyCreateView(generic.CreateView):
     """Company create view."""
 
     form_class = CompanyCreateForm
-    template_name = "stock_home/company/company_create.html"
+    template_name = "company/company_create.html"
     success_url = reverse_lazy("stock_home:company_list")
 
 
@@ -88,7 +43,7 @@ class CompanyUpdateView(generic.UpdateView):
 
     model = Company
     form_class = CompanyUpdateForm
-    template_name = "stock_home/company/company_update.html"
+    template_name = "company/company_update.html"
     success_url = reverse_lazy("stock_home:company_list")
 
 
@@ -96,31 +51,46 @@ class CompanyDeleteView(generic.DeleteView):
     """Company delete view."""
 
     model = Company
-    template_name = "stock_home/company/company_delete.html"
+    template_name = "company/company_delete.html"
     success_url = reverse_lazy("stock_home:company_list")
 
 
 # -------------------------------------------------- POSITIONS
-class PositionListView(generic.ListView):
+class PositionListView(LoginRequiredMixin, generic.ListView):
     """Position List class."""
 
     model = Position
-    tempate_name = "stock_home/position_list.html"
+    tempate_name = "position_list.html"
+
+    def get_queryset(self) -> list:
+        """Return a list with objects created by current user."""
+        return Position.objects.filter(user=self.request.user)
 
 
-class PositionDetailView(generic.DetailView):
+class PositionDetailView(LoginRequiredMixin, generic.DetailView):
     """Position Detail class."""
 
     model = Position
-    template_name = "stock_home/position_detail.html"
+    template_name = "position_detail.html"
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not the owner of the object, redirect."""
+        if self.get_object().user != self.request.user:
+            return redirect("stock_home:transaction_list")
+        return super().get(request, *args, **kwargs)
 
 
 class PositionCreateView(generic.CreateView):
     """Position create view."""
 
     form_class = PositionCreateForm
-    template_name = "stock_home/position_create.html"
+    template_name = "position_create.html"
     success_url = reverse_lazy("stock_home:position_list")
+
+    def form_valid(self, form: object) -> object:
+        """When the form submitted is valid, add current user to the form data."""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class PositionUpdateView(generic.UpdateView):
@@ -128,39 +98,66 @@ class PositionUpdateView(generic.UpdateView):
 
     model = Position
     form_class = PositionUpdateForm
-    template_name = "stock_home/position_update.html"
+    template_name = "position_update.html"
     success_url = reverse_lazy("stock_home:position_list")
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not the owner of the object, redirect."""
+        if self.get_object().user != self.request.user:
+            return redirect("stock_home:transaction_list")
+        return super().get(request, *args, **kwargs)
 
 
 class PositionDeleteView(generic.DeleteView):
     """Position delete view."""
 
     model = Position
-    template_name = "stock_home/position_confirm_delete.html"
+    template_name = "position_confirm_delete.html"
     success_url = reverse_lazy("stock_home:position_list")
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not the owner of the object, redirect."""
+        if self.get_object().user != self.request.user:
+            return redirect("stock_home:transaction_list")
+        return super().get(request, *args, **kwargs)
 
 
 # -------------------------------------------------- TRANSACTIONS
-class TransactionListView(generic.ListView):
+class TransactionListView(LoginRequiredMixin, generic.ListView):
     """Transaction List class."""
 
     model = Transaction
-    template_name = "stock_home/transaction_list.html"
+    template_name = "transaction_list.html"
+
+    def get_queryset(self) -> list:
+        """Return a list with objects created by current user."""
+        return Transaction.objects.filter(user=self.request.user)
 
 
-class TransactionDetailView(generic.DetailView):
+class TransactionDetailView(LoginRequiredMixin, generic.DetailView):
     """Transaction Detail class."""
 
     model = Transaction
-    template_name = "stock_home/transaction_detail.html"
+    template_name = "transaction_detail.html"
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not the owner of the object, redirect."""
+        if self.get_object().user != self.request.user:
+            return redirect("stock_home:transaction_list")
+        return super().get(request, *args, **kwargs)
 
 
 class TransactionCreateView(generic.CreateView):
     """Transaction create view."""
 
     form_class = TransactionCreateForm
-    template_name = "stock_home/transaction_create.html"
+    template_name = "transaction_create.html"
     success_url = reverse_lazy("stock_home:transaction_list")
+
+    def form_valid(self, form: object) -> object:
+        """When the form submitted is valid, add current user to the form data."""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class TransactionUpdateView(generic.UpdateView):
@@ -168,13 +165,25 @@ class TransactionUpdateView(generic.UpdateView):
 
     model = Transaction
     form_class = TransactionUpdateForm
-    template_name = "stock_home/transaction_update.html"
+    template_name = "transaction_update.html"
     success_url = reverse_lazy("stock_home:transaction_list")
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not the owner of the object, redirect."""
+        if self.get_object().user != self.request.user:
+            return redirect("stock_home:transaction_list")
+        return super().get(request, *args, **kwargs)
 
 
 class TransactionDeleteView(generic.DeleteView):
     """Transaction delete view."""
 
     model = Transaction
-    template_name = "stock_home/transaction_confirm_delete.html"
+    template_name = "transaction_confirm_delete.html"
     success_url = reverse_lazy("stock_home:transaction_list")
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not the owner of the object, redirect."""
+        if self.get_object().user != self.request.user:
+            return redirect("stock_home:transaction_list")
+        return super().get(request, *args, **kwargs)

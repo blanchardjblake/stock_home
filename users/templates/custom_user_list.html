@@ -4,7 +4,7 @@
 <ul>
 {% for object in object_list %}
         <li>
-<a href="{% url 'stock_home:custom_user_detail' object.id %}">
+<a href="{% url 'users:custom_user_detail' object.id %}">
 {{ object }}
 </a>
 </li>
