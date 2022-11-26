@@ -85,41 +85,61 @@ div.page-content {
     padding: 1em;
 }
 
-h2.snapshot-header {
+h2.section-header {
     font-family: 'Syne Mono', monospace;
     color: #fda403;
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
-div.snapshots {
+div.section {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 }
 
-img.snapshot-chart {
-    height: 90px;
-    width: 150px;
-    border: solid 1px #f8b400;
-}
-
-div.snap-info {
+div.module {
+    background-color: #fda403;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    font-family: 'Syne Mono', monospace;
-    font-size: .75em;
-    color: #fda403;
-    margin-top: 0;
+    justify-content: space-evenly;
+    align-items: center;
+    outline: solid 2px #e8751a;
+    border-radius: .5em;
+    width: 15%;
+    height: auto;
+    overflow: hidden;
 }
 
-h4.snapshot-label,
-h4.snapshot-price,
-h4.snapshot-change {
-    margin-top: .5em;
-    margin-bottom: 0;
+div.module-upper {
+    background-color: #fda403;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+h3.module-title {
+    width: 100%;
+    text-align: center;
+    font-family: 'Syne Mono', monospace;
+    color: #111;
+}
+
+div.module-lower {
+    background-size: cover;
+    height: auto;
+    width: 50%;
+    min-width: 150px;
+    min-height: 150px;
+}
+
+div.module-upper:hover,
+div.module-lower:hover {
+    outline-color: #fda403;
+    text-shadow: 0px 0px 20px #333;
+    cursor: pointer;
 }
 
 button.left-arrow,
@@ -146,61 +166,4 @@ button.right-arrow:hover {
 hr {
     margin-top: 2em;
     color: #e8751a;
-}
-
-h2.learning-header {
-    font-family: 'Syne Mono', monospace;
-    color: #fda403;
-    width: 100%;
-    text-align: center;
-}
-
-div.learning {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-div.learning-block {
-    outline: solid 2px #e8751a;
-    border-radius: .5em;
-    margin-bottom: 5em;
-    width: 30%;
-    height: 25em;
-}
-
-div.learning-block-upper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: .75em;
-    border-bottom: solid 1px #e8751a;
-}
-
-h3.learning-title {
-    font-family: 'Syne Mono', monospace;
-    color: #fda403;
-    text-align: center;
-}
-
-svg.learning {
-    color: #fda403;
-    width: 2em;
-    height: 2em;
-}
-
-div.learning-block-lower {
-    display: flex;
-    align-items: center;
-}
-
-p.learning-description {
-    font-family: 'Syne Mono', monospace;
-    color: #f8b400;
-    font-size: 1.25em;
-    margin: 1em;
-    text-indent: 2em;
-    text-align: justify;
 }
