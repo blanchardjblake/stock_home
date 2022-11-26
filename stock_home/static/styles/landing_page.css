@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+
+/* ----------------------------------------------------------NAVBAR*/
+div.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10em;
+
+    background-color: #fda403;
+}
+
+img.app-logo {
+    width: 200px;
+    height: 200px;
+}
+
+h1.app-name {
+    font-family: 'Syne Mono', monospace;
+    text-shadow: 0px 0px 40px #e8751a;
+    font-size: 3em;
+}
+
+div.nav-left,
+div.nav-right,
+div.nav-center {
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div.nav-left {
+    justify-content: flex-start;
+}
+
+div.nav-right {
+    justify-content: flex-end;
+}
+
+button.nav-button {
+    background-color: #333;
+    border: 2px #e8751a solid;
+    border-radius: .5em;
+    height: 4em;
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.nav-button:hover {
+    border-color: #f8b400;
+    cursor: pointer;
+}
+
+h3.button-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 2em;
+    color: #f8b400;
+}
+
+h3.username {
+    font-family: 'Syne Mono', monospace;
+    text-shadow: 0px 0px 40px #e8751a;
+    font-size: 1.5em;
+}
+
+img.user-photo {
+    width: 60px;
+    height: 60px;
+    margin: 30px;
+    border-radius: 25%;
+}
+
+/* ----------------------------------------------------------MAIN CONTENT*/
+div.page-content {
+    height: 100%;
+    background-color: #333;
+    padding: 1em;
+}
+
+h2.snapshot-header {
+    font-family: 'Syne Mono', monospace;
+    color: #fda403;
+    width: 100%;
+    text-align: center;
+}
+
+div.snapshots {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+img.snapshot-chart {
+    height: 90px;
+    width: 150px;
+    border: solid 1px #f8b400;
+}
+
+div.snap-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Syne Mono', monospace;
+    font-size: .75em;
+    color: #fda403;
+    margin-top: 0;
+}
+
+h4.snapshot-label,
+h4.snapshot-price,
+h4.snapshot-change {
+    margin-top: .5em;
+    margin-bottom: 0;
+}
+
+button.left-arrow,
+button.right-arrow {
+    background-color: #333;
+    color: #f8b400;
+    border: 2px #e8751a solid;
+    border-radius: .5em;
+    height: 4em;
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.left-arrow:hover,
+button.right-arrow:hover {
+    border-color: #f8b400;
+    cursor: pointer;
+}
+
+hr {
+    margin-top: 2em;
+    color: #e8751a;
+}
+
+h2.learning-header {
+    font-family: 'Syne Mono', monospace;
+    color: #fda403;
+    width: 100%;
+    text-align: center;
+}
+
+div.learning {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div.learning-block {
+    outline: solid 2px #e8751a;
+    border-radius: .5em;
+    margin-bottom: 5em;
+    width: 30%;
+    height: 25em;
+}
+
+div.learning-block-upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75em;
+    border-bottom: solid 1px #e8751a;
+}
+
+h3.learning-title {
+    font-family: 'Syne Mono', monospace;
+    color: #fda403;
+    text-align: center;
+}
+
+svg.learning {
+    color: #fda403;
+    width: 2em;
+    height: 2em;
+}
+
+div.learning-block-lower {
+    display: flex;
+    align-items: center;
+}
+
+p.learning-description {
+    font-family: 'Syne Mono', monospace;
+    color: #f8b400;
+    font-size: 1.25em;
+    margin: 1em;
+    text-indent: 2em;
+    text-align: justify;
+}

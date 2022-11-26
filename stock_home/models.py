@@ -2,6 +2,7 @@
 from datetime import datetime
 
 from django.db import models
+
 from users.managers import CustomUserManager
 from users.models import CustomUser
 

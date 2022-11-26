@@ -1,8 +1,8 @@
 """Define views (URLS)."""
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from stock_home.forms import (
     CompanyCreateForm,
@@ -13,6 +13,13 @@ from stock_home.forms import (
     TransactionUpdateForm,
 )
 from stock_home.models import Company, Position, Transaction
+
+
+# -------------------------------------------------- LANDING
+class LandingPageView(generic.TemplateView):
+    """Landing page class."""
+
+    template_name = "pages/landing_page.html"
 
 
 # -------------------------------------------------- COMPANIES
