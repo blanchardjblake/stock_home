@@ -19,7 +19,7 @@ from stock_home.models import Company, Position, Transaction
 class LandingPageView(generic.TemplateView):
     """Landing page class."""
 
-    template_name = "stock_home/pages/landing_page.html"
+    template_name = "pages/landing_page.html"
 
 
 # -------------------------------------------------- COMPANIES
