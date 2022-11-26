@@ -19,6 +19,7 @@ img.app-logo {
 h1.app-name {
     font-family: 'Syne Mono', monospace;
     text-shadow: 0px 0px 40px #e8751a;
+    color: #111;
     font-size: 3em;
 }
 
