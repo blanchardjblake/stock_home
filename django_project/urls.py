@@ -36,45 +36,45 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     path("team", TemplateView.as_view(template_name="team.html"), name="team",),
     path("about", TemplateView.as_view(template_name="about.html"), name="about",),
-    path("users/", include("users.urls")),
+    path("accounts/", include("users.urls")),
 ]
 
 urlpatterns += [
     path(
-        "users/password_change/",
+        "accounts/password_change/",
         PasswordChangeView.as_view(template_name="registration/password_change.html"),
         name="password_change",
     ),
     path(
-        "users/password_change/done/",
+        "accounts/password_change/done/",
         PasswordChangeDoneView.as_view(template_name="registration/password_change_done.html"),
         name="password_change_done",
     ),
     path(
-        "users/login/", LoginView.as_view(template_name="registration/login.html"), name="login"
+        "accounts/login/", LoginView.as_view(template_name="registration/login.html"), name="login"
     ),
     path(
-        "users/logout/",
+        "accounts/logout/",
         LogoutView.as_view(template_name="registration/logout.html"),
         name="logout",
     ),
     path(
-        "users/password_reset/",
+        "accounts/password_reset/",
         PasswordResetView.as_view(template_name="registration/password_reset.html"),
         name="password_reset",
     ),
     path(
-        "users/password_reset/done/",
+        "accounts/password_reset/done/",
         PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"),
         name="password_reset_done",
     ),
     path(
-        "users/reset/<uidb64>/<token>/",
+        "accounts/reset/<uidb64>/<token>/",
         PasswordResetConfirmView.as_view(template_name="registration/password_reset_confirm.html"),
         name="password_reset_confirm",
     ),
     path(
-        "users/reset/done/",
+        "accounts/reset/done/",
         PasswordResetCompleteView.as_view(
             template_name="registration/password_reset_complete.html"
         ),

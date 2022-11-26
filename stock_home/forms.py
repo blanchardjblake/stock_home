@@ -37,6 +37,7 @@ class CompanyUpdateForm(ModelForm):
             "div_yield",
         )
 
+
 # -------------------------------------------------- POSITIONS
 # For fields, include: user, company, quantity
 class PositionCreateForm(ModelForm):
@@ -47,7 +48,7 @@ class PositionCreateForm(ModelForm):
 
         model = Position
         # list of fields to be used in the form.
-        fields = ("user", "company", "quantity")
+        fields = ("company", "quantity")
 
 
 class PositionUpdateForm(ModelForm):
@@ -58,7 +59,7 @@ class PositionUpdateForm(ModelForm):
 
         model = Position
         # list of fields to be used in the form.
-        fields = ("user", "company", "quantity")
+        fields = ("company", "quantity")
 
 
 # -------------------------------------------------- TRANSACTIONS
@@ -71,7 +72,7 @@ class TransactionCreateForm(ModelForm):
 
         model = Transaction
         # list of fields to be used in the form.
-        fields = ("user", "company", "quantity", "type", "price", "date")
+        fields = ("company", "quantity", "type", "price", "date")
 
 
 class TransactionUpdateForm(ModelForm):
@@ -82,4 +83,4 @@ class TransactionUpdateForm(ModelForm):
 
         model = Transaction
         # list of fields to be used in the form.
-        fields = ("user", "company", "quantity", "type", "price", "date")
+        fields = ("company", "quantity", "type", "price", "date")
