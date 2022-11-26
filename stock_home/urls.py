@@ -9,6 +9,7 @@ app_name = "stock_home"
 urlpatterns = [
     path("", views.LandingPageView.as_view(), name="landing_page"),
     path("learn", views.LearningPageView.as_view(), name="learning_page"),
+    path("forecast", views.ForecastPageView.as_view(), name="forecast_page"),
     path("company", views.CompanyListView.as_view(), name="company_list"),
     path("company/<int:pk>/", views.CompanyDetailView.as_view(), name="company_detail"),
     path("company/create/", views.CompanyCreateView.as_view(), name="company_create"),
