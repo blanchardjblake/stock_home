@@ -22,6 +22,13 @@ class LandingPageView(generic.TemplateView):
     template_name = "pages/landing_page.html"
 
 
+# -------------------------------------------------- LEARNING
+class LearningPageView(generic.TemplateView):
+    """Learning page class."""
+
+    template_name = "pages/learning_page.html"
+
+
 # -------------------------------------------------- COMPANIES
 class CompanyListView(generic.ListView):
     """Company List class."""
