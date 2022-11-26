@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+
+/* ----------------------------------------------------------NAVBAR*/
+div.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10em;
+
+    background-color: #fda403;
+}
+
+img.app-logo {
+    width: 200px;
+    height: 200px;
+}
+
+h1.app-name {
+    font-family: 'Syne Mono', monospace;
+    text-shadow: 0px 0px 40px #e8751a;
+    color: #111;
+    font-size: 3em;
+}
+
+div.nav-left,
+div.nav-right,
+div.nav-center {
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div.nav-left {
+    justify-content: flex-start;
+}
+
+div.nav-right {
+    justify-content: flex-end;
+}
+
+button.nav-button {
+    background-color: #333;
+    border: 2px #e8751a solid;
+    border-radius: .5em;
+    height: 4em;
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.nav-button:hover {
+    border-color: #f8b400;
+    cursor: pointer;
+}
+
+h3.button-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 2em;
+    color: #f8b400;
+}
+
+h3.username {
+    font-family: 'Syne Mono', monospace;
+    text-shadow: 0px 0px 40px #e8751a;
+    font-size: 1.5em;
+}
+
+img.user-photo {
+    width: 60px;
+    height: 60px;
+    margin: 30px;
+    border-radius: 25%;
+}
+
+/* ----------------------------------------------------------MAIN CONTENT*/
+div.page-content {
+    height: 100%;
+    background-color: #333;
+    padding: 1em;
+}
+
+h2.section-header {
+    font-family: 'Syne Mono', monospace;
+    color: #fda403;
+    width: 100%;
+    text-align: left;
+}
+
+div.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div.module {
+    background-color: #fda403;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    outline: solid 2px #e8751a;
+    border-radius: .5em;
+    width: 15%;
+    height: auto;
+    overflow: hidden;
+}
+
+div.module-upper {
+    background-color: #fda403;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+h3.module-title {
+    width: 100%;
+    text-align: center;
+    font-family: 'Syne Mono', monospace;
+    color: #111;
+}
+
+div.module-lower {
+    background-size: cover;
+    height: auto;
+    width: 50%;
+    min-width: 150px;
+    min-height: 150px;
+}
+
+div.module-upper:hover,
+div.module-lower:hover {
+    outline-color: #fda403;
+    text-shadow: 0px 0px 20px #333;
+    cursor: pointer;
+}
+
+button.left-arrow,
+button.right-arrow {
+    background-color: #333;
+    color: #f8b400;
+    border: 2px #e8751a solid;
+    border-radius: .5em;
+    height: 4em;
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.left-arrow:hover,
+button.right-arrow:hover {
+    border-color: #f8b400;
+    cursor: pointer;
+}
+
+hr {
+    margin-top: 2em;
+    color: #e8751a;
+}
