@@ -36,6 +36,13 @@ class ForecastPageView(generic.TemplateView):
     template_name = "pages/forecast_page.html"
 
 
+# -------------------------------------------------- TRADING
+class TradingPageView(generic.TemplateView):
+    """Trading page class."""
+
+    template_name = "pages/trading_page.html"
+
+
 # -------------------------------------------------- COMPANIES
 class CompanyListView(generic.ListView):
     """Company List class."""
