@@ -13,6 +13,13 @@ from stock_home.forms import (
 from stock_home.models import Company, Position, Transaction
 
 
+# -------------------------------------------------- LANDING
+class LandingPageView(generic.TemplateView):
+    """Landing page class."""
+
+    template_name = "stock_home/pages/landing_page.html"
+
+
 # -------------------------------------------------- COMPANIES
 class CompanyListView(generic.ListView):
     """Company List class."""
@@ -68,7 +75,6 @@ class PositionListView(generic.ListView):
     def get_queryset(self) -> list:
         """Return a list with objects created by current user."""
         return Position.objects.filter(owner=self.request.user)
-
 
 
 class PositionDetailView(generic.DetailView):
