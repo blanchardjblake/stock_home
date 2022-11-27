@@ -81,7 +81,7 @@ img.user-photo {
 /* ----------------------------------------------------------MAIN CONTENT*/
 div.page-content {
     height: 100%;
-    background-color: #333;
+    background-color: #222;
     padding: 1em;
 }
 
@@ -181,13 +181,36 @@ div.forecast-area {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-top: 1em;
+}
+
+div.forecast-section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+h3.forecast-section-title {
+    font-family: 'Syne Mono', monospace;
+    color: #f8b400;
+    margin-bottom: 0;
+}
+
+div.forecast-section-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-top: 1em;
 }
 
 div.forecast-left {
-    width: 40%;
+    width: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -219,8 +242,8 @@ h1.forecast {
     font-family: 'Syne Mono', monospace;
 }
 
-div.forecast-right {
-    width: 60%;
+div.forecast-middle {
+    width: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -228,22 +251,64 @@ div.forecast-right {
 }
 
 div.forecast-rating {
+    width: 5.5em;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-end;
+}
+
+div.forecast-percent {
+    width: 100%;
+    font-size: .9em;
+    text-align: center;
+    font-family: 'Syne Mono', monospace;
 }
 
 div.forecast-bar {
     margin-left: auto;
     margin-right: auto;
-    width: 3em;
+    width: 2em;
 }
 
-div.forecast-percent {
+div.forecast-label {
+    width: 100%;
     text-align: center;
     font-family: 'Syne Mono', monospace;
-    color: #f8b400
+}
+
+div.forecast-right {
+    margin-top: 10%;
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+div.price-rating {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+div.price-tier,
+div.price-label {
+    width: 5em;
+    font-family: 'Syne Mono', monospace;
+    font-size: .9em;
+    color: #e8751a;
+}
+
+div.price-bar {
+    margin-left: .5em;
+    margin-right: .5em;
+    background-color: #f8b400;
+    height: 1em;
 }
 
 div.company-area {
@@ -260,8 +325,21 @@ div.company-upper {
 }
 
 h2.company-symbol {
+    font-size: 2em;
     font-family: 'Syne Mono', monospace;
-    padding-left: 1em;
+    color: #111;
+    padding-left: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+h3.company-name {
+    font-size: .9em;
+    font-family: 'Syne Mono', monospace;
+    color: #111;
+    padding-left: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 div.company-lower {
@@ -269,6 +347,7 @@ div.company-lower {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-top: .5em;
 }
 
 div.company-lower-left,
@@ -287,11 +366,15 @@ div.company-info {
 }
 
 h4.company-stat {
+    margin-top: 0;
+    margin-bottom: 0;
     font-family: 'Syne Mono', monospace;
     color: #dc2f2f;
 }
 
-h3.company-data {
+h4.company-data {
+    margin-top: 0;
+    margin-bottom: 0;
     font-family: 'Syne Mono', monospace;
     color: #f8b400;
 }
