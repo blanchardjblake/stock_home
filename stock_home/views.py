@@ -103,7 +103,7 @@ class PositionDetailView(LoginRequiredMixin, generic.DetailView):
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""
         if self.get_object().user != self.request.user:
-            return redirect("stock_home:transaction_list")
+            return redirect("stock_home:position_list")
         return super().get(request, *args, **kwargs)
 
 
@@ -133,7 +133,7 @@ class PositionUpdateView(generic.UpdateView):
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""
         if self.get_object().user != self.request.user:
-            return redirect("stock_home:transaction_list")
+            return redirect("stock_home:position_list")
         return super().get(request, *args, **kwargs)
 
 
@@ -147,7 +147,7 @@ class PositionDeleteView(generic.DeleteView):
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""
         if self.get_object().user != self.request.user:
-            return redirect("stock_home:transaction_list")
+            return redirect("stock_home:position_list")
         return super().get(request, *args, **kwargs)
 
 
