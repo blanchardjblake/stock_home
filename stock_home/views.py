@@ -63,6 +63,12 @@ class CompanyCreateView(generic.CreateView):
     success_url = reverse_lazy("stock_home:company_list")
     extra_context = {"title_text": "Create Company", "button_text": "Create"}
 
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not staff, redirect."""
+        if not request.user.is_staff:
+            return redirect("stock_home:company_list")
+        return super().get(request, *args, **kwargs)
+
 
 class CompanyUpdateView(generic.UpdateView):
     """Company update view."""
@@ -73,6 +79,12 @@ class CompanyUpdateView(generic.UpdateView):
     success_url = reverse_lazy("stock_home:company_list")
     extra_context = {"title_text": "Update Company", "button_text": "Update"}
 
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not staff, redirect."""
+        if not request.user.is_staff:
+            return redirect("stock_home:company_list")
+        return super().get(request, *args, **kwargs)
+
 
 class CompanyDeleteView(generic.DeleteView):
     """Company delete view."""
@@ -80,6 +92,12 @@ class CompanyDeleteView(generic.DeleteView):
     model = Company
     template_name = "stock_home/company/company_delete.html"
     success_url = reverse_lazy("stock_home:company_list")
+
+    def get(self, request: object, *args, **kwargs) -> object:
+        """If user is not staff, redirect."""
+        if not request.user.is_staff:
+            return redirect("stock_home:company_list")
+        return super().get(request, *args, **kwargs)
 
 
 # -------------------------------------------------- POSITIONS
@@ -103,7 +121,7 @@ class PositionDetailView(LoginRequiredMixin, generic.DetailView):
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""
         if self.get_object().user != self.request.user:
-            return redirect("stock_home:transaction_list")
+            return redirect("stock_home:position_list")
         return super().get(request, *args, **kwargs)
 
 
@@ -133,7 +151,7 @@ class PositionUpdateView(generic.UpdateView):
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""
         if self.get_object().user != self.request.user:
-            return redirect("stock_home:transaction_list")
+            return redirect("stock_home:position_list")
         return super().get(request, *args, **kwargs)
 
 
@@ -147,7 +165,7 @@ class PositionDeleteView(generic.DeleteView):
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""
         if self.get_object().user != self.request.user:
-            return redirect("stock_home:transaction_list")
+            return redirect("stock_home:position_list")
         return super().get(request, *args, **kwargs)
 
 
