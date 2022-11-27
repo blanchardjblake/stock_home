@@ -7,15 +7,13 @@ from stock_home import views
 app_name = "stock_home"
 
 urlpatterns = [
-    path("", views.LandingPageView.as_view(), name="landing_page"),
-    path("learn", views.LearningPageView.as_view(), name="learning_page"),
-    path("forecast", views.ForecastPageView.as_view(), name="forecast_page"),
-    path("trade", views.TradingPageView.as_view(), name="trading_page"),
+    # Company Views
     path("company", views.CompanyListView.as_view(), name="company_list"),
     path("company/<int:pk>/", views.CompanyDetailView.as_view(), name="company_detail"),
     path("company/create/", views.CompanyCreateView.as_view(), name="company_create"),
     path("company/<int:pk>/update/", views.CompanyUpdateView.as_view(), name="company_update"),
     path("company/<int:pk>/delete/", views.CompanyDeleteView.as_view(), name="company_delete"),
+    # Position Views
     path("positions", views.PositionListView.as_view(), name="position_list"),
     path("positions/<int:pk>/", views.PositionDetailView.as_view(), name="position_detail"),
     path("positions/create/", views.PositionCreateView.as_view(), name="position_create"),
@@ -25,6 +23,7 @@ urlpatterns = [
         views.PositionDeleteView.as_view(),
         name="position_confirm_delete",
     ),
+    # Transaction Views
     path("transactions", views.TransactionListView.as_view(), name="transaction_list"),
     path(
         "transactions/<int:pk>/", views.TransactionDetailView.as_view(), name="transaction_detail"
@@ -40,4 +39,9 @@ urlpatterns = [
         views.TransactionDeleteView.as_view(),
         name="transaction_confirm_delete",
     ),
+    # Stock Home Pages
+    path("", views.LandingPageView.as_view(), name="landing_page"),
+    path("learn", views.LearningPageView.as_view(), name="learning_page"),
+    path("forecast", views.ForecastPageView.as_view(), name="forecast_page"),
+    path("trade", views.TradingPageView.as_view(), name="trading_page"),
 ]
