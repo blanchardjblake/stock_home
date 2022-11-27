@@ -88,7 +88,7 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
     """Position List class."""
 
     model = Position
-    tempate_name = "stock_home/positoin/position_list.html"
+    tempate_name = "stock_home/position/position_list.html"
 
     def get_queryset(self) -> list:
         """Return a list with objects created by current user."""
@@ -166,7 +166,7 @@ class TransactionDetailView(LoginRequiredMixin, generic.DetailView):
     """Transaction Detail class."""
 
     model = Transaction
-    template_name = "stock_home/transactiontransaction_detail.html"
+    template_name = "stock_home/transaction/transaction_detail.html"
 
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""
@@ -179,7 +179,7 @@ class TransactionCreateView(generic.CreateView):
     """Transaction create view."""
 
     form_class = TransactionCreateForm
-    template_name = "stock_home/transactiontransaction_create.html"
+    template_name = "stock_home/transaction/transaction_create.html"
     success_url = reverse_lazy("stock_home:transaction_list")
 
     def form_valid(self, form: object) -> object:
@@ -193,7 +193,7 @@ class TransactionUpdateView(generic.UpdateView):
 
     model = Transaction
     form_class = TransactionUpdateForm
-    template_name = "stock_home/transactiontransaction_update.html"
+    template_name = "stock_home/transaction/transaction_update.html"
     success_url = reverse_lazy("stock_home:transaction_list")
 
     def get(self, request: object, *args, **kwargs) -> object:
@@ -207,7 +207,7 @@ class TransactionDeleteView(generic.DeleteView):
     """Transaction delete view."""
 
     model = Transaction
-    template_name = "stock_home/transactiontransaction_confirm_delete.html"
+    template_name = "stock_home/transaction/transaction_confirm_delete.html"
     success_url = reverse_lazy("stock_home:transaction_list")
 
     def get(self, request: object, *args, **kwargs) -> object:
