@@ -5,12 +5,9 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from stock_home.forms import (
-    CompanyCreateForm,
-    CompanyUpdateForm,
-    PositionCreateForm,
-    PositionUpdateForm,
-    TransactionCreateForm,
-    TransactionUpdateForm,
+    CompanyCreateUpdateForm,
+    PositionCreateUpdateForm,
+    TransactionCreateUpdateForm,
 )
 from stock_home.models import Company, Position, Transaction
 
