@@ -6,24 +6,8 @@ from users.models import CustomUser
 
 
 # -------------------------------------------------- COMPANIES
-class CompanyCreateForm(ModelForm):
+class CompanyCreateUpdateForm(ModelForm):
     """Company creation form."""
-
-    class Meta:
-        """Meta class."""
-
-        model = Company
-        fields = (
-            "name",
-            "symbol",
-            "value",
-            "share_price",
-            "div_yield",
-        )
-
-
-class CompanyUpdateForm(ModelForm):
-    """Company update form."""
 
     class Meta:
         """Meta class."""
@@ -40,19 +24,8 @@ class CompanyUpdateForm(ModelForm):
 
 # -------------------------------------------------- POSITIONS
 # For fields, include: user, company, quantity
-class PositionCreateForm(ModelForm):
+class PositionCreateUpdateForm(ModelForm):
     """Position creation form."""
-
-    class Meta:
-        """Meta class."""
-
-        model = Position
-        # list of fields to be used in the form.
-        fields = ("company", "quantity")
-
-
-class PositionUpdateForm(ModelForm):
-    """Position update form."""
 
     class Meta:
         """Meta class."""
@@ -64,19 +37,8 @@ class PositionUpdateForm(ModelForm):
 
 # -------------------------------------------------- TRANSACTIONS
 # For fields, include: user, company, quantity, type, price, date
-class TransactionCreateForm(ModelForm):
+class TransactionCreateUpdateForm(ModelForm):
     """Transaction creation form."""
-
-    class Meta:
-        """Meta class."""
-
-        model = Transaction
-        # list of fields to be used in the form.
-        fields = ("company", "quantity", "type", "price", "date")
-
-
-class TransactionUpdateForm(ModelForm):
-    """Transaction update form."""
 
     class Meta:
         """Meta class."""
