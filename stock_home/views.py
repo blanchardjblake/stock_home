@@ -87,7 +87,7 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
     """Position List class."""
 
     model = Position
-    tempate_name = "stock_home/position/position_list.html"
+    template_name = "stock_home/position/position_list.html"
 
     def get_queryset(self) -> list:
         """Return a list with objects created by current user."""
