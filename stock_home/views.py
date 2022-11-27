@@ -236,13 +236,14 @@ class TransactionDeleteView(generic.DeleteView):
 
 # -------------------------------------------------- TRADING
 def getData(request):
+    """Get data for stock."""
     template = loader.get_template("pages/trading_page.html")
 
     API_KEY = "GGphVkaXZMMwG6io9V6jVCKlDM5kYq4N3DBynSul"
     ticker = "TSLA"
 
     stock_data = requests.get(
-        f"https://api.stockdata.org/v1/data/quote?symbols={ticker}&api_token={API_KEY}"
+        f"https://api.stockdata.org/v1/data/quote?symbols={ticker}&api_token={API_KEY}", timeout=10
     ).json()
 
     d = stock_data["data"][0]
