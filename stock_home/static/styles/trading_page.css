@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+
+/* ----------------------------------------------------------NAVBAR*/
+div.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10em;
+
+    background-color: #fda403;
+}
+
+img.app-logo {
+    width: 200px;
+    height: 200px;
+}
+
+h1.app-name {
+    font-family: 'Syne Mono', monospace;
+    text-shadow: 0px 0px 40px #e8751a;
+    color: #111;
+    font-size: 3em;
+}
+
+div.nav-left,
+div.nav-right,
+div.nav-center {
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div.nav-left {
+    justify-content: flex-start;
+}
+
+div.nav-right {
+    justify-content: flex-end;
+}
+
+button.nav-button {
+    background-color: #333;
+    border: 2px #e8751a solid;
+    border-radius: .5em;
+    height: 4em;
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.nav-button:hover {
+    border-color: #f8b400;
+    cursor: pointer;
+}
+
+h3.button-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 2em;
+    color: #f8b400;
+}
+
+h3.username {
+    font-family: 'Syne Mono', monospace;
+    text-shadow: 0px 0px 40px #e8751a;
+    font-size: 1.5em;
+}
+
+img.user-photo {
+    width: 60px;
+    height: 60px;
+    margin: 30px;
+    border-radius: 25%;
+}
+
+/* ----------------------------------------------------------MAIN CONTENT*/
+div.page-content {
+    height: 100%;
+    background-color: #333;
+    padding: 1em;
+}
+
+div.search-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+input.search-field {
+    width: 40%;
+    font-size: 1.25em;
+    font-family: 'Syne Mono', monospace;
+    background-color: #111;
+    color: #f8b400;
+    border: none;
+    border-radius: .25em;
+    outline: solid 1px #e8751a;
+    padding-left: .25em;
+    padding-right: .25em;
+}
+
+input.search-field:hover {
+    outline-width: 2px;
+    cursor: pointer;
+}
+
+input.search-field:focus {
+    outline: solid 2px #dc2f2f;
+}
+
+button.search-button {
+    font-family: 'Syne Mono', monospace;
+    background-color: #111;
+    outline: solid 1px #e8751a;
+    color: #f8b400;
+    border: none;
+    border-radius: .25em;
+    font-size: 1.25em;
+    margin-left: .5em;
+}
+
+button.search-button:hover {
+    outline: solid 2px #dc2f2f;
+    cursor: pointer;
+    color: #dc2f2f;
+}
+
+div.trading-area {
+    margin-top: 2em;
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 7em;
+}
+
+div.trading-left {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    outline: solid 1px #e8751a;
+    padding: .5em;
+}
+
+div.trading-right {
+    width: 27%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    outline: solid 1px #e8751a;
+    padding: .5em;
+}
+
+div.chart-area {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+div#chartContainer {
+    height: 450px;
+    width: 83em;
+}
+
+div.forecast-area {
+    border-top: solid 1px #e8751a;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+}
+
+div.forecast-left {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+h2.forecast-source {
+    font-family: 'Syne Mono', monospace;
+    color: #f8b400;
+    text-align: center;
+    font-size: .9em;
+}
+
+div.forecast-call {
+    background-color: rgba(122, 176, 5, .5);
+    border-radius: 50%;
+    height: 10em;
+    width: 10em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: .5em;
+}
+
+h1.forecast {
+    width: 100%;
+    color: #111;
+    text-align: center;
+    font-family: 'Syne Mono', monospace;
+}
+
+div.forecast-right {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+div.forecast-rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+div.forecast-bar {
+    margin-left: auto;
+    margin-right: auto;
+    width: 3em;
+}
+
+div.forecast-percent {
+    text-align: center;
+    font-family: 'Syne Mono', monospace;
+    color: #f8b400
+}
+
+div.company-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+div.company-upper {
+    width: 100%;
+    background-color: #fda403;
+}
+
+h2.company-symbol {
+    font-family: 'Syne Mono', monospace;
+    padding-left: 1em;
+}
+
+div.company-lower {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+div.company-lower-left,
+div.company-lower-right {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.company-info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h4.company-stat {
+    font-family: 'Syne Mono', monospace;
+    color: #dc2f2f;
+}
+
+h3.company-data {
+    font-family: 'Syne Mono', monospace;
+    color: #f8b400;
+}
+
+hr {
+    width: 100%;
+    color: #e8751a;
+}
+
+div.transaction-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.transaction-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+div.transaction-option {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+h4.option-label {
+    font-family: 'Syne Mono', monospace;
+    color: #dc2f2f;
+}
+
+#price-input {
+    width: 100%;
+}
+
+input.option-input,
+select {
+    font-size: 1.25em;
+    font-family: 'Syne Mono', monospace;
+    background-color: #111;
+    color: #f8b400;
+    border: none;
+    border-radius: .25em;
+    outline: solid 1px #e8751a;
+    padding-left: .25em;
+    padding-right: .25em;
+}
+
+input.option-input:hover,
+select:hover {
+    outline-width: 2px;
+    cursor: pointer;
+}
+
+button.transaction-button {
+    margin-top: 1em;
+    width: 49%;
+    font-family: 'Syne Mono', monospace;
+    font-size: 2em;
+    border: none;
+    outline: solid 3px #111;
+}
+
+button.transaction-button:hover {
+    cursor: pointer;
+    outline-color: #fda403;
+    color: #fda403;
+}
+
+#buy-button {
+    background-color: #090;
+}
+
+#sell-button {
+    background-color: #dc2f2f;
+}
