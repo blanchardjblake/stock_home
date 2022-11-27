@@ -58,7 +58,11 @@
             </div>
             <div class="nav-right">
 
-                <h3 class="username">Warren Buffett</h3>
+                {% if user.is_authenticated %}<h3 class="username">{{user.get_username}}</h3>
+
+                {% else %}<a href="/accounts/login" style="text-decoration: none; color: #111;"><h3 class="username">Log In</h3></a>
+
+                {% endif %}
 
                 <img class="user-photo" src="../../../static/img/green_monkey.jpeg">
 
