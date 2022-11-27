@@ -5,12 +5,9 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from stock_home.forms import (
-    CompanyCreateForm,
-    CompanyUpdateForm,
-    PositionCreateForm,
-    PositionUpdateForm,
-    TransactionCreateForm,
-    TransactionUpdateForm,
+    CompanyCreateUpdateForm,
+    PositionCreateUpdateForm,
+    TransactionCreateUpdateForm,
 )
 from stock_home.models import Company, Position, Transaction
 
@@ -61,18 +58,20 @@ class CompanyDetailView(generic.DetailView):
 class CompanyCreateView(generic.CreateView):
     """Company create view."""
 
-    form_class = CompanyCreateForm
-    template_name = "stock_home/company/company_create.html"
+    form_class = CompanyCreateUpdateForm
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:company_list")
+    extra_context = {"title_text": "Create Company", "button_text": "Create"}
 
 
 class CompanyUpdateView(generic.UpdateView):
     """Company update view."""
 
     model = Company
-    form_class = CompanyUpdateForm
-    template_name = "stock_home/company/company_update.html"
+    form_class = CompanyCreateUpdateForm
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:company_list")
+    extra_context = {"title_text": "Update Company", "button_text": "Update"}
 
 
 class CompanyDeleteView(generic.DeleteView):
@@ -88,7 +87,7 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
     """Position List class."""
 
     model = Position
-    tempate_name = "stock_home/position/position_list.html"
+    template_name = "stock_home/position/position_list.html"
 
     def get_queryset(self) -> list:
         """Return a list with objects created by current user."""
@@ -111,9 +110,10 @@ class PositionDetailView(LoginRequiredMixin, generic.DetailView):
 class PositionCreateView(generic.CreateView):
     """Position create view."""
 
-    form_class = PositionCreateForm
-    template_name = "stock_home/position/position_create.html"
+    form_class = PositionCreateUpdateForm
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:position_list")
+    extra_context = {"title_text": "Create Position", "button_text": "Create"}
 
     def form_valid(self, form: object) -> object:
         """When the form submitted is valid, add current user to the form data."""
@@ -125,9 +125,10 @@ class PositionUpdateView(generic.UpdateView):
     """Position update view."""
 
     model = Position
-    form_class = PositionUpdateForm
-    template_name = "stock_home/position/position_update.html"
+    form_class = PositionCreateUpdateForm
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:position_list")
+    extra_context = {"title_text": "Update Position", "button_text": "Update"}
 
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""
@@ -178,9 +179,10 @@ class TransactionDetailView(LoginRequiredMixin, generic.DetailView):
 class TransactionCreateView(generic.CreateView):
     """Transaction create view."""
 
-    form_class = TransactionCreateForm
-    template_name = "stock_home/transaction/transaction_create.html"
+    form_class = TransactionCreateUpdateForm
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:transaction_list")
+    extra_context = {"title_text": "Create Transaction", "button_text": "Create"}
 
     def form_valid(self, form: object) -> object:
         """When the form submitted is valid, add current user to the form data."""
@@ -192,9 +194,10 @@ class TransactionUpdateView(generic.UpdateView):
     """Transaction update view."""
 
     model = Transaction
-    form_class = TransactionUpdateForm
-    template_name = "stock_home/transaction/transaction_update.html"
+    form_class = TransactionCreateUpdateForm
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:transaction_list")
+    extra_context = {"title_text": "Update Transaction", "button_text": "Update"}
 
     def get(self, request: object, *args, **kwargs) -> object:
         """If user is not the owner of the object, redirect."""

@@ -1,6 +1,8 @@
 {% extends "base_generic.html" %}
 {% load django_bootstrap5 %}
-{% block title %}Create Company{% endblock title %}
+{% block title %}
+    {{ title_text }}
+{% endblock title %}
 {% block content %}
     <div class="d-flex justify-content-center">
         <div class="col-md-4">
@@ -9,7 +11,7 @@
                 {% bootstrap_form form %}
                 {{ form.media }}
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">{{ button_text }}</button>
                 </div>
             </form>
         </div>
