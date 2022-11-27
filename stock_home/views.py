@@ -58,7 +58,7 @@ class CompanyDetailView(generic.DetailView):
 class CompanyCreateView(generic.CreateView):
     """Company create view."""
 
-    form_class = CompanyCreateForm
+    form_class = CompanyCreateUpdateForm
     template_name = "stock_home/company/company_create.html"
     success_url = reverse_lazy("stock_home:company_list")
 
@@ -67,7 +67,7 @@ class CompanyUpdateView(generic.UpdateView):
     """Company update view."""
 
     model = Company
-    form_class = CompanyUpdateForm
+    form_class = CompanyCreateUpdateForm
     template_name = "stock_home/company/company_update.html"
     success_url = reverse_lazy("stock_home:company_list")
 
@@ -108,7 +108,7 @@ class PositionDetailView(LoginRequiredMixin, generic.DetailView):
 class PositionCreateView(generic.CreateView):
     """Position create view."""
 
-    form_class = PositionCreateForm
+    form_class = PositionCreateUpdateForm
     template_name = "stock_home/position/position_create.html"
     success_url = reverse_lazy("stock_home:position_list")
 
@@ -122,7 +122,7 @@ class PositionUpdateView(generic.UpdateView):
     """Position update view."""
 
     model = Position
-    form_class = PositionUpdateForm
+    form_class = PositionCreateUpdateForm
     template_name = "stock_home/position/position_update.html"
     success_url = reverse_lazy("stock_home:position_list")
 
@@ -175,7 +175,7 @@ class TransactionDetailView(LoginRequiredMixin, generic.DetailView):
 class TransactionCreateView(generic.CreateView):
     """Transaction create view."""
 
-    form_class = TransactionCreateForm
+    form_class = TransactionCreateUpdateForm
     template_name = "stock_home/transaction/transaction_create.html"
     success_url = reverse_lazy("stock_home:transaction_list")
 
@@ -189,7 +189,7 @@ class TransactionUpdateView(generic.UpdateView):
     """Transaction update view."""
 
     model = Transaction
-    form_class = TransactionUpdateForm
+    form_class = TransactionCreateUpdateForm
     template_name = "stock_home/transaction/transaction_update.html"
     success_url = reverse_lazy("stock_home:transaction_list")
 
