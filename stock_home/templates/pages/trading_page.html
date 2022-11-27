@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<link rel="stylesheet" text="text/scss" href="../../../static/styles/trading_page.css">
+<html>
+    <head>
+        <title>Stock Home</title>
+        <meta charset="utf-8"/>
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
+        <script type="text/javascript">
+        window.onload = function () {
+          var dataPoints1 = [], dataPoints2 = [];
+          var stockChart = new CanvasJS.StockChart("chartContainer",{
+            backgroundColor: "#0F0F0F",
+            theme: "dark1",
+            charts: [{
+              axisY: {
+                prefix: "$"
+              },
+              data: [{
+                type: "candlestick",
+                color: "#666",
+                risingColor: "#090",
+                fallingColor: "#DC2F2F",
+                yValueFormatString: "$#,###.00",
+                dataPoints : dataPoints1
+              }]
+            }],
+            navigator: {
+              data: [{
+                color: "#E8751A",
+                dataPoints: dataPoints2
+              }],
+              slider: {
+                minimum: new Date(2018, 04, 01),
+                maximum: new Date(2018, 06, 01)
+              }
+            }
+          });
+          $.getJSON("https://canvasjs.com/data/docs/ethusd2018.json", function(data) {
+            for(var i = 0; i < data.length; i++){
+              dataPoints1.push({x: new Date(data[i].date), y: [Number(data[i].open), Number(data[i].high), Number(data[i].low), Number(data[i].close)]});
+              dataPoints2.push({x: new Date(data[i].date), y: Number(data[i].close)});
+            }
+            stockChart.render();
+          });
+        }
+        </script>
+    </head>
+    <body style="margin:0;">
+
+        <div class="nav-bar">
+            <div class="nav-left">
+                <a href="/stock_home" style="text-decoration: none;">
+                    <img class="app-logo" src="../../../static/img/stock_home_logo.png">
+                </a>
+
+                <a href="/stock_home" style="text-decoration: none;">
+                    <h1 class="app-name">Stock Home</h1>
+                </a>
+            </div>
+
+            <div class="nav-center">
+
+                <a href="trade" style="text-decoration: none;">
+                    <button class="nav-button" type="button">
+                        <h3 class="button-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+                                <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                            </svg>
+                            Trade
+                        </h3>
+                    </button>
+                </a>
+
+                <a href="learn" style="text-decoration: none;">
+                    <button class="nav-button" type="button">
+                        <h3 class="button-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                              </svg>
+                            Learn
+                        </h3>
+                    </button>
+                </a>
+
+                <a href="forecast" style="text-decoration: none;">
+                    <button class="nav-button" href="#" type="button">
+                        <h3 class="button-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+                            </svg>
+                            Forecast
+                        </h3>
+                    </button>
+                </a>
+
+            </div>
+            <div class="nav-right">
+
+                <h3 class="username">Warren Buffett</h3>
+
+                <img class="user-photo" src="../../../static/img/green_monkey.jpeg">
+
+            </div>
+        </div>
+
+        <div class="page-content">
+
+            <div class="search-bar">
+                <input class="search-field" type="text">
+                <button class="search-button" type="button">Search</button>
+            </div>
+
+            <div class="trading-area">
+                <div class="trading-left">
+
+                    <div class="chart-area">
+                        <div id="chartContainer"></div>
+                    </div>
+
+                    <div class="forecast-area">
+
+                        <div class="forecast-left">
+
+                            <h2 class="forecast-source">Based on 20 expert analysts</h2>
+
+                            <div class="forecast-call">
+                                <h1 class="forecast">Buy</h1>
+                            </div>
+
+                        </div>
+
+                        <div class="forecast-right">
+
+                            <div class="forecast-rating">
+                                <div class="forecast-bar" style="height: 5em; background-color: #04a221;"></div>
+                                <div class="forecast-percent">5 analysts</div>
+                            </div>
+
+                            <div class="forecast-rating">
+                                <div class="forecast-bar" style="height: 6em; background-color: #7ab005;"></div>
+                                <div class="forecast-percent">6 analysts</div>
+                            </div>
+
+                            <div class="forecast-rating">
+                                <div class="forecast-bar" style="height: 4em; background-color: #f8b400;"></div>
+                                <div class="forecast-percent">4 analysts</div>
+                            </div>
+
+                            <div class="forecast-rating">
+                                <div class="forecast-bar" style="height: 3em; background-color: #dd6904;"></div>
+                                <div class="forecast-percent">3 analysts</div>
+                            </div>
+
+                            <div class="forecast-rating">
+                                <div class="forecast-bar" style="height: 2em; background-color: #dc2f2f;"></div>
+                                <div class="forecast-percent">2 analysts</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="trading-right">
+
+                    <div class="company-area">
+
+                        <div class="company-upper">
+                            <h2 class="company-symbol">TSLA</h2>
+                        </div>
+
+                        <div class="company-lower">
+                            <div class="company-lower-left">
+                                <div class="company-info">
+                                    <h4 class="company-stat">Name:</h4><h3 class="company-data">Tesla Inc.</h3>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Open:</h4><h3 class="company-data">$145.06</h3>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Prev Close:</h4><h3 class="company-data">$143.20</h3>
+                                </div>
+                            </div>
+                            <div class="company-lower-right">
+                                <div class="company-info">
+                                    <h4 class="company-stat">High:</h4><h3 class="company-data">$145.20</h3>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Low:</h4><h3 class="company-data">$140.63</h3>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Volume:</h4><h3 class="company-data">50.76M</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="transaction-area">
+
+                        <div class="transaction-section">
+                            <div class="transaction-option">
+                                <h4 class="option-label">Order Type</h4>
+                                <select name="transaction-type">
+                                    <option value="market">Market</option>
+                                    <option value="limit">Limit</option>
+                                </select>
+                            </div>
+
+                            <div class="transaction-option">
+                                <h4 class="option-label">Quantity</h4>
+                                <input class="option-input" type="number" value="100">
+                            </div>
+                        </div>
+
+                        <div class="transaction-section">
+                            <div class="transaction-option" id="price-input">
+                                <h4 class="option-label">Price</h4>
+                                <input class="option-input" type="text" placeholder="145.20">
+                            </div>
+                        </div>
+
+                        <div class="transaction-section">
+                            <div class="transaction-option">
+                                <h4 class="option-label">Time in Force</h4>
+                                <select name="transaction-tif">
+                                    <option value="day">Day</option>
+                                    <option value="gtc">GTC (Good 'til Cancelled)</option>
+                                </select>
+                            </div>
+
+                            <div class="transaction-option">
+                                <h4 class="option-label">Extended Hours</h4>
+                                <select name="transaction-ext">
+                                    <option value="y">Yes</option>
+                                    <option value="n">No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="transaction-section">
+                            <button class="transaction-button" id="buy-button" type="button">BUY</button>
+                            <button class="transaction-button" id="sell-button" type="button">SELL</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
