@@ -59,7 +59,7 @@ class CompanyCreateView(generic.CreateView):
     """Company create view."""
 
     form_class = CompanyCreateUpdateForm
-    template_name = "stock_home/company/company_create.html"
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:company_list")
     extra_context = {"title_text": "Create Company", "button_text": "Create"}
 
@@ -69,7 +69,7 @@ class CompanyUpdateView(generic.UpdateView):
 
     model = Company
     form_class = CompanyCreateUpdateForm
-    template_name = "stock_home/company/company_update.html"
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:company_list")
     extra_context = {"title_text": "Update Company", "button_text": "Update"}
 
@@ -111,7 +111,7 @@ class PositionCreateView(generic.CreateView):
     """Position create view."""
 
     form_class = PositionCreateUpdateForm
-    template_name = "stock_home/position/position_create.html"
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:position_list")
     extra_context = {"title_text": "Create Position", "button_text": "Create"}
 
@@ -126,7 +126,7 @@ class PositionUpdateView(generic.UpdateView):
 
     model = Position
     form_class = PositionCreateUpdateForm
-    template_name = "stock_home/position/position_update.html"
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:position_list")
     extra_context = {"title_text": "Update Position", "button_text": "Update"}
 
@@ -180,7 +180,7 @@ class TransactionCreateView(generic.CreateView):
     """Transaction create view."""
 
     form_class = TransactionCreateUpdateForm
-    template_name = "stock_home/transaction/transaction_create.html"
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:transaction_list")
     extra_context = {"title_text": "Create Transaction", "button_text": "Create"}
 
@@ -195,7 +195,7 @@ class TransactionUpdateView(generic.UpdateView):
 
     model = Transaction
     form_class = TransactionCreateUpdateForm
-    template_name = "stock_home/transaction/transaction_update.html"
+    template_name = "stock_home/generic_create_update.html"
     success_url = reverse_lazy("stock_home:transaction_list")
     extra_context = {"title_text": "Update Transaction", "button_text": "Update"}
 
