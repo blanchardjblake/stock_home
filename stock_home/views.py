@@ -90,7 +90,7 @@ class CompanyDeleteView(generic.DeleteView):
     """Company delete view."""
 
     model = Company
-    template_name = "stock_home/company/generic_delete.html"
+    template_name = "stock_home/generic_delete.html"
     success_url = reverse_lazy("stock_home:company_list")
     extra_context = {"title_text": "Delete Company", "button_text": "Delete"}
 
@@ -160,7 +160,7 @@ class PositionDeleteView(generic.DeleteView):
     """Position delete view."""
 
     model = Position
-    template_name = "stock_home/position/generic_delete.html"
+    template_name = "stock_home/generic_delete.html"
     success_url = reverse_lazy("stock_home:position_list")
     extra_context = {"title_text": "Delete Position", "button_text": "Delete"}
 
@@ -230,7 +230,7 @@ class TransactionDeleteView(generic.DeleteView):
     """Transaction delete view."""
 
     model = Transaction
-    template_name = "stock_home/transaction/generic_delete.html"
+    template_name = "stock_home/generic_delete.html"
     success_url = reverse_lazy("stock_home:transaction_list")
     extra_context = {"title_text": "Delete Transaction", "button_text": "Delete"}
 
