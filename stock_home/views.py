@@ -1,6 +1,9 @@
 """Define views (URLS)."""
+import requests
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -31,13 +34,6 @@ class ForecastPageView(generic.TemplateView):
     """Forecast page class."""
 
     template_name = "pages/forecast_page.html"
-
-
-# -------------------------------------------------- TRADING
-class TradingPageView(generic.TemplateView):
-    """Trading page class."""
-
-    template_name = "pages/trading_page.html"
 
 
 # -------------------------------------------------- COMPANIES
@@ -239,3 +235,36 @@ class TransactionDeleteView(generic.DeleteView):
         if self.get_object().user != self.request.user:
             return redirect("stock_home:transaction_list")
         return super().get(request, *args, **kwargs)
+
+
+# -------------------------------------------------- TRADING
+def getData(request):
+    """Get data for stock."""
+    template = loader.get_template("pages/trading_page.html")
+
+    API_KEY = "GGphVkaXZMMwG6io9V6jVCKlDM5kYq4N3DBynSul"
+    ticker = "TSLA"
+
+    stock_data = requests.get(
+        f"https://api.stockdata.org/v1/data/quote?symbols={ticker}&api_token={API_KEY}", timeout=10
+    ).json()
+
+    d = stock_data["data"][0]
+
+    context = {
+        "ticker": d["ticker"],
+        "name": d["name"],
+        "exchange": d["exchange_short"],
+        "price": d["price"],
+        "day_high": d["day_high"],
+        "day_low": d["day_low"],
+        "day_open": d["day_open"],
+        "52_week_high": d["52_week_high"],
+        "52_week_low": d["52_week_low"],
+        "market_cap": d["market_cap"],
+        "previous_close_price": d["previous_close_price"],
+        "day_change": d["day_change"],
+        "volume": d["volume"],
+    }
+
+    return HttpResponse(template.render(context, request))

@@ -58,7 +58,6 @@
                     <h1 class="app-name">Stock Home</h1>
                 </a>
             </div>
-
             <div class="nav-center">
 
                 <a href="trade" style="text-decoration: none;">
@@ -99,13 +98,16 @@
             </div>
             <div class="nav-right">
 
-                <h3 class="username">Warren Buffett</h3>
+                {% if user.is_authenticated %}<h3 class="username">{{user.get_username}}</h3>
+
+                {% else %}<a href="/accounts/login" style="text-decoration: none; color: #111;"><h3 class="username">Log In</h3></a>
+
+                {% endif %}
 
                 <img class="user-photo" src="../../../static/img/green_monkey.jpeg">
 
             </div>
         </div>
-
         <div class="page-content">
 
             <div class="search-bar">
@@ -122,41 +124,88 @@
 
                     <div class="forecast-area">
 
-                        <div class="forecast-left">
+                        <div class="forecast-section">
 
-                            <h2 class="forecast-source">Based on 20 expert analysts</h2>
+                            <h3 class="forecast-section-title">Recommendation Rating</h3>
 
-                            <div class="forecast-call">
-                                <h1 class="forecast">Buy</h1>
+                            <div class="forecast-section-content">
+
+                                <div class="forecast-left">
+
+                                    <h2 class="forecast-source">Based on 41 <br>expert analysts</h2>
+
+                                    <div class="forecast-call">
+                                        <h1 class="forecast">Buy</h1>
+                                    </div>
+
+                                </div>
+
+                                <div class="forecast-middle">
+
+                                    <div class="forecast-rating">
+                                        <div class="forecast-percent" style="color: #04a221;">26.83%</div>
+                                        <div class="forecast-bar" style="height: 5em; background-color: #04a221;"></div>
+                                        <div class="forecast-label" style="color: #04a221;">Strong Buy</div>
+                                    </div>
+
+                                    <div class="forecast-rating">
+                                        <div class="forecast-percent" style="color: #7ab005;">34.15%</div>
+                                        <div class="forecast-bar" style="height: 6em; background-color: #7ab005;"></div>
+                                        <div class="forecast-label" style="color: #7ab005;">Buy</div>
+                                    </div>
+
+                                    <div class="forecast-rating">
+                                        <div class="forecast-percent" style="color: #f8b400;">29.27%</div>
+                                        <div class="forecast-bar" style="height: 4em; background-color: #f8b400;"></div>
+                                        <div class="forecast-label" style="color: #f8b400;">Hold</div>
+                                    </div>
+
+                                    <div class="forecast-rating">
+                                        <div class="forecast-percent" style="color: #dd6904;">7.32%</div>
+                                        <div class="forecast-bar" style="height: 3em; background-color: #dd6904;"></div>
+                                        <div class="forecast-label" style="color: #dd6904;">Sell</div>
+                                    </div>
+
+                                    <div class="forecast-rating">
+                                        <div class="forecast-percent" style="color: #dc2f2f;">2.44%</div>
+                                        <div class="forecast-bar" style="height: 2em; background-color: #dc2f2f;"></div>
+                                        <div class="forecast-label" style="color: #dc2f2f;">Dump</div>
+                                    </div>
+
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <div class="forecast-right">
+                        <div class="forecast-section">
 
-                            <div class="forecast-rating">
-                                <div class="forecast-bar" style="height: 5em; background-color: #04a221;"></div>
-                                <div class="forecast-percent">5 analysts</div>
-                            </div>
+                            <h3 class="forecast-section-title">Analyst Price Target</h3>
 
-                            <div class="forecast-rating">
-                                <div class="forecast-bar" style="height: 6em; background-color: #7ab005;"></div>
-                                <div class="forecast-percent">6 analysts</div>
-                            </div>
+                            <div class="forecast-section-content">
 
-                            <div class="forecast-rating">
-                                <div class="forecast-bar" style="height: 4em; background-color: #f8b400;"></div>
-                                <div class="forecast-percent">4 analysts</div>
-                            </div>
+                                <div class="forecast-right">
 
-                            <div class="forecast-rating">
-                                <div class="forecast-bar" style="height: 3em; background-color: #dd6904;"></div>
-                                <div class="forecast-percent">3 analysts</div>
-                            </div>
+                                    <div class="price-rating">
+                                        <div class="price-tier">High</div>
+                                        <div class="price-bar" style="width: 15em;"></div>
+                                        <div class="price-label">386.00</div>
+                                    </div>
 
-                            <div class="forecast-rating">
-                                <div class="forecast-bar" style="height: 2em; background-color: #dc2f2f;"></div>
-                                <div class="forecast-percent">2 analysts</div>
+                                    <div class="price-rating">
+                                        <div class="price-tier">Average</div>
+                                        <div class="price-bar" style="width: 10em;"></div>
+                                        <div class="price-label">214.00</div>
+                                    </div>
+
+                                    <div class="price-rating">
+                                        <div class="price-tier">Low</div>
+                                        <div class="price-bar" style="width: 5em;"></div>
+                                        <div class="price-label">24.33</div>
+                                    </div>
+
+                                </div>
+
                             </div>
 
                         </div>
@@ -170,30 +219,85 @@
                     <div class="company-area">
 
                         <div class="company-upper">
-                            <h2 class="company-symbol">TSLA</h2>
+                            <h2 class="company-symbol">{{ticker}}  ${{price}}  {{day_change}}%</h2>
+                            <h3 class="company-name">{{name}} {{exchange}}</h3>
                         </div>
 
                         <div class="company-lower">
                             <div class="company-lower-left">
                                 <div class="company-info">
-                                    <h4 class="company-stat">Name:</h4><h3 class="company-data">Tesla Inc.</h3>
+                                    <h4 class="company-stat">Open</h4><h4 class="company-data">{{day_open}}</h4>
                                 </div>
                                 <div class="company-info">
-                                    <h4 class="company-stat">Open:</h4><h3 class="company-data">$145.06</h3>
+                                    <h4 class="company-stat">High</h4><h4 class="company-data">{{day_high}}</h4>
                                 </div>
                                 <div class="company-info">
-                                    <h4 class="company-stat">Prev Close:</h4><h3 class="company-data">$143.20</h3>
+                                    <h4 class="company-stat">Volume</h4><h4 class="company-data">{{volume}}</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Avg Volume</h4><h4 class="company-data">75.86M</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">52 Wk High</h4><h4 class="company-data">{{52_week_high}}</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Market Cap</h4><h4 class="company-data">{{market_cap}}</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">P/E (FWD)</h4><h4 class="company-data">44.49</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">EPS</h4><h4 class="company-data">4.901</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">% Turnover</h4><h4 class="company-data">1.60%</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Shares Out</h4><h4 class="company-data">3.16B</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Free Float Mkt Cap</h4><h4 class="company-data">486.71B</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Lot Size</h4><h4 class="company-data">1.00</h4>
                                 </div>
                             </div>
                             <div class="company-lower-right">
                                 <div class="company-info">
-                                    <h4 class="company-stat">High:</h4><h3 class="company-data">$145.20</h3>
+                                    <h4 class="company-stat">Prev Close</h4><h4 class="company-data">{{previous_close_price}}</h4>
                                 </div>
                                 <div class="company-info">
-                                    <h4 class="company-stat">Low:</h4><h3 class="company-data">$140.63</h3>
+                                    <h4 class="company-stat">Low</h4><h4 class="company-data">{{day_low}}</h4>
                                 </div>
                                 <div class="company-info">
-                                    <h4 class="company-stat">Volume:</h4><h3 class="company-data">50.76M</h3>
+                                    <h4 class="company-stat">Turnover</h4><h4 class="company-data">0.00</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">% Range</h4><h4 class="company-data">2.48%</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">52 Wk Low</h4><h4 class="company-data">{{52_week_low}}</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">P/E (TTM)</h4><h4 class="company-data">56.33</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Dividend</h4><h4 class="company-data">----</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Div Yield</h4><h4 class="company-data">0.00%</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">P/B</h4><h4 class="company-data">14.49</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Free Float</h4><h4 class="company-data">2.66B</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Beta</h4><h4 class="company-data">----</h4>
+                                </div>
+                                <div class="company-info">
+                                    <h4 class="company-stat">Ex-Div Date</h4><h4 class="company-data">08/25/2022</h4>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +326,7 @@
                         <div class="transaction-section">
                             <div class="transaction-option" id="price-input">
                                 <h4 class="option-label">Price</h4>
-                                <input class="option-input" type="text" placeholder="145.20">
+                                <input class="option-input" type="text" placeholder={{price}}>
                             </div>
                         </div>
 

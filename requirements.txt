@@ -18,3 +18,4 @@ pylint
 pylint-django
 pytest-django
 pytest-cov
+requests

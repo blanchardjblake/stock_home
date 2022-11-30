@@ -43,5 +43,5 @@ urlpatterns = [
     path("", views.LandingPageView.as_view(), name="landing_page"),
     path("learn", views.LearningPageView.as_view(), name="learning_page"),
     path("forecast", views.ForecastPageView.as_view(), name="forecast_page"),
-    path("trade", views.TradingPageView.as_view(), name="trading_page"),
+    path("trade", views.getData, name="trading_page"),
 ]
