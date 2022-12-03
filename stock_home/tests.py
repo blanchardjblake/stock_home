@@ -67,7 +67,6 @@ class CompanyTestCase(TestCase):
 
     def test_create_company_raises_missing_data_integrity_error_with_no_name(self):
         """Tests if `Company`'s `create()` method raises an integrity error."""
-
         with pytest.raises(IntegrityError) as exc_info:
             Company.objects.create(
                 name=None,
