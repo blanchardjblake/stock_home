@@ -1,6 +1,5 @@
 """Tests."""
 from sqlite3 import IntegrityError
-from typing import ByteString
 
 import pytest
 from django.test import TestCase
@@ -51,7 +50,7 @@ class CompanyTestCase(TestCase):
         with pytest.raises(IntegrityError) as exc_info:
             Company.objects.create(
                 name="FakeCompany",
-                symbol="FCOM",
+                symbol="FCM",
                 value=10000000,
                 share_price=10.00,
                 curr_day_open=9.90,
