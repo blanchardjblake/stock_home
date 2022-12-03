@@ -117,8 +117,8 @@ class PositionTestCase(TestCase):
         query = Position.objects.get(user=user, company=company)
         self.assertEqual(position, query)
 
-    def test_create_company_raises_missing_data_integrity_error_with_no_user_company(self):
-        """Tests if `Company`'s `create()` method raises an integrity error."""
+    def test_create_position_raises_missing_data_integrity_error_with_no_user_company(self):
+        """Tests if `Position`'s `create()` method raises an integrity error."""
         with pytest.raises(IntegrityError) as exc_info:
             Position.objects.create(
                 user=None, company=None, quantity=10, avg_cost=5.00, p_l=0,
