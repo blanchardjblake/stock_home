@@ -1,0 +1,25 @@
+{
+  "name": "stock-home",
+  "version": "1.0.0",
+  "description": "Stock Home frontend packages.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/ull-gitlab/fa22-team-d/stock-home.git"
+  },
+  "author": "Blake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/ull-gitlab/fa22-team-d/stock-home/issues"
+  },
+  "homepage": "https://gitlab.com/ull-gitlab/fa22-team-d/stock-home#readme",
+  "devDependencies": {
+    "cypress": "^11.2.0"
+  }
+}

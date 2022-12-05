@@ -51,7 +51,7 @@ class CompanyDetailView(generic.DetailView):
     template_name = "stock_home/company/company_detail.html"
 
 
-class CompanyCreateView(generic.CreateView):
+class CompanyCreateView(LoginRequiredMixin, generic.CreateView):
     """Company create view."""
 
     form_class = CompanyCreateUpdateForm
@@ -66,7 +66,7 @@ class CompanyCreateView(generic.CreateView):
         return super().get(request, *args, **kwargs)
 
 
-class CompanyUpdateView(generic.UpdateView):
+class CompanyUpdateView(LoginRequiredMixin, generic.UpdateView):
     """Company update view."""
 
     model = Company
@@ -82,7 +82,7 @@ class CompanyUpdateView(generic.UpdateView):
         return super().get(request, *args, **kwargs)
 
 
-class CompanyDeleteView(generic.DeleteView):
+class CompanyDeleteView(LoginRequiredMixin, generic.DeleteView):
     """Company delete view."""
 
     model = Company
@@ -122,7 +122,7 @@ class PositionDetailView(LoginRequiredMixin, generic.DetailView):
         return super().get(request, *args, **kwargs)
 
 
-class PositionCreateView(generic.CreateView):
+class PositionCreateView(LoginRequiredMixin, generic.CreateView):
     """Position create view."""
 
     form_class = PositionCreateUpdateForm
@@ -136,7 +136,7 @@ class PositionCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-class PositionUpdateView(generic.UpdateView):
+class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
     """Position update view."""
 
     model = Position
@@ -152,7 +152,7 @@ class PositionUpdateView(generic.UpdateView):
         return super().get(request, *args, **kwargs)
 
 
-class PositionDeleteView(generic.DeleteView):
+class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
     """Position delete view."""
 
     model = Position
@@ -192,7 +192,7 @@ class TransactionDetailView(LoginRequiredMixin, generic.DetailView):
         return super().get(request, *args, **kwargs)
 
 
-class TransactionCreateView(generic.CreateView):
+class TransactionCreateView(LoginRequiredMixin, generic.CreateView):
     """Transaction create view."""
 
     form_class = TransactionCreateUpdateForm
@@ -206,7 +206,7 @@ class TransactionCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-class TransactionUpdateView(generic.UpdateView):
+class TransactionUpdateView(LoginRequiredMixin, generic.UpdateView):
     """Transaction update view."""
 
     model = Transaction
@@ -222,7 +222,7 @@ class TransactionUpdateView(generic.UpdateView):
         return super().get(request, *args, **kwargs)
 
 
-class TransactionDeleteView(generic.DeleteView):
+class TransactionDeleteView(LoginRequiredMixin, generic.DeleteView):
     """Transaction delete view."""
 
     model = Transaction
