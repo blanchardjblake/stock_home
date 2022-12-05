@@ -295,8 +295,8 @@ class TransactionTestCase(TestCase):
             )
         self.assertEqual(exc_info.type, IntegrityError)
 
-    def test_create(self):
-        """Tests if `Transaction`'s `create()` method is working using a query."""
+    def test_update(self):
+        """Tests if `Transaction`'s `update()` method is working using a query."""
         user = CustomUser.objects.create(email="jdoe@gmail.com", password="password123")
 
         company = Company.objects.create(
