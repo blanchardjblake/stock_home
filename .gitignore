@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,pycharm,linux,macos,emacs,vim,windows,sublimetext,jupyternotebooks,eclipse,intellij+all,pydev,python,django
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,visualstudiocode,pycharm,linux,macos,emacs,vim,windows,sublimetext,jupyternotebooks,eclipse,intellij+all,pydev,python,django
 
+cypress/screenshots/*
+cypress/videos/*
+
 ### Django ###
 *.log
 *.pot
