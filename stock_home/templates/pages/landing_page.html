@@ -58,7 +58,28 @@
             </div>
             <div class="nav-right">
 
-                {% if user.is_authenticated %}<h3 class="username">{{user.get_username}}</h3>
+                {% if user.is_authenticated %}
+                    <div style="display: flex; flex-direction: column;">
+                        <h3 class="username">{{user.get_username}}</h3>
+                        <select id="user_options" onchange="location=this.value" 
+                            style = 
+                                "font-size: 1.25em;
+                                font-family: 'Syne Mono', monospace;
+                                background-color: #111;
+                                color: #f8b400;
+                                border: none;
+                                border-radius: 0.25em;
+                                outline: solid 1px #e8751a;
+                                padding-left: 0.25em;
+                                padding-right: 0.25em;"
+                        >
+                            <option value="">---</option>
+                            <option value="{% url "stock_home:position_list" %}">View Positions</option>
+                            <option value="{% url "stock_home:transaction_list" %}">View Transactions</option>
+                            <option value="{% url "users:custom_user_update" user.id %}">Update Account</option>
+                            <option value="{% url "users:custom_user_confirm_delete" user.id %}">Delete Account</option>
+                        </select>
+                    </div>
 
                 {% else %}<a href="/accounts/login" style="text-decoration: none; color: #111;"><h3 class="username">Log In</h3></a>
 
