@@ -81,7 +81,7 @@ describe('Transaction View', () => {
     });
     it('Should view a transaction for the current user.', () => {
         cy.visit('stock_home/transactions');
-        cy.get('ul').get('li').get('a').click();
+        cy.get('a[class="transaction_li"]').click();
         cy.contains('User:');
         cy.contains('Company:');
         cy.contains('Type:');
